@@ -49,7 +49,7 @@ const Viewport = (props) => {
             position={[0, 0, 0]}
           >
             <planeBufferGeometry attach="geometry" args={[100, 100]} />
-            <shadowMaterial attach="material" opacity={0.3} />
+            <meshStandardMaterial color="gray" attach="material" opacity={1} />
           </mesh>
           <Entities orbitControls={orbitControls} cubes={props.cubes} />
           <OrbitControls ref={orbitControls} />
