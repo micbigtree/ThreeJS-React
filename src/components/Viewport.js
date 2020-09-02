@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import "../App.scss";
 import Entities from "./Entities";
 // react three fiber takes care of camera position in canvas
@@ -18,6 +19,9 @@ const Viewport = (props) => {
   return (
     <div style={styles.viewport}>
       <Canvas
+        onCreated={({ gl }) => {
+          document.body.appendChild(VRButton.createButton(gl));
+        }}
         vr={true}
         shadowMap
         colorManagement
