@@ -6,7 +6,6 @@ import cubes from "./data/cubes.json";
 
 const App = () => {
   const [cubeState, setCubeState] = useState(cubes);
-  const [i, setI] = useState(0);
 
   const addShape = (e) => {
     setCubeState([
@@ -14,12 +13,11 @@ const App = () => {
       {
         id: cubeState.length + 1,
         shape: e.target.value,
-        position: [i, 0, i],
+        position: [0, 0, 0],
         color: "red",
         speed: "10"
       }
     ]);
-    setI(i + 1);
   };
 
   const editCubePosition = (id, input) => {
