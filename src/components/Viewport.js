@@ -18,6 +18,7 @@ const Viewport = (props) => {
   return (
     <div style={styles.viewport}>
       <Canvas
+        vr={true}
         shadowMap
         colorManagement
         camera={{ position: [0, 2, 5], fov: 60 }}
