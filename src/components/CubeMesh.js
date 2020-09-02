@@ -21,6 +21,7 @@ const CubeMesh = (props) => {
         color={props.color}
         speed={props.speed}
         factor={0.6}
+        opacity={0.8}
       />
     </a.mesh>
   );
