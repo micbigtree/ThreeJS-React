@@ -1,11 +1,19 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
+import * as THREE from "three";
 import "../App.scss";
 
 import { a } from "react-spring/three";
 
 const CubeMesh = (props) => {
   return (
-    <a.mesh castShadow>
+    <a.mesh
+      castShadow
+      onClick={(event) => {
+        let vector = new THREE.Vector3();
+        event.object.getWorldPosition(vector);
+        console.log(vector);
+      }}
+    >
       {props.shape === "box" ? (
         <boxBufferGeometry attach="geometry" args={props.args} />
       ) : props.shape === "cylinder" ? (

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { TransformControls } from "drei";
 
-function Transformable({ enabled, children, orbitControls }) {
+function Transformable({ children, orbitControls }) {
   const transformControls = useRef();
 
   useEffect(() => {
@@ -15,7 +15,9 @@ function Transformable({ enabled, children, orbitControls }) {
   });
 
   return (
-    <TransformControls ref={transformControls}>{children}</TransformControls>
+    <TransformControls translationSnap={1} ref={transformControls}>
+      {children}
+    </TransformControls>
   );
 }
 
