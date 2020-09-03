@@ -19,6 +19,9 @@ const Entities = (props) => {
     <group>
       <Transformable orbitControls={props.orbitControls}>
         <CubeMesh
+          onClick={() => {
+            console.log("where is it?" + CubeMesh.position);
+          }}
           id={mapped.id}
           position={mapped.position}
           color={mapped.color}
