@@ -20,6 +20,8 @@ const App = () => {
     ]);
   };
 
+  const changeSidebarPosition = () => {};
+
   const removeCube = (id) => {
     setCubeState(cubeState.filter((item) => item.id !== id));
   };
