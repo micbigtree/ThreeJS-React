@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import { OrbitControls, TransformControls } from "drei";
-
 import App from "../App.js";
 import Transformable from "./Transformable.js";
 

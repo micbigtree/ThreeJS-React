@@ -20,15 +20,6 @@ const App = () => {
     ]);
   };
 
-  const editCubePosition = (id, input) => {
-    const result = cubeState.map((obj) => {
-      if (obj.id === id) {
-        obj.position = input;
-      }
-    });
-    setCubeState(result);
-  };
-
   const removeCube = (id) => {
     setCubeState(cubeState.filter((item) => item.id !== id));
   };
@@ -54,11 +45,7 @@ const App = () => {
         <Viewport cubes={cubeState} />
       </div>
       <div style={styles.layerList}>
-        <LayerList
-          edit={editCubePosition}
-          remove={removeCube}
-          cubes={cubeState}
-        />
+        <LayerList remove={removeCube} cubes={cubeState} />
       </div>
     </div>
   );
