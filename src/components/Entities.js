@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import App from "../App.js";
-import Transformable from "./Transformable.js";
 
 import CubeMesh from "./CubeMesh";
 import ConeMesh from "./ConeMesh";
@@ -17,16 +16,15 @@ const Entities = (props) => {
 
   return objects.map((mapped) => (
     <group>
-      <Transformable showY={true} orbitControls={props.orbitControls}>
-        <CubeMesh
-          id={mapped.id}
-          position={mapped.position}
-          color={mapped.color}
-          speed={mapped.speed}
-          args={mapped.args}
-          shape={mapped.shape}
-        />
-      </Transformable>
+      <CubeMesh
+        id={mapped.id}
+        position={mapped.position}
+        color={mapped.color}
+        speed={mapped.speed}
+        args={mapped.args}
+        shape={mapped.shape}
+        orbitControls={props.orbitControls}
+      />
     </group>
   ));
 };
