@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import "../App.scss";
 import Entities from "./Entities";
+import Camera from "./Camera";
 // react three fiber takes care of camera position in canvas
 import { Canvas } from "react-three-fiber";
 // drei have lots of shapes without writing code
@@ -51,6 +52,7 @@ const Viewport = (props) => {
             <planeBufferGeometry attach="geometry" args={[100, 100]} />
             <meshStandardMaterial color="gray" attach="material" opacity={1} />
           </mesh>
+          <Camera orbitControls={orbitControls} />
           <Entities orbitControls={orbitControls} cubes={props.cubes} />
           <OrbitControls ref={orbitControls} />
         </group>

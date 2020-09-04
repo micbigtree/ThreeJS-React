@@ -17,7 +17,7 @@ const Entities = (props) => {
 
   return objects.map((mapped) => (
     <group>
-      <Transformable orbitControls={props.orbitControls}>
+      <Transformable showY={true} orbitControls={props.orbitControls}>
         <CubeMesh
           id={mapped.id}
           position={mapped.position}
