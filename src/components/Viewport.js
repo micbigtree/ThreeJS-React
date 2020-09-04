@@ -53,7 +53,11 @@ const Viewport = (props) => {
             <meshStandardMaterial color="gray" attach="material" opacity={1} />
           </mesh>
           <Camera orbitControls={orbitControls} />
-          <Entities orbitControls={orbitControls} cubes={props.cubes} />
+          <Entities
+            setSidebarPosition={props.setSidebarPosition}
+            orbitControls={orbitControls}
+            cubes={props.cubes}
+          />
           <OrbitControls ref={orbitControls} />
         </group>
       </Canvas>

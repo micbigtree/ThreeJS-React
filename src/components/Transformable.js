@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { TransformControls } from "drei";
 import { applyProps } from "react-three-fiber";
 
-function Transformable({ showY, children, orbitControls }) {
+function Transformable({ showX, showY, showZ, children, orbitControls }) {
   const transformControls = useRef();
 
   useEffect(() => {
@@ -18,6 +18,8 @@ function Transformable({ showY, children, orbitControls }) {
   return (
     <TransformControls
       showY={showY}
+      showX={showX}
+      showZ={showZ}
       translationSnap={1}
       ref={transformControls}
     >

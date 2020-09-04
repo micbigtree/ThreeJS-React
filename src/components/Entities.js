@@ -24,6 +24,7 @@ const Entities = (props) => {
         args={mapped.args}
         shape={mapped.shape}
         orbitControls={props.orbitControls}
+        setSidebarPosition={props.setSidebarPosition}
       />
     </group>
   ));

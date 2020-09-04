@@ -20,7 +20,11 @@ const App = () => {
     ]);
   };
 
-  const changeSidebarPosition = () => {};
+  const [passDownPosition, setPassDownPosition] = useState([0, 0, 0]);
+
+  const setSidebarPosition = (position) => {
+    setPassDownPosition(position);
+  };
 
   const removeCube = (id) => {
     setCubeState(cubeState.filter((item) => item.id !== id));
@@ -44,10 +48,14 @@ const App = () => {
       </div>
 
       <div style={styles.viewport}>
-        <Viewport cubes={cubeState} />
+        <Viewport setSidebarPosition={setSidebarPosition} cubes={cubeState} />
       </div>
       <div style={styles.layerList}>
-        <LayerList remove={removeCube} cubes={cubeState} />
+        <LayerList
+          position={passDownPosition}
+          remove={removeCube}
+          cubes={cubeState}
+        />
       </div>
     </div>
   );
