@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
+import { connect } from "react-redux";
 import * as THREE from "three";
 import "../App.scss";
 
 import { a } from "react-spring/three";
 import { TransformControls } from "drei";
+
 const CubeMesh = (props) => {
   const [hovered, setHover] = useState(false);
 
@@ -35,7 +37,7 @@ const CubeMesh = (props) => {
       onClick={(e) => {
         recordPositionChange(e);
       }}
-      position={objectPosition}
+      position={[props.positionX, 0, 0]}
       showY={hovered}
       showX={hovered}
       showZ={hovered}
@@ -68,4 +70,4 @@ const CubeMesh = (props) => {
   );
 };
 
-export default CubeMesh;
+export default connect()(CubeMesh);

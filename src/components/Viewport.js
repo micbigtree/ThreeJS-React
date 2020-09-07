@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { connect } from "react-redux";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import "../App.scss";
 import Entities from "./Entities";
@@ -78,4 +79,4 @@ const styles = {
   }
 };
 
-export default Viewport;
+export default connect()(Viewport);

@@ -13,10 +13,32 @@ const SpinningMesh = (props) => {
         <p>
           <strong>x:</strong>
           {props.position[0]}
+          <button
+            onClick={() => {
+              props.setShapePosition(-1);
+            }}
+          >
+            -
+          </button>
+          <button
+            onClick={() => {
+              props.setShapePosition(1);
+            }}
+          >
+            +
+          </button>
+        </p>
+        <p>
           <strong>y:</strong>
           {props.position[1]}
+          <button>-</button>
+          <button>+</button>
+        </p>
+        <p>
           <strong>z:</strong>
           {props.position[2]}
+          <button>-</button>
+          <button>+</button>
         </p>
       </div>
       <p>size:{props.cube.args} </p>

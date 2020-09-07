@@ -11,6 +11,7 @@ const LayerList = (props) => {
         edit={props.edit}
         cube={mapped}
         position={props.position}
+        setShapePosition={props.setShapePosition}
       />
     </div>
   ));

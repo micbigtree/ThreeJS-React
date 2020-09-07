@@ -1,11 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
-
-import App from "../App.js";
-
+import React from "react";
+import { connect } from "react-redux";
 import CubeMesh from "./CubeMesh";
-import ConeMesh from "./ConeMesh";
-import CylinderMesh from "./CylinderMesh";
-import SphereMesh from "./SphereMesh";
 
 const Entities = (props) => {
   const objects = [];
@@ -30,4 +25,4 @@ const Entities = (props) => {
   ));
 };
 
-export default Entities;
+export default connect()(Entities);
