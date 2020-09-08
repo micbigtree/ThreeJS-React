@@ -1,5 +1,5 @@
 import React from "react";
-
+import { connect } from "react-redux";
 import LayerListItem from "./LayerListItem";
 
 const LayerList = (props) => {
@@ -23,5 +23,7 @@ const styles = {
     marginLeft: "1%"
   }
 };
-
-export default LayerList;
+const mapState = (state) => ({
+  shapes: state.artboard.shapes
+});
+export default connect(mapState)(LayerList);

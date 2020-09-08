@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Viewport from "./components/Viewport";
 import LayerList from "./components/LayerList";
-import cubes from "./data/cubes.json";
+import cubes from "./data/db.json";
 
 const App = () => {
   const [cubeState, setCubeState] = useState(cubes);
@@ -58,7 +58,7 @@ const App = () => {
           setShapePosition={adjustShapePosition}
           position={passDownPosition}
           remove={removeCube}
-          cubes={cubeState}
+          cubes={cubes}
         />
       </div>
     </div>
