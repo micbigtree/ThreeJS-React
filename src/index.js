@@ -1,14 +1,38 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 import { createStore } from "redux";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
+const initialState = {
+  positionX: 0
+};
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "INCREMENTX":
+      return {
+        positionX: state.positionX + 1
+      };
+    case "DECREMENTX":
+      return {
+        positionX: state.positionX - 1
+      };
+    default:
+      return state;
+  }
+};
+
+const store = createStore(reducer);
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>,
   document.getElementById("root")
 );
 
