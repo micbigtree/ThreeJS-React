@@ -1,11 +1,11 @@
 import React, { useRef } from "react";
-import { connect } from "react-redux";
+import { connect, useStore, Provider } from "react-redux";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import "../App.scss";
 import Entities from "./Entities";
 import Camera from "./Camera";
 // react three fiber takes care of camera position in canvas
-import { Canvas } from "react-three-fiber";
+import { Canvas, stateContext } from "react-three-fiber";
 // drei have lots of shapes without writing code
 import { softShadows, OrbitControls } from "drei";
 
@@ -18,6 +18,8 @@ const Viewport = (props) => {
   objects.push(props.cubes);
   console.log(objects);
 
+  const store = useStore();
+
   return (
     <div style={styles.viewport}>
       <Canvas
@@ -29,38 +31,44 @@ const Viewport = (props) => {
         colorManagement
         camera={{ position: [0, 2, 5], fov: 60 }}
       >
-        <directionalLight
-          castShadow
-          position={[0, 10, 0]}
-          intensity={1.5}
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-          shadow-camera-far={50}
-          shadow-camera-left={-10}
-          shadow-camera-right={10}
-          shadow-camera-top={10}
-          shadow-camera-bottom={-10}
-        />
-        <ambientLight intensity={0.3} />
-        <pointLight position={[-10, 0, -20]} intensity={0.5} />
-        <pointLight position={[0, -10, 0]} intensity={1.5} />
-        <group>
-          <mesh
-            receiveShadow
-            rotation={[-Math.PI / 2, 0, 0]}
-            position={[0, -1.5, 0]}
-          >
-            <planeBufferGeometry attach="geometry" args={[100, 100]} />
-            <meshStandardMaterial color="gray" attach="material" opacity={1} />
-          </mesh>
-          <Camera orbitControls={orbitControls} />
-          <Entities
-            setSidebarPosition={props.setSidebarPosition}
-            orbitControls={orbitControls}
-            cubes={props.cubes}
+        <Provider store={store}>
+          <directionalLight
+            castShadow
+            position={[0, 10, 0]}
+            intensity={1.5}
+            shadow-mapSize-width={1024}
+            shadow-mapSize-height={1024}
+            shadow-camera-far={50}
+            shadow-camera-left={-10}
+            shadow-camera-right={10}
+            shadow-camera-top={10}
+            shadow-camera-bottom={-10}
           />
-          <OrbitControls ref={orbitControls} />
-        </group>
+          <ambientLight intensity={0.3} />
+          <pointLight position={[-10, 0, -20]} intensity={0.5} />
+          <pointLight position={[0, -10, 0]} intensity={1.5} />
+          <group>
+            <mesh
+              receiveShadow
+              rotation={[-Math.PI / 2, 0, 0]}
+              position={[0, -1.5, 0]}
+            >
+              <planeBufferGeometry attach="geometry" args={[100, 100]} />
+              <meshStandardMaterial
+                color="gray"
+                attach="material"
+                opacity={1}
+              />
+            </mesh>
+            <Camera orbitControls={orbitControls} />
+            <Entities
+              setSidebarPosition={props.setSidebarPosition}
+              orbitControls={orbitControls}
+              cubes={props.cubes}
+            />
+            <OrbitControls ref={orbitControls} />
+          </group>
+        </Provider>
       </Canvas>
     </div>
   );
@@ -79,4 +87,8 @@ const styles = {
   }
 };
 
-export default connect()(Viewport);
+function mapStateToProps(state) {
+  return { positionX: state.positionX };
+}
+
+export default connect(mapStateToProps)(Viewport);

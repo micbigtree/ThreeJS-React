@@ -37,7 +37,7 @@ const CubeMesh = (props) => {
       onClick={(e) => {
         recordPositionChange(e);
       }}
-      position={[props.positionX, 0, 0]}
+      position={[0, 0, 0]}
       showY={hovered}
       showX={hovered}
       showZ={hovered}
@@ -70,4 +70,4 @@ const CubeMesh = (props) => {
   );
 };
 
-export default connect()(CubeMesh);
+export default CubeMesh;

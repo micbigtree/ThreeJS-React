@@ -10,9 +10,7 @@ const App = () => {
     positionX: 0
   };
 
-  function reducer(state = initialState, action) {
-    // returns undefined
-    console.log("reducer", action);
+  const reducer = (state = initialState, action) => {
     switch (action.type) {
       case "INCREMENTX":
         return {
@@ -25,7 +23,7 @@ const App = () => {
       default:
         return state;
     }
-  }
+  };
 
   const store = createStore(reducer);
 
