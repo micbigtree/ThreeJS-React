@@ -1,0 +1,32 @@
+{
+  "1": {
+    "shapes": [
+      {
+        "id": 0,
+        "shape": "box",
+        "position": [0, 0, 0],
+        "color": "lightgreen",
+        "speed": "2",
+        "args": [1, 1, 2]
+      }
+    ],
+    "previewCamera": {
+      "position": [2, 0, 0]
+    }
+  },
+  "2": {
+    "shapes": [
+      {
+        "id": 0,
+        "shape": "box",
+        "position": [1, 0, 2],
+        "color": "lightgreen",
+        "speed": "2",
+        "args": [1, 1, 2]
+      }
+    ],
+    "previewCamera": {
+      "position": [2, 0, 0]
+    }
+  }
+}

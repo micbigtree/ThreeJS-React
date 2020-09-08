@@ -1,8 +1,6 @@
-const initialState = {
-  positionX: 0
-};
+const initialState = {};
 
-const reducers = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "INCREMENTX":
       return {
@@ -17,4 +15,4 @@ const reducers = (state = initialState, action) => {
   }
 };
 
-export default reducers;
+export default reducer;
