@@ -5,27 +5,9 @@ import { createStore } from "redux";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import reducers from "./reducers/reducers.js";
 
-const initialState = {
-  positionX: 0
-};
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "INCREMENTX":
-      return {
-        positionX: state.positionX + 1
-      };
-    case "DECREMENTX":
-      return {
-        positionX: state.positionX - 1
-      };
-    default:
-      return state;
-  }
-};
-
-const store = createStore(reducer);
+const store = createStore(reducers);
 
 ReactDOM.render(
   <Provider store={store}>
