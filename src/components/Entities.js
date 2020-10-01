@@ -1,47 +1,29 @@
 import React from "react";
-import { connect } from "react-redux";
+
+import { useZusStore } from "../zustand/artboards";
 import CubeMesh from "./CubeMesh";
 
-const Entities = (props) => {
-  const objects = [
-    {
-      id: 0,
-      shape: "box",
-      position: [0, 0, 0],
-      color: "lightgreen",
-      speed: "2",
-      args: [1, 1, 2]
-    },
-    {
-      id: 0,
-      shape: "box",
-      position: [0, 0, 0],
-      color: "lightgreen",
-      speed: "2",
-      args: [1, 1, 2]
-    }
-  ];
+const Entities = ({
+  orbitControls,
+}) => {
 
-  // props.cubes.map((mapped) => {
-  // objects.push(mapped);
+const { artboards, currentArtboard } = useZusStore();
 
-  //  });
-
-  return objects.map((mapped) => (
-    <group>
+  return artboards[currentArtboard].map((mapped) => (
+    <group key={mapped.id}>
       <CubeMesh
+        key={mapped.id}
         id={mapped.id}
         position={mapped.position}
-        positionX={props.positionX}
         color={mapped.color}
         speed={mapped.speed}
-        args={mapped.args}
+        args={[1, 1, 2]}
         shape={mapped.shape}
-        orbitControls={props.orbitControls}
-        setSidebarPosition={props.setSidebarPosition}
+        orbitControls={orbitControls}
       />
     </group>
   ));
 };
 
-export default connect()(Entities);
+export default Entities;
+

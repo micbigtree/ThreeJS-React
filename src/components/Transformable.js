@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import { TransformControls } from "drei";
-import { applyProps } from "react-three-fiber";
 
 function Transformable({ showX, showY, showZ, children, orbitControls }) {
   const transformControls = useRef();

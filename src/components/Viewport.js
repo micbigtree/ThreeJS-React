@@ -1,11 +1,12 @@
 import React, { useRef } from "react";
-import { connect, useStore, Provider } from "react-redux";
+
+import { useZusStore } from "../zustand/artboards";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import "../App.scss";
 import Entities from "./Entities";
 import Camera from "./Camera";
 // react three fiber takes care of camera position in canvas
-import { Canvas, stateContext } from "react-three-fiber";
+import { Canvas } from "react-three-fiber";
 // drei have lots of shapes without writing code
 import { softShadows, OrbitControls } from "drei";
 
@@ -13,14 +14,18 @@ softShadows();
 
 const Viewport = (props) => {
   const orbitControls = useRef();
-  const objects = [];
 
-  objects.push(props.cubes);
-  console.log(objects);
+  const { shapesAreLoaded } = useZusStore();
 
-  const store = useStore();
 
-  return (
+
+  if (!shapesAreLoaded) {
+    return (
+      <div style={styles.viewport}>
+        Loading...
+      </div>
+    );
+  } else { return (
     <div style={styles.viewport}>
       <Canvas
         onCreated={({ gl }) => {
@@ -31,7 +36,7 @@ const Viewport = (props) => {
         colorManagement
         camera={{ position: [0, 2, 5], fov: 60 }}
       >
-        <Provider store={store}>
+
           <directionalLight
             castShadow
             position={[0, 10, 0]}
@@ -62,16 +67,15 @@ const Viewport = (props) => {
             </mesh>
             <Camera orbitControls={orbitControls} />
             <Entities
-              setSidebarPosition={props.setSidebarPosition}
               orbitControls={orbitControls}
-              cubes={props.cubes}
             />
             <OrbitControls ref={orbitControls} />
           </group>
-        </Provider>
+
       </Canvas>
     </div>
-  );
+    );
+  };
 };
 
 const styles = {
@@ -87,8 +91,5 @@ const styles = {
   }
 };
 
-function mapStateToProps(state) {
-  return { positionX: state.positionX };
-}
 
-export default connect(mapStateToProps)(Viewport);
+export default Viewport;

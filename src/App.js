@@ -1,73 +1,70 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
+
 import Viewport from "./components/Viewport";
 import LayerList from "./components/LayerList";
-import cubes from "./data/db.json";
+import { useZusStore } from "./zustand/artboards";
+import ArtboardPanel from "./components/ArtboardPanel";
 
-const App = () => {
-  const [cubeState, setCubeState] = useState(cubes);
+const App = ( ) => {
+  const {
+    loadShapes,
+    addShape,
+    currentArtboard
+  } = useZusStore();
 
-  const addShape = (e) => {
-    setCubeState([
-      ...cubeState,
-      {
-        id: cubeState.length + 1,
-        shape: e.target.value,
-        position: [0, 0, 0],
-        color: "red",
-        speed: "10"
-      }
-    ]);
-  };
+  useEffect(() => {
+    loadShapes();
+  }, []); // <-- empty dependency array
 
-  const [passDownPosition, setPassDownPosition] = useState([0, 0, 0]);
 
-  const setSidebarPosition = (position) => {
-    setPassDownPosition(position);
-  };
-
-  const adjustShapePosition = (change) => {
-    setPassDownPosition(passDownPosition + change);
-  };
-
-  const removeCube = (id) => {
-    setCubeState(cubeState.filter((item) => item.id !== id));
-  };
-
-  return (
-    <div style={styles.container}>
-      <div style={styles.addButtons}>
-        <button style={styles.addButton} value="box" onClick={addShape}>
-          Add Cube
-        </button>
-        <button style={styles.addButton} value="sphere" onClick={addShape}>
-          Add Sphere
-        </button>
-        <button style={styles.addButton} onClick={addShape}>
-          Add Cylinder
-        </button>
-        <button style={styles.addButton} onClick={addShape}>
-          Add Cone
-        </button>
+    return (
+      <div style={styles.container}>
+        <div style={styles.viewport}>
+          <Viewport />
+        </div>
+        <div style={styles.artboardPanel}>
+          <ArtboardPanel />
+        </div>
+        <div style={styles.layerList}>
+          <div style={styles.addButtons}>
+            <button
+              style={styles.addButton}
+              value="box"
+              onClick={(e) => {
+                addShape({ currentArtboard, shape: e.target.value });
+              }}
+            >
+              Add Cube
+            </button>
+            <button
+              style={styles.addButton}
+              value="sphere"
+              onClick={(e) => {
+                addShape({ currentArtboard, shape: e.target.value });
+              }}
+            >
+              Add Sphere
+            </button>
+            <button
+              style={styles.addButton}
+              value="cylinder"
+              onClick={(e) => {
+                addShape({ currentArtboard, shape: e.target.value });
+              }}
+            >
+              Add Cylinder
+            </button>
+          </div>
+          <LayerList />
+        </div>
       </div>
+    );
+  };
 
-      <div style={styles.viewport}>
-        <Viewport setSidebarPosition={setSidebarPosition} cubes={cubeState} />
-      </div>
-      <div style={styles.layerList}>
-        <LayerList
-          setShapePosition={adjustShapePosition}
-          position={passDownPosition}
-          remove={removeCube}
-          cubes={cubes}
-        />
-      </div>
-    </div>
-  );
-};
 
 const styles = {
   container: {
-    overflow: "scroll"
+    overflow: "scroll",
   },
   viewport: { outline: "none" },
   layerList: {
@@ -75,17 +72,20 @@ const styles = {
     height: "auto",
     borderRadius: "10px",
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
-    overflow: "scroll"
+    overflow: "scroll",
   },
   addButtons: {
     overflow: "auto",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
+    padding: "2.5%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   addButton: {
     display: "inline-block",
     textAlign: "center",
-    padding: "1%"
-  }
+  },
 };
 
 export default App;

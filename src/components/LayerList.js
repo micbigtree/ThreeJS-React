@@ -1,29 +1,42 @@
 import React from "react";
-import { connect } from "react-redux";
+
+import { useZusStore } from "../zustand/artboards";
 import LayerListItem from "./LayerListItem";
 
-const LayerList = (props) => {
-  return props.cubes.map((mapped, index) => (
-    <div style={styles.listItem}>
-      <LayerListItem
-        id={index}
-        remove={props.remove}
-        edit={props.edit}
-        cube={mapped}
-        position={props.position}
-        setShapePosition={props.setShapePosition}
-      />
-    </div>
-  ));
+const LayerList = () => {
+
+  const { artboards, shapesAreLoaded, currentArtboard } = useZusStore();
+
+  if (!shapesAreLoaded) {
+    return <div>Loading...</div>;
+  } else {
+    return (
+      <ul style={styles.list}>
+        {artboards[currentArtboard].map((shape) => (
+          <li style={styles.listItem} key={shape.id}>
+            <LayerListItem
+              key={shape.id}
+              id={shape.id}
+              position={shape.position}
+              shape={shape.shape}
+              color={shape.color}
+            />
+          </li>
+        ))}
+      </ul>
+    );
+  }
 };
 
 const styles = {
   listItem: {
     marginTop: "1%",
-    marginLeft: "1%"
+
+    listStyleType: "none",
+  },
+  list: {
+    padding: 10
   }
 };
-const mapState = (state) => ({
-  shapes: state.artboard.shapes
-});
-export default connect(mapState)(LayerList);
+
+export default LayerList;
