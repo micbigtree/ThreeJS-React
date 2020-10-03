@@ -12,6 +12,7 @@ const LayerListItem = ({
 
 const {
   updatePosition,
+  updateDestination,
   removeShape,
   artboards,
   currentArtboard,
@@ -104,10 +105,21 @@ const {
       </div>
       <div style={styles.dropdownContainer}>
         Links to:
-        <select id="myDropdown">
-          <option value="none">none</option>
+        <select
+          onChange={(e) => {
+            updateDestination({
+              id,
+              currentArtboard,
+              destination: e.target.value,
+            });
+          }}
+          id="myDropdown"
+        >
+          <option value={null}>none</option>
           {Object.keys(artboards).map((mapped) => (
-            <option key={mapped} value={mapped}>{mapped}</option>
+            <option key={mapped} value={mapped}>
+              {mapped}
+            </option>
           ))}
         </select>
       </div>

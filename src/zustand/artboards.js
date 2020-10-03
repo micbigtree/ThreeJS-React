@@ -21,8 +21,6 @@ const store = (set, get) => ({
       const duration = performance.now() - startTime;
       console.log("updatePosition took" + duration + "ms, from" + startTime);
     }),
-  
-  // updatePosition: ({ position }) => console.log(position),
   // ADD A NEW SHAPE
   addShape: ({ currentArtboard, shape }) =>
     set((state) => {
@@ -75,11 +73,6 @@ const store = (set, get) => ({
   // OR CREATE A NEW BLANK IF THERE ARE NONE
   removeArtboard: (key) =>
     set((state) => {
-      // let keys = Object.keys(state.artboards).splice(
-      //   state.artboards[currentArtboard].find((x) => x.key === key), 1);
-      // let length = Object.keys(state.artboards).length > 1 ? true : false;
-      // let newArtboardArray = Object.keys(state.artboards);
-
       delete state.artboards[key];
     }),
   // LOAD SHAPES
@@ -91,6 +84,17 @@ const store = (set, get) => ({
         })
       )
       .then(() => set(() => ({ shapesAreLoaded: true }))),
+  // UPDATE SHAPE'S CLICK DESTINATION
+  updateDestination: ({ id, currentArtboard, destination }) => 
+  set((state) => {
+    console.log(destination);
+    state.artboards[currentArtboard].find(
+      (x) => x.id === id
+    ).destination = destination;
+    console.log(
+      state.artboards[currentArtboard].find((x) => x.id === id).destination
+    );
+  }),
 });
 const immer = (config) => (set, get, api) =>
   config((fn) => set(produce(fn)), get, api);
