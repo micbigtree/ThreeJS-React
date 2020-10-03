@@ -9,56 +9,58 @@ const App = ( ) => {
   const {
     loadShapes,
     addShape,
-    currentArtboard
+    currentArtboard,
+    editorMode
   } = useZusStore();
 
   useEffect(() => {
     loadShapes();
   }, []); // <-- empty dependency array
 
-
-    return (
-      <div style={styles.container}>
-        <div style={styles.viewport}>
-          <Viewport />
-        </div>
-        <div style={styles.artboardPanel}>
-          <ArtboardPanel />
-        </div>
-        <div style={styles.layerList}>
-          <div style={styles.addButtons}>
-            <button
-              style={styles.addButton}
-              value="box"
-              onClick={(e) => {
-                addShape({ currentArtboard, shape: e.target.value });
-              }}
-            >
-              Add Cube
-            </button>
-            <button
-              style={styles.addButton}
-              value="sphere"
-              onClick={(e) => {
-                addShape({ currentArtboard, shape: e.target.value });
-              }}
-            >
-              Add Sphere
-            </button>
-            <button
-              style={styles.addButton}
-              value="cylinder"
-              onClick={(e) => {
-                addShape({ currentArtboard, shape: e.target.value });
-              }}
-            >
-              Add Cylinder
-            </button>
-          </div>
-          <LayerList />
-        </div>
+  return editorMode ? (
+    <div style={styles.container}>
+      <div style={styles.viewport}>
+        <Viewport />
       </div>
-    );
+      <div style={styles.artboardPanel}>
+        <ArtboardPanel />
+      </div>
+      <div style={styles.layerList}>
+        <div style={styles.addButtons}>
+          <button
+            style={styles.addButton}
+            value="box"
+            onClick={(e) => {
+              addShape({ currentArtboard, shape: e.target.value });
+            }}
+          >
+            Add Cube
+          </button>
+          <button
+            style={styles.addButton}
+            value="sphere"
+            onClick={(e) => {
+              addShape({ currentArtboard, shape: e.target.value });
+            }}
+          >
+            Add Sphere
+          </button>
+          <button
+            style={styles.addButton}
+            value="cylinder"
+            onClick={(e) => {
+              addShape({ currentArtboard, shape: e.target.value });
+            }}
+          >
+            Add Cylinder
+          </button>
+        </div>
+        <LayerList />
+      </div>
+    </div>
+  ) : (
+    <div>Preview mode</div>
+  ); 
   };
 
 

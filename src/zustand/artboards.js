@@ -8,6 +8,7 @@ import { devtools } from "zustand/middleware";
 // ~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = (set, get) => ({
+  editorMode: true,
   currentArtboard: 1,
   artboards: {},
   shapesAreLoaded: false,
