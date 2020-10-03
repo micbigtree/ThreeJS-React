@@ -9,6 +9,10 @@ import { devtools } from "zustand/middleware";
 
 const store = (set, get) => ({
   editorMode: true,
+  switchModes: () => 
+  set((state) => {
+    state.editorMode = !state.editorMode;
+  }),
   currentArtboard: 1,
   artboards: {},
   shapesAreLoaded: false,

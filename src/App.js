@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import Viewport from "./components/Viewport";
+import PreviewViewport from "./components/PreviewViewport";
 import LayerList from "./components/LayerList";
 import { useZusStore } from "./zustand/artboards";
 import ArtboardPanel from "./components/ArtboardPanel";
@@ -10,7 +11,8 @@ const App = ( ) => {
     loadShapes,
     addShape,
     currentArtboard,
-    editorMode
+    editorMode,
+    switchModes,
   } = useZusStore();
 
   useEffect(() => {
@@ -19,6 +21,14 @@ const App = ( ) => {
 
   return editorMode ? (
     <div style={styles.container}>
+      <button
+        onClick={() => {
+          switchModes();
+        }}
+      >
+        Switch to Preview
+      </button>
+      <h1>Editor</h1>
       <div style={styles.viewport}>
         <Viewport />
       </div>
@@ -59,8 +69,18 @@ const App = ( ) => {
       </div>
     </div>
   ) : (
-    <div>Preview mode</div>
-  ); 
+    <div>
+      <button
+        onClick={() => {
+          switchModes();
+        }}
+      >
+        Switch to Editor
+      </button>
+      <h1>Preview</h1>
+      <PreviewViewport />
+    </div>
+  );
   };
 
 
