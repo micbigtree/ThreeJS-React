@@ -14,9 +14,12 @@ const store = (set, get) => ({
   // UPDATE POSITION OF SHAPE
   updatePosition: ({ id, currentArtboard, position }) =>
     set((state) => {
+      const startTime = performance.now();
       state.artboards[currentArtboard].find(
         (x) => x.id === id
       ).position = position;
+      const duration = performance.now() - startTime;
+      console.log("updatePosition took" + duration + "ms, from" + startTime);
     }),
   
   // updatePosition: ({ position }) => console.log(position),

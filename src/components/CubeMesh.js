@@ -19,33 +19,43 @@ const CubeMesh = ({
 
   const { updatePosition, currentArtboard } = useZusStore();
 
-  const worldPosition = new THREE.Vector3(0, 0, 0);
+  const worldPosition = new THREE.Vector3();
   const transformControls = useRef();
   const mesh = useRef();
+  let fired = 0
 
-useEffect(() => {
-  if (transformControls.current.dragging) {
-    updatePosition({
-      id,
-      currentArtboard,
-      position: Object.values(
-        transformControls.current.object.getWorldPosition(worldPosition)
-      ),
-    });
-    // updatePosition({position: Object.values(
-    //     transformControls.current.object.getWorldPosition(worldPosition)
-    //   )})
-  }
-});
+const handlePositionChange = () => {
+  const controls = transformControls.current;
+   console.log("dragging");
+   updatePosition({
+     id,
+     currentArtboard,
+     position: Object.values(controls.object.getWorldPosition(worldPosition)),
+   });
+   fired++;
+   console.log("dragged" + fired);
+}
+
+// useEffect(() => {
+//   if (transformControls.current.dragging === true) {
+//   console.log("dragging");
+//   updatePosition({
+//     id,
+//     currentArtboard,
+//     position: Object.values(transformControls.current.object.getWorldPosition(worldPosition)),
+//   });
+//   fired++;
+//   console.log("dragged" + fired);
+//   }
+// });
 
   useEffect(() => {
     if (transformControls.current) {
       const controls = transformControls.current;
-        controls.object.getWorldPosition(worldPosition);
-      const callback = (event) =>
-        (orbitControls.current.enabled = !event.value);
-      controls.addEventListener("dragging-changed", callback, {passive: true});
-
+      const callback = (event) => {(orbitControls.current.enabled = !event.value); 
+      handlePositionChange();  
+      };
+      controls.addEventListener("dragging-changed", callback);
       return () => controls.removeEventListener("dragging-changed", callback);
     }
   });
