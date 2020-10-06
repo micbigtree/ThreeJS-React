@@ -64,7 +64,7 @@ const store = (set, get) => ({
   // SELECT DIFFERENT ARTBOARD
   updateArtboard: (artboard) => {
     set((state) => {
-      state.currentArtboard = artboard;
+    state.currentArtboard = artboard;
     });
   },
   // ADD A NEW ARTBOARD

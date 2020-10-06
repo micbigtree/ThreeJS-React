@@ -64,7 +64,9 @@ const PreviewShape = ({ orbitControls, position, color, shape, speed, id, destin
     >
       <a.mesh
         onClick={() => {
-          updateArtboard(destination);
+            if (destination !== null) {
+              updateArtboard(destination);
+            }
         }}
         onPointerOver={(e) => setHover(true)}
         onPointerOut={(e) => setHover(false)}

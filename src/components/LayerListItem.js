@@ -16,6 +16,7 @@ const {
   removeShape,
   artboards,
   currentArtboard,
+  destination
 } = useZusStore();
 
   return (
@@ -106,6 +107,7 @@ const {
       <div style={styles.dropdownContainer}>
         Links to:
         <select
+          selected={destination}
           onChange={(e) => {
             updateDestination({
               id,
