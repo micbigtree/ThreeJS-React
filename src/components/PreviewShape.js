@@ -64,7 +64,7 @@ const PreviewShape = ({ orbitControls, position, color, shape, speed, id, destin
     >
       <a.mesh
         onClick={() => {
-            if (destination !== null) {
+            if (destination !== "none") {
               updateArtboard(destination);
             }
         }}
