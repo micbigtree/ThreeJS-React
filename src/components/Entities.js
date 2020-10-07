@@ -1,19 +1,16 @@
 import React from "react";
 
-import { useZusStore } from "../zustand/artboards";
-import CubeMesh from "./CubeMesh";
+import { useShapeStore } from "../zustand/shapes";
+import Shape from "./Shape";
 import PreviewShape from "./PreviewShape";
 
-const Entities = ({
-  orbitControls,
-}) => {
-
-const { artboards, currentArtboard, editorMode } = useZusStore();
+const Entities = ({ orbitControls }) => {
+  const { artboards, currentArtboard, editorMode } = useShapeStore();
 
   return artboards[currentArtboard].map((mapped) =>
     editorMode ? (
       <group key={mapped.id}>
-        <CubeMesh
+        <Shape
           key={mapped.id}
           id={mapped.id}
           position={mapped.position}

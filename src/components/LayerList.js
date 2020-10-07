@@ -1,11 +1,11 @@
 import React from "react";
 
-import { useZusStore } from "../zustand/artboards";
+import { useShapeStore } from "../zustand/shapes";
 import LayerListItem from "./LayerListItem";
 
 const LayerList = () => {
 
-  const { artboards, shapesAreLoaded, currentArtboard } = useZusStore();
+  const { artboards, shapesAreLoaded, currentArtboard } = useShapeStore();
 
   if (!shapesAreLoaded) {
     return <div>Loading...</div>;

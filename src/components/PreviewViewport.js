@@ -1,21 +1,33 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
-import { useZusStore } from "../zustand/artboards";
+import { useShapeStore } from "../zustand/shapes";
+import { useCameraStore } from "../zustand/camera";
+import { PreviewCamera } from "./PreviewCamera.js";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import "../App.scss";
 import Entities from "./Entities";
-import Camera from "./Camera";
-// react three fiber takes care of camera position in canvas
-import { Canvas } from "react-three-fiber";
-// drei have lots of shapes without writing code
-import { softShadows, OrbitControls } from "drei";
+import { Canvas, useFrame, useThree } from "react-three-fiber";
+import {
+  softShadows
+} from "drei";
 
 softShadows();
 
-const PreviewViewport = (props) => {
-  const orbitControls = useRef();
+const PreviewViewport = () => {
+  const { camera } = useThree()
 
-  const { shapesAreLoaded } = useZusStore();
+ const { shapesAreLoaded } = useShapeStore();
+ const { cameraArtboards, currentCameraArtboard } = useCameraStore();
+
+const orbitControls = useRef();
+
+useEffect((camera) => {
+// camera.updateProjectionMatrix(
+//   (camera.position = cameraArtboards[currentCameraArtboard].position)
+// );
+console.log(camera)
+})
+
 
   if (!shapesAreLoaded) {
     return <div style={styles.viewport}>Loading...</div>;
@@ -29,8 +41,11 @@ const PreviewViewport = (props) => {
           vr={true}
           shadowMap
           colorManagement
-          camera={{ position: [0, 2, 5], fov: 60 }}
+
         >
+          <PreviewCamera
+            position={cameraArtboards[currentCameraArtboard].position}
+          />
           <directionalLight
             castShadow
             position={[0, 10, 0]}
@@ -59,15 +74,13 @@ const PreviewViewport = (props) => {
                 opacity={1}
               />
             </mesh>
-            <Camera orbitControls={orbitControls} />
             <Entities orbitControls={orbitControls} />
-            <OrbitControls ref={orbitControls} />
           </group>
         </Canvas>
       </div>
     );
   }
-};
+}
 
 const styles = {
   viewport: {

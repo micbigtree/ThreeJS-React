@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
 import LayerList from "./components/LayerList";
-import { useZusStore } from "./zustand/artboards";
+import { useShapeStore } from "./zustand/shapes";
 import ArtboardPanel from "./components/ArtboardPanel";
 
 const App = ( ) => {
@@ -13,7 +13,7 @@ const App = ( ) => {
     currentArtboard,
     editorMode,
     switchModes,
-  } = useZusStore();
+  } = useShapeStore();
 
   useEffect(() => {
     loadShapes();

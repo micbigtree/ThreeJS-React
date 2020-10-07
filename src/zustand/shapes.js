@@ -103,4 +103,4 @@ const store = (set, get) => ({
 });
 const immer = (config) => (set, get, api) =>
   config((fn) => set(produce(fn)), get, api);
-export const [useZusStore] = create(devtools(immer(store)));
+export const [useShapeStore] = create(devtools(immer(store)));

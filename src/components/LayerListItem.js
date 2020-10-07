@@ -1,7 +1,7 @@
 import React from "react";
 
 import "../App.scss";
-import { useZusStore } from "../zustand/artboards";
+import { useShapeStore } from "../zustand/shapes";
 
 const LayerListItem = ({
   id,
@@ -16,8 +16,8 @@ const {
   removeShape,
   artboards,
   currentArtboard,
-  destination
-} = useZusStore();
+  destination,
+} = useShapeStore();
 
   return (
     <div style={styles.container} key={id}>
@@ -27,7 +27,7 @@ const {
       <div style={styles.position}>
         <div style={styles.positionVector}>
           <label> x: </label>
-          <input style={styles.inputField} value={position[0]} />
+          <input style={styles.inputField} placeholder={position[0]} />
           <button
             onClick={() => {
               updatePosition({
@@ -53,7 +53,7 @@ const {
         </div>
         <div style={styles.positionVector}>
           <label> y: </label>
-          <input style={styles.inputField} value={position[1]} />
+          <input style={styles.inputField} placeholder={position[1]} />
           <button
             onClick={() => {
               updatePosition({
@@ -79,7 +79,7 @@ const {
         </div>
         <div style={styles.positionVector}>
           <label> z: </label>
-          <input style={styles.inputField} value={position[2]} />
+          <input style={styles.inputField} placeholder={position[2]} />
           <button
             onClick={() => {
               updatePosition({

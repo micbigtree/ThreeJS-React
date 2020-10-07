@@ -1,5 +1,5 @@
 import React from "react";
-import { useZusStore } from "../zustand/artboards";
+import { useShapeStore } from "../zustand/shapes";
 
 const ArtboardPanel = () => {
 
@@ -14,7 +14,13 @@ const selectedDeleteRequest = (mapped) => {
   }, 1);
 };
 
-const { artboards, addArtboard, removeArtboard, currentArtboard, updateArtboard } = useZusStore();
+const {
+  artboards,
+  addArtboard,
+  removeArtboard,
+  currentArtboard,
+  updateArtboard,
+} = useShapeStore();
 
   return (
     <div style={styles.artboardContainer}>

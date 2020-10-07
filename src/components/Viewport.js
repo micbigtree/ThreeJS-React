@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-import { useZusStore } from "../zustand/artboards";
+import { useShapeStore } from "../zustand/shapes";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import "../App.scss";
 import Entities from "./Entities";
@@ -15,7 +15,7 @@ softShadows();
 const Viewport = (props) => {
   const orbitControls = useRef();
 
-  const { shapesAreLoaded } = useZusStore();
+  const { shapesAreLoaded } = useShapeStore();
 
 
 
