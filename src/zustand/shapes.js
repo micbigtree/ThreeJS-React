@@ -7,7 +7,7 @@ import { devtools } from "zustand/middleware";
 // STATE 
 // ~~~~~~~~~~~~~~~~~~~~~~~~
 
-const store = (set, get) => ({
+const store = (set) => ({
   editorMode: true,
   switchModes: () => 
   set((state) => {

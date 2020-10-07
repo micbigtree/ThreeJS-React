@@ -6,7 +6,7 @@ import { devtools } from "zustand/middleware";
 // STATE
 // ~~~~~~~~~~~~~~~~~~~~~~~~
 
-const store = (set, get) => ({
+const store = (set) => ({
   currentCameraArtboard: 1,
   // CAMERAS
   cameraArtboards: {

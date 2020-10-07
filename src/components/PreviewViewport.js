@@ -6,28 +6,17 @@ import { PreviewCamera } from "./PreviewCamera.js";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import "../App.scss";
 import Entities from "./Entities";
-import { Canvas, useFrame, useThree } from "react-three-fiber";
-import {
-  softShadows
-} from "drei";
+import { Canvas } from "react-three-fiber";
+import { softShadows } from "drei";
 
 softShadows();
 
 const PreviewViewport = () => {
-  const { camera } = useThree()
 
  const { shapesAreLoaded } = useShapeStore();
  const { cameraArtboards, currentCameraArtboard } = useCameraStore();
 
 const orbitControls = useRef();
-
-useEffect((camera) => {
-// camera.updateProjectionMatrix(
-//   (camera.position = cameraArtboards[currentCameraArtboard].position)
-// );
-console.log(camera)
-})
-
 
   if (!shapesAreLoaded) {
     return <div style={styles.viewport}>Loading...</div>;
@@ -41,7 +30,6 @@ console.log(camera)
           vr={true}
           shadowMap
           colorManagement
-
         >
           <PreviewCamera
             position={cameraArtboards[currentCameraArtboard].position}

@@ -20,7 +20,6 @@ const PreviewShape = ({
   const { updateCameraArtboard } = useCameraStore();
 
   const transformControls = useRef();
-  const mesh = useRef();
 
   return (
     <TransformControls
@@ -41,7 +40,6 @@ const PreviewShape = ({
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}
         castShadow
-        ref={mesh}
       >
         {shape === "box" ? (
           <boxBufferGeometry attach="geometry" />

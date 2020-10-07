@@ -67,7 +67,7 @@ const PlayerCamera = ({ position }) => {
 
   const [camera] = React.useState(() => {
     const cam = new THREE.PerspectiveCamera(
-      80,
+      60,
       size.width / size.height,
       0.005,
       10000
@@ -77,6 +77,11 @@ const PlayerCamera = ({ position }) => {
     setDefaultCamera(cam);
     return cam;
   });
+
+  // UPDATES CAMERA POSITION IF ARTBOARD IS CHANGED
+  React.useEffect(() => {
+    camera.position.set(...position);
+  }, [position]);
 
   React.useEffect(() => {
     camera.aspect = size.width / size.height;
