@@ -73,10 +73,10 @@ const orbitControls = useRef();
 const styles = {
   viewport: {
     position: "absolute",
-    width: "60%",
-    height: "75%",
-    top: "12.5%",
-    left: "20%",
+    width: "95%",
+    height: "95%",
+    top: "5%",
+    bottom: "5%",
     borderRadius: "10px",
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
     outline: "none",
