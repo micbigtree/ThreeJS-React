@@ -5,6 +5,7 @@ import { useShapeStore } from "../zustand/shapes";
 import { useCameraStore } from "../zustand/camera";
 import { TransformControls } from "drei";
 
+
 import "../App.scss";
 
 const PreviewShape = ({
@@ -31,7 +32,7 @@ const PreviewShape = ({
       ref={transformControls}
     >
       <a.mesh
-        onClick={() => {
+        onPointerDown={() => {
           if (destination !== "none") {
             updateArtboard(destination);
             updateCameraArtboard(destination);

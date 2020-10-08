@@ -20,12 +20,12 @@ export const PreviewCamera = ({
 
   React.useEffect(() => {
     yawObject.current.add(pitchObject.current);
-    function mouseDown(event) {
+    function pointerDown(event) {
       dragging.current = true;
       previousEvent.current = event;
     }
 
-    function mouseMove(event) {
+    function pointerMove(event) {
       if (dragging.current && previousEvent.current) {
         const movementX = event.screenX - previousEvent.current.screenX;
         const movementY = event.screenY - previousEvent.current.screenY;
@@ -41,18 +41,18 @@ export const PreviewCamera = ({
 
       previousEvent.current = event;
     }
-    function mouseUp() {
+    function pointerUp() {
       previousEvent.current = undefined;
       dragging.current = false;
     }
-    gl.domElement.addEventListener("mousedown", mouseDown, false);
-    gl.domElement.addEventListener("mousemove", mouseMove, false);
-    gl.domElement.addEventListener("mouseup", mouseUp, false);
+    gl.domElement.addEventListener("pointerdown", pointerDown, false);
+    gl.domElement.addEventListener("pointermove", pointerMove, false);
+    gl.domElement.addEventListener("pointerup", pointerUp, false);
 
     return () => {
-      gl.domElement.removeEventListener("mousedown", mouseDown);
-      gl.domElement.removeEventListener("mousemove", mouseMove);
-      gl.domElement.removeEventListener("mouseup", mouseUp);
+      gl.domElement.removeEventListener("pointerdown", pointerDown);
+      gl.domElement.removeEventListener("pointermove", pointerMove);
+      gl.domElement.removeEventListener("pointerup", pointerUp);
     };
   }, [gl.domElement]);
 
