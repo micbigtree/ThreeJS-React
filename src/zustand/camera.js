@@ -1,3 +1,4 @@
+import { getPreviewCameras } from "../api";
 import create from "zustand";
 import produce from "immer";
 import { devtools } from "zustand/middleware";
@@ -9,14 +10,8 @@ import { devtools } from "zustand/middleware";
 const store = (set) => ({
   currentCameraArtboard: 1,
   // CAMERAS
-  cameraArtboards: {
-    1: {
-      position: [0, 0, 3],
-    },
-    2: {
-      position: [1, 5, 6],
-    },
-  },
+  cameraArtboards: {},
+  cameraIsLoaded: false,
   // UPDATE POSITION OF CAMERA
   updateCameraPosition: ({ currentArtboard, position }) =>
     set((state) => {
@@ -48,6 +43,15 @@ const store = (set) => ({
       state.currentCameraArtboard = artboard;
     });
   },
+  // LOAD PREVIEW CAMERAS
+  loadPreviewCameras: () =>
+    getPreviewCameras()
+      .then((cameras) =>
+        set((state) => {
+          state.cameraArtboards = cameras.cameraArtboards;
+        })
+      )
+      .then(() => set(() => ({ cameraIsLoaded: true }))),
 });
 const immer = (config) => (set, get, api) =>
   config((fn) => set(produce(fn)), get, api);

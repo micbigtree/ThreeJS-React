@@ -28,9 +28,6 @@ const Viewport = (props) => {
   } else { return (
     <div style={styles.viewport}>
       <Canvas
-        onCreated={({ gl }) => {
-          document.body.appendChild(VRButton.createButton(gl));
-        }}
         vr={true}
         shadowMap
         colorManagement

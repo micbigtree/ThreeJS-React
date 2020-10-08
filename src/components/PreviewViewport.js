@@ -11,7 +11,12 @@ import { softShadows } from "drei";
 
 softShadows();
 
+
 const PreviewViewport = () => {
+
+  // useEffect((gl) => {
+  //   document.body.appendChild(VRButton.createButton(gl));
+  // }, []);
 
  const { shapesAreLoaded } = useShapeStore();
  const { cameraArtboards, currentCameraArtboard } = useCameraStore();
@@ -24,9 +29,9 @@ const orbitControls = useRef();
     return (
       <div style={styles.viewport}>
         <Canvas
-          onCreated={({ gl }) => {
-            document.body.appendChild(VRButton.createButton(gl));
-          }}
+          // onCreated={({ gl }) => {
+          //   document.body.appendChild(VRButton.createButton(gl));
+          // }}
           vr={true}
           shadowMap
           colorManagement

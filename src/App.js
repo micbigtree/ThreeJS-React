@@ -4,6 +4,7 @@ import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
 import LayerList from "./components/LayerList";
 import { useShapeStore } from "./zustand/shapes";
+import { useCameraStore } from "./zustand/camera";
 import ArtboardPanel from "./components/ArtboardPanel";
 
 const App = ( ) => {
@@ -14,9 +15,11 @@ const App = ( ) => {
     editorMode,
     switchModes,
   } = useShapeStore();
+  const { loadPreviewCameras } = useCameraStore();
 
   useEffect(() => {
     loadShapes();
+    loadPreviewCameras();
   }, []); // <-- empty dependency array
 
   return editorMode ? (

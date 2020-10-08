@@ -2,6 +2,8 @@ import * as React from "react";
 import { useFrame, useThree } from "react-three-fiber";
 import * as THREE from "three";
 
+//code from this article: https://dev.to/jhsu/creating-a-hud-in-react-three-fiber-1953
+
 const PI_2 = Math.PI / 2;
 export const PreviewCamera = ({
   position
