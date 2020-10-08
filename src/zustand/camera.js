@@ -8,9 +8,9 @@ import { devtools } from "zustand/middleware";
 // ~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = (set) => ({
-  currentCameraArtboard: 1,
   // CAMERAS
   cameraArtboards: {},
+  currentCameraArtboard: 1,
   cameraIsLoaded: false,
   // UPDATE POSITION OF CAMERA
   updateCameraPosition: ({ currentArtboard, position }) =>

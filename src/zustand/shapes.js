@@ -9,12 +9,12 @@ import { devtools } from "zustand/middleware";
 
 const store = (set) => ({
   editorMode: true,
-  switchModes: () => 
-  set((state) => {
-    state.editorMode = !state.editorMode;
-  }),
-  currentArtboard: 1,
   artboards: {},
+  switchModes: () =>
+    set((state) => {
+      state.editorMode = !state.editorMode;
+    }),
+  currentArtboard: 1,
   shapesAreLoaded: false,
   // UPDATE POSITION OF SHAPE
   updatePosition: ({ id, currentArtboard, position }) =>
@@ -64,7 +64,7 @@ const store = (set) => ({
   // SELECT DIFFERENT ARTBOARD
   updateArtboard: (artboard) => {
     set((state) => {
-    state.currentArtboard = artboard;
+      state.currentArtboard = artboard;
     });
   },
   // ADD A NEW ARTBOARD
@@ -90,16 +90,16 @@ const store = (set) => ({
       )
       .then(() => set(() => ({ shapesAreLoaded: true }))),
   // UPDATE SHAPE'S CLICK DESTINATION
-  updateDestination: ({ id, currentArtboard, destination }) => 
-  set((state) => {
-    console.log(destination);
-    state.artboards[currentArtboard].find(
-      (x) => x.id === id
-    ).destination = destination;
-    console.log(
-      state.artboards[currentArtboard].find((x) => x.id === id).destination
-    );
-  }),
+  updateDestination: ({ id, currentArtboard, destination }) =>
+    set((state) => {
+      console.log(destination);
+      state.artboards[currentArtboard].find(
+        (x) => x.id === id
+      ).destination = destination;
+      console.log(
+        state.artboards[currentArtboard].find((x) => x.id === id).destination
+      );
+    }),
 });
 const immer = (config) => (set, get, api) =>
   config((fn) => set(produce(fn)), get, api);

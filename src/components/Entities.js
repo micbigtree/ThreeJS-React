@@ -13,7 +13,7 @@ const Entities = ({ orbitControls }) => {
   } = useShapeStore();
 
   return artboards[currentArtboard].map((mapped) =>
-    editorMode ? (
+    // editorMode ? (
       <group key={mapped.id}>
         <Shape
           key={mapped.id}
@@ -26,23 +26,23 @@ const Entities = ({ orbitControls }) => {
           orbitControls={orbitControls}
         />
       </group>
-    ) : (
+    // ) : (
 
-        <group key={mapped.id}>
-          <PreviewShape
-            key={mapped.id}
-            id={mapped.id}
-            position={mapped.position}
-            color={mapped.color}
-            speed={mapped.speed}
-            args={[1, 1, 2]}
-            shape={mapped.shape}
-            orbitControls={orbitControls}
-            destination={mapped.destination}
-          />
-        </group>
+        
+    //       <PreviewShape
+    //         key={mapped.id}
+    //         id={mapped.id}
+    //         position={mapped.position}
+    //         color={mapped.color}
+    //         speed={mapped.speed}
+    //         args={[1, 1, 2]}
+    //         shape={mapped.shape}
+    //         orbitControls={orbitControls}
+    //         destination={mapped.destination}
+    //       />
 
-    )
+
+    // )
   );
 };
 
