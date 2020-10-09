@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useCameraStore } from "../zustand/camera";
 import { useShapeStore } from "../zustand/shapes";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
@@ -14,7 +14,6 @@ softShadows();
 
 const Viewport = (props) => {
   const orbitControls = useRef();
-
   const { shapesAreLoaded, currentArtboard } = useShapeStore();
 
   const { cameraArtboards } = useCameraStore();
@@ -60,9 +59,7 @@ const Viewport = (props) => {
             <planeBufferGeometry attach="geometry" args={[100, 100]} />
             <meshStandardMaterial color="gray" attach="material" opacity={1} />
           </mesh>
-          <Camera
-            orbitControls={orbitControls}
-          />
+            <Camera orbitControls={orbitControls} />
           <Entities orbitControls={orbitControls} />
           <OrbitControls ref={orbitControls} />
         </group>

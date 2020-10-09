@@ -38,7 +38,7 @@ const orbitControls = useRef();
           shadowMap
           colorManagement
         > */}
-        <VRCanvas>
+        <VRCanvas colorManagement>
           <DefaultXRControllers />
           <PreviewCamera position={cameraArtboards[currentArtboard].position} />
           <directionalLight

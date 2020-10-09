@@ -8,12 +8,15 @@ import { useCameraStore } from "../zustand/camera";
 import { useShapeStore } from "../zustand/shapes";
 
 const Camera = ({ orbitControls }) => {
-  const [hovered, setHover] = useState(false);
+  
+  const [hovered, setHovered] = useState(false);
+
+// can maybe use onPointerMissed to detect when a user clicks 'off' of a shape or camera, 
+// but i think it can only be used in canvas
 
 const {
   updateCameraPosition,
   cameraArtboards,
-  cameraIsLoaded,
 } = useCameraStore();
 const { currentArtboard } = useShapeStore();
 
@@ -33,7 +36,6 @@ const { currentArtboard } = useShapeStore();
        const controls = transformControls.current;
        const callback = (event) => {
          orbitControls.current.enabled = !event.value;
-        //  handlePositionChange();
        };
        controls.addEventListener("dragging-changed", callback);
        return () => controls.removeEventListener("dragging-changed", callback);
@@ -54,8 +56,8 @@ const { currentArtboard } = useShapeStore();
       <a.mesh
         scale={[0.25, 0.25, 0.25]}
         castShadow
-        onPointerOver={(e) => setHover(true)}
-        onPointerOut={(e) => setHover(false)}
+        onPointerOver={() => setHovered(true)}
+        onPointerOut={() => setHovered(false)}
       >
         <sphereBufferGeometry attach="geometry" />
         <meshStandardMaterial
