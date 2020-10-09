@@ -1,33 +1,55 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import "../App.scss";
 
 import { a } from "react-spring/three";
-import Transformable from "./Transformable.js";
+import { TransformControls } from "drei";
+import { useCameraStore } from "../zustand/camera";
+import { useShapeStore } from "../zustand/shapes";
 
-const Camera = (props) => {
+const Camera = ({ orbitControls }) => {
   const [hovered, setHover] = useState(false);
 
-  let vector = new THREE.Vector3();
+const { updateCameraPosition } = useCameraStore();
+const { currentArtboard } = useShapeStore();
 
-  useEffect(() => {});
+  const worldPosition = new THREE.Vector3();
+
+  const handlePositionChange = () => {
+    const controls = transformControls.current;
+    updateCameraPosition({
+      currentArtboard,
+      position: Object.values(controls.object.getWorldPosition(worldPosition)),
+    });
+  };
+
+   const transformControls = useRef();
+   useEffect(() => {
+     if (transformControls.current) {
+       const controls = transformControls.current;
+       const callback = (event) => {
+         orbitControls.current.enabled = !event.value;
+         handlePositionChange();
+       };
+       controls.addEventListener("dragging-changed", callback);
+       return () => controls.removeEventListener("dragging-changed", callback);
+     }
+   });
+
 
   return (
-    <Transformable
-      showX={hovered}
+    <TransformControls
       showY={false}
+      showX={hovered}
       showZ={hovered}
-      orbitControls={props.orbitControls}
+      translationSnap={1}
+      ref={transformControls}
     >
       <a.mesh
+        scale={[0.25, 0.25, 0.25]}
         castShadow
         onPointerOver={(e) => setHover(true)}
         onPointerOut={(e) => setHover(false)}
-        onClick={(event) => {
-          event.object.getWorldPosition(vector);
-          console.log(vector);
-          console.log(Object.values(vector));
-        }}
       >
         <sphereBufferGeometry attach="geometry" />
         <meshStandardMaterial
@@ -37,7 +59,7 @@ const Camera = (props) => {
           opacity={hovered ? 0.8 : 1}
         />
       </a.mesh>
-    </Transformable>
+    </TransformControls>
   );
 };
 

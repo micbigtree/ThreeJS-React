@@ -19,28 +19,12 @@ const Shape = ({ orbitControls, position, color, shape, speed, id }) => {
 
   const handlePositionChange = () => {
     const controls = transformControls.current;
-    console.log("dragging");
     updatePosition({
       id,
       currentArtboard,
       position: Object.values(controls.object.getWorldPosition(worldPosition)),
     });
-    fired++;
-    console.log("dragged" + fired);
   };
-
-  // useEffect(() => {
-  //   if (transformControls.current.dragging === true) {
-  //   console.log("dragging");
-  //   updatePosition({
-  //     id,
-  //     currentArtboard,
-  //     position: Object.values(transformControls.current.object.getWorldPosition(worldPosition)),
-  //   });
-  //   fired++;
-  //   console.log("dragged" + fired);
-  //   }
-  // });
 
   useEffect(() => {
     if (transformControls.current) {

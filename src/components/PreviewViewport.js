@@ -16,12 +16,12 @@ softShadows();
 
 const PreviewViewport = () => {
 
- const { shapesAreLoaded, artboards, currentArtboard, updateArtboard } = useShapeStore();
+ const { shapesAreLoaded, artboards, currentArtboard } = useShapeStore();
  const {
    cameraArtboards,
    currentCameraArtboard,
-   updateCameraArtboard,
  } = useCameraStore();
+ 
 
 const orbitControls = useRef();
 
@@ -40,9 +40,7 @@ const orbitControls = useRef();
         > */}
         <VRCanvas>
           <DefaultXRControllers />
-          <PreviewCamera
-            position={cameraArtboards[currentCameraArtboard].position}
-          />
+          <PreviewCamera position={cameraArtboards[currentArtboard].position} />
           <directionalLight
             castShadow
             position={[0, 10, 0]}
@@ -73,24 +71,19 @@ const orbitControls = useRef();
             </mesh>
 
             {/* <Entities orbitControls={orbitControls} /> */}
-            {artboards[currentArtboard].map((mapped) =>
-              
-              (
-
-                <PreviewShape
-                  key={mapped.id}
-                  id={mapped.id}
-                  position={mapped.position}
-                  color={mapped.color}
-                  speed={mapped.speed}
-                  args={[1, 1, 2]}
-                  shape={mapped.shape}
-                  orbitControls={orbitControls}
-                  destination={mapped.destination}
-                />
-
-              )
-            )}
+            {artboards[currentArtboard].map((mapped) => (
+              <PreviewShape
+                key={mapped.id}
+                id={mapped.id}
+                position={mapped.position}
+                color={mapped.color}
+                speed={mapped.speed}
+                args={[1, 1, 2]}
+                shape={mapped.shape}
+                orbitControls={orbitControls}
+                destination={mapped.destination}
+              />
+            ))}
           </group>
         </VRCanvas>
         {/* </Canvas> */}

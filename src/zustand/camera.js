@@ -4,7 +4,7 @@ import produce from "immer";
 import { devtools } from "zustand/middleware";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~
-// STATE
+// STATE 
 // ~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = (set) => ({
@@ -15,12 +15,7 @@ const store = (set) => ({
   // UPDATE POSITION OF CAMERA
   updateCameraPosition: ({ currentArtboard, position }) =>
     set((state) => {
-      const startTime = performance.now();
       state.cameraArtboards[currentArtboard].position = position;
-      const duration = performance.now() - startTime;
-      console.log(
-        "updateCameraPosition took" + duration + "ms, from" + startTime
-      );
     }),
   // ADD A NEW CAMERA ARTBOARD
   addCameraArtboard: () =>
