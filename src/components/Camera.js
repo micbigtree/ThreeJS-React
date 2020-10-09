@@ -10,7 +10,11 @@ import { useShapeStore } from "../zustand/shapes";
 const Camera = ({ orbitControls }) => {
   const [hovered, setHover] = useState(false);
 
-const { updateCameraPosition } = useCameraStore();
+const {
+  updateCameraPosition,
+  cameraArtboards,
+  cameraIsLoaded,
+} = useCameraStore();
 const { currentArtboard } = useShapeStore();
 
   const worldPosition = new THREE.Vector3();
@@ -29,7 +33,7 @@ const { currentArtboard } = useShapeStore();
        const controls = transformControls.current;
        const callback = (event) => {
          orbitControls.current.enabled = !event.value;
-         handlePositionChange();
+        //  handlePositionChange();
        };
        controls.addEventListener("dragging-changed", callback);
        return () => controls.removeEventListener("dragging-changed", callback);
@@ -39,11 +43,13 @@ const { currentArtboard } = useShapeStore();
 
   return (
     <TransformControls
+      position={cameraArtboards[currentArtboard].position}
       showY={false}
       showX={hovered}
       showZ={hovered}
       translationSnap={1}
       ref={transformControls}
+      onPointerUp={() => handlePositionChange()}
     >
       <a.mesh
         scale={[0.25, 0.25, 0.25]}

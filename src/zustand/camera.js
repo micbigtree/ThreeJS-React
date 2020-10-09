@@ -1,4 +1,4 @@
-import { getPreviewCameras } from "../api";
+import { getPreviewCameras, sendPreviewCameras } from "../api";
 import create from "zustand";
 import produce from "immer";
 import { devtools } from "zustand/middleware";
@@ -15,7 +15,12 @@ const store = (set) => ({
   // UPDATE POSITION OF CAMERA
   updateCameraPosition: ({ currentArtboard, position }) =>
     set((state) => {
-      state.cameraArtboards[currentArtboard].position = position;
+      state.cameraArtboards[currentArtboard].position = position
+      sendPreviewCameras(state.cameraArtboards)
+      .then(state.cameraIsLoaded = false)
+    .then(state.loadPreviewCameras(),
+    console.log("state updated!"),
+    state.cameraIsLoaded = true)
     }),
   // ADD A NEW CAMERA ARTBOARD
   addCameraArtboard: () =>
@@ -43,11 +48,11 @@ const store = (set) => ({
     getPreviewCameras()
       .then((cameras) =>
         set((state) => {
-          state.cameraArtboards = cameras.cameraArtboards;
+          state.cameraArtboards = cameras;
         })
       )
       .then(() => set(() => ({ cameraIsLoaded: true }))),
 });
 const immer = (config) => (set, get, api) =>
   config((fn) => set(produce(fn)), get, api);
-export const [useCameraStore] = create(devtools(immer(store)));
+export const [useCameraStore] = create(devtools(immer(store))); 
