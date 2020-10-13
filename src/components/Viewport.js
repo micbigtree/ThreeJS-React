@@ -1,10 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useCameraStore } from "../zustand/camera";
 import { useShapeStore } from "../zustand/shapes";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import "../App.scss";
 import Entities from "./Entities";
 import Camera from "./Camera";
+
 // react three fiber takes care of camera position in canvas
 import { Canvas } from "react-three-fiber";
 // drei have lots of shapes without writing code
@@ -15,9 +16,14 @@ softShadows();
 const Viewport = (props) => {
   const orbitControls = useRef();
   const { shapesAreLoaded, currentArtboard } = useShapeStore();
-
   const { cameraArtboards } = useCameraStore();
- 
+
+  const [selected, setSelected] = useState(0);
+
+  const handleSelected = (id) => {
+    setSelected(id)
+  }
+
   if (!shapesAreLoaded) {
     return (
       <div style={styles.viewport}>
@@ -34,6 +40,9 @@ const Viewport = (props) => {
         shadowMap
         colorManagement
         camera={{ position: [0, 2, 5], fov: 60 }}
+        onPointerMissed={() => {
+          setSelected(0);
+        }}
       >
         <directionalLight
           castShadow
@@ -59,8 +68,12 @@ const Viewport = (props) => {
             <planeBufferGeometry attach="geometry" args={[100, 100]} />
             <meshStandardMaterial color="gray" attach="material" opacity={1} />
           </mesh>
-            <Camera orbitControls={orbitControls} />
-          <Entities orbitControls={orbitControls} />
+          <Camera orbitControls={orbitControls} />
+          <Entities
+            selected={selected}
+            handleSelected={handleSelected}
+            orbitControls={orbitControls}
+          />
           <OrbitControls ref={orbitControls} />
         </group>
       </Canvas>

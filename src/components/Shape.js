@@ -1,30 +1,39 @@
 import React, { useState, useRef, useEffect } from "react";
-
 import { a } from "react-spring/three";
 import { useShapeStore } from "../zustand/shapes";
 import { TransformControls } from "drei";
 import * as THREE from 'three';
-
 import "../App.scss";
 
-const Shape = ({ orbitControls, position, color, shape, speed, id }) => {
-  const [hovered, setHover] = useState(false);
-
+const Shape = ({
+  orbitControls,
+  position,
+  color,
+  shape,
+  speed,
+  id,
+  selected, 
+  handleSelected
+}) => {
+  const [shapeSelected, setSelected] = useState(selected);
+  const [hovered, setHover] = useState();
   const { updatePosition, currentArtboard } = useShapeStore();
-
   const worldPosition = new THREE.Vector3();
   const transformControls = useRef();
   const mesh = useRef();
-  let fired = 0;
-
   const handlePositionChange = () => {
-    const controls = transformControls.current;
+  const controls = transformControls.current;
+
     updatePosition({
       id,
       currentArtboard,
       position: Object.values(controls.object.getWorldPosition(worldPosition)),
     });
   };
+
+  const clickedShape = (id) => {
+    handleSelected(id);
+  }
 
   useEffect(() => {
     if (transformControls.current) {
@@ -41,15 +50,16 @@ const Shape = ({ orbitControls, position, color, shape, speed, id }) => {
   return (
     <TransformControls
       position={position}
-      showY={hovered}
-      showX={hovered}
-      showZ={hovered}
+      showY={selected === id ? true : false}
+      showX={selected === id ? true : false}
+      showZ={selected === id ? true : false}
       translationSnap={1}
       ref={transformControls}
     >
       <a.mesh
-        onPointerOver={(e) => setHover(true)}
-        onPointerOut={(e) => setHover(false)}
+        onPointerOver={() => setHover(true)}
+        onPointerOut={() => setHover(false)}
+        onPointerDown={() => clickedShape(id)}
         castShadow
         ref={mesh}
       >
