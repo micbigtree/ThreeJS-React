@@ -62,7 +62,11 @@ const Viewport = ({selected, handleSelected}) => {
             <planeBufferGeometry attach="geometry" args={[100, 100]} />
             <meshStandardMaterial color="gray" attach="material" opacity={1} />
           </mesh>
-          <Camera orbitControls={orbitControls} />
+          <Camera
+            orbitControls={orbitControls}
+            selected={selected}
+            handleSelected={handleSelected}
+          />
           <Entities
             selected={selected}
             handleSelected={handleSelected}

@@ -7,18 +7,16 @@ import { TransformControls } from "drei";
 import { useCameraStore } from "../zustand/camera";
 import { useShapeStore } from "../zustand/shapes";
 
-const Camera = ({ orbitControls }) => {
-  
+const Camera = ({ orbitControls, selected, handleSelected }) => {
   const [hovered, setHovered] = useState(false);
 
-// can maybe use onPointerMissed to detect when a user clicks 'off' of a shape or camera, 
-// but i think it can only be used in canvas
+  const id = -1
 
-const {
-  updateCameraPosition,
-  cameraArtboards,
-} = useCameraStore();
-const { currentArtboard } = useShapeStore();
+  // can maybe use onPointerMissed to detect when a user clicks 'off' of a shape or camera,
+  // but i think it can only be used in canvas
+
+  const { updateCameraPosition, cameraArtboards } = useCameraStore();
+  const { currentArtboard } = useShapeStore();
 
   const worldPosition = new THREE.Vector3();
 
@@ -30,25 +28,24 @@ const { currentArtboard } = useShapeStore();
     });
   };
 
-   const transformControls = useRef();
-   useEffect(() => {
-     if (transformControls.current) {
-       const controls = transformControls.current;
-       const callback = (event) => {
-         orbitControls.current.enabled = !event.value;
-       };
-       controls.addEventListener("dragging-changed", callback);
-       return () => controls.removeEventListener("dragging-changed", callback);
-     }
-   });
-
+  const transformControls = useRef();
+  useEffect(() => {
+    if (transformControls.current) {
+      const controls = transformControls.current;
+      const callback = (event) => {
+        orbitControls.current.enabled = !event.value;
+      };
+      controls.addEventListener("dragging-changed", callback);
+      return () => controls.removeEventListener("dragging-changed", callback);
+    }
+  });
 
   return (
     <TransformControls
       position={cameraArtboards[currentArtboard].position}
-      showY={false}
-      showX={hovered}
-      showZ={hovered}
+      showY={selected === id ? true : false}
+      showX={selected === id ? true : false}
+      showZ={selected === id ? true : false}
       translationSnap={1}
       ref={transformControls}
       onPointerUp={() => handlePositionChange()}
@@ -58,6 +55,7 @@ const { currentArtboard } = useShapeStore();
         castShadow
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
+        onPointerDown={() => handleSelected(id)}
       >
         <sphereBufferGeometry attach="geometry" />
         <meshStandardMaterial
