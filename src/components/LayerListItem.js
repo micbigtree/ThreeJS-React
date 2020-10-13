@@ -8,19 +8,21 @@ const LayerListItem = ({
   shape,
   position,
   color,
+  selected,
+  handleSelected,
 }) => {
-
-const {
-  updatePosition,
-  updateDestination,
-  removeShape,
-  artboards,
-  currentArtboard,
-  destination,
-} = useShapeStore();
+  
+  const {
+    updatePosition,
+    updateDestination,
+    removeShape,
+    artboards,
+    currentArtboard,
+    destination,
+  } = useShapeStore();
 
   return (
-    <div style={styles.container} key={id}>
+    <div style={selected === id ? styles.containerSelected : styles.container} key={id} onPointerDown={ () => {handleSelected(id)}}>
       <div style={styles.id}>id:{id}</div>
       <div style={styles.shape}>shape: {shape}</div>
       Position:
@@ -149,7 +151,19 @@ const styles = {
     paddingLeft: "2.5%",
     paddingRight: "2.5%",
     width: "100%",
-    height: 155
+    height: 155,
+  },
+  containerSelected: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    borderRadius: "5px",
+    boxShadow: "0 2px 4px 0 rgba(0,0,0,0.1)",
+    paddingLeft: "2.5%",
+    paddingRight: "2.5%",
+    width: "100%",
+    height: 155,
+    backgroundColor: "grey"
   },
   position: {
     display: "flex",
@@ -165,8 +179,8 @@ const styles = {
   },
   dropdownContainer: {
     border: "none",
-    cursor: "pointer" 
-  }
+    cursor: "pointer",
+  },
 };
 
 

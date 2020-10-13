@@ -13,16 +13,10 @@ import { softShadows, OrbitControls } from "drei";
 
 softShadows();
 
-const Viewport = (props) => {
+const Viewport = ({selected, handleSelected}) => {
   const orbitControls = useRef();
   const { shapesAreLoaded, currentArtboard } = useShapeStore();
   const { cameraArtboards } = useCameraStore();
-
-  const [selected, setSelected] = useState(0);
-
-  const handleSelected = (id) => {
-    setSelected(id)
-  }
 
   if (!shapesAreLoaded) {
     return (
@@ -41,7 +35,7 @@ const Viewport = (props) => {
         colorManagement
         camera={{ position: [0, 2, 5], fov: 60 }}
         onPointerMissed={() => {
-          setSelected(0);
+          handleSelected(0);
         }}
       >
         <directionalLight

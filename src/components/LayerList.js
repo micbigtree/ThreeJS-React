@@ -3,8 +3,7 @@ import React from "react";
 import { useShapeStore } from "../zustand/shapes";
 import LayerListItem from "./LayerListItem";
 
-const LayerList = () => {
-
+const LayerList = ({ selected, handleSelected }) => {
   const { artboards, shapesAreLoaded, currentArtboard } = useShapeStore();
 
   if (!shapesAreLoaded) {
@@ -20,6 +19,8 @@ const LayerList = () => {
               position={shape.position}
               shape={shape.shape}
               color={shape.color}
+              selected={selected}
+              handleSelected={handleSelected}
             />
           </li>
         ))}

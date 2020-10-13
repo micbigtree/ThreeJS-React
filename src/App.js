@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
@@ -17,6 +17,12 @@ const App = ( ) => {
   } = useShapeStore();
   const { loadPreviewCameras } = useCameraStore();
 
+  const [selected, setSelected] = useState(0);
+
+  const handleSelected = (id) => {
+    setSelected(id);
+  };
+
   useEffect(() => {
     loadShapes();
     loadPreviewCameras();
@@ -33,7 +39,7 @@ const App = ( ) => {
       </button>
       <h1>Editor</h1>
       <div style={styles.viewport}>
-        <Viewport />
+        <Viewport selected={selected} handleSelected={handleSelected} />
       </div>
       <div style={styles.artboardPanel}>
         <ArtboardPanel />
@@ -68,7 +74,7 @@ const App = ( ) => {
             Add Cylinder
           </button>
         </div>
-        <LayerList />
+        <LayerList selected={selected} handleSelected={handleSelected} />
       </div>
     </div>
   ) : (
