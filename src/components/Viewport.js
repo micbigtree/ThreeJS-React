@@ -15,6 +15,7 @@ import Model from "./Model";
 import { Canvas } from "react-three-fiber";
 // drei have lots of shapes without writing code
 import { softShadows, OrbitControls } from "drei";
+import ObjectsMapped from "./ObjectsMapped";
 
 softShadows();
 
@@ -72,13 +73,19 @@ const Model = React.lazy(() => import("./Model"));
               />
             </mesh>
             <Suspense fallback={null}>
-              <Model orbitControls={orbitControls} />
+              {/* <Model orbitControls={orbitControls} /> */}
+              <ObjectsMapped
+                selected={selected}
+                handleSelected={handleSelected}
+                orbitControls={orbitControls}
+              />
             </Suspense>
             <Camera
               orbitControls={orbitControls}
               selected={selected}
               handleSelected={handleSelected}
             />
+
             <Entities
               selected={selected}
               handleSelected={handleSelected}

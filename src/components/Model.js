@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { useGLTFLoader, TransformControls } from "drei";
 
-const Model = ({orbitControls}) => {
-    const gltf = useGLTFLoader("/pirates/ship_light.gltf", true);
+const Model = ({orbitControls, object, position}) => {
+
+  const gltf = useGLTFLoader("/pirates/" + object + ".gltf", true);
   const transformControls = useRef();
 useEffect(() => {
   if (transformControls.current) {
@@ -24,8 +25,8 @@ useEffect(() => {
         translationSnap={1}
         ref={transformControls}
       >
-        <group position={[0, 0, 0]}>
-          <mesh scale={[1, 1, 1]} position={[0, 0, 0]}>
+        <group position={position}>
+          <mesh scale={[1, 1, 1]}>
             <primitive object={gltf.scene} dispose={null} />
           </mesh>
         </group>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-
 import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
 import LayerList from "./components/LayerList";
@@ -8,6 +7,7 @@ import { useShapeStore } from "./zustand/shapes";
 import { useCameraStore } from "./zustand/camera";
 import ArtboardPanel from "./components/ArtboardPanel";
 import ShapePanel from "./components/ShapePanel";
+import ObjectTopbar from "./components/ObjectTopbar";
 
 const App = ( ) => {
   const {
@@ -49,6 +49,7 @@ const App = ( ) => {
         Switch to Preview
       </button>
       <h1>Editor</h1>
+      <ObjectTopbar />
       <div style={styles.viewport}>
         <Viewport
           details={details}
