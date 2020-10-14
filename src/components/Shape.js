@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+
 import { a } from "react-spring/three";
 import { useShapeStore } from "../zustand/shapes";
 import { TransformControls } from "drei";
@@ -24,7 +25,7 @@ const Shape = ({
   const handlePositionChange = () => {
   const controls = transformControls.current;
 
-    updatePosition({
+    updatePosition({ 
       id,
       currentArtboard,
       position: Object.values(controls.object.getWorldPosition(worldPosition)),
@@ -32,7 +33,7 @@ const Shape = ({
   };
 
   const clickedShape = (id) => {
-    handleSelected(id);
+    handleSelected(id, position, color, shape);
   }
 
   useEffect(() => {
@@ -56,6 +57,7 @@ const Shape = ({
       translationSnap={1}
       ref={transformControls}
     >
+      
       <a.mesh
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}
@@ -82,6 +84,12 @@ const Shape = ({
       </a.mesh>
     </TransformControls>
   );
+};
+
+const styles = {
+htmlContainer: {
+  position: "absolute",
+}
 };
 
 export default Shape;

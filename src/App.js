@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 
+
 import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
 import LayerList from "./components/LayerList";
 import { useShapeStore } from "./zustand/shapes";
 import { useCameraStore } from "./zustand/camera";
 import ArtboardPanel from "./components/ArtboardPanel";
+import ShapePanel from "./components/ShapePanel";
 
 const App = ( ) => {
   const {
@@ -19,8 +21,17 @@ const App = ( ) => {
 
   const [selected, setSelected] = useState(0);
 
-  const handleSelected = (id) => {
+  const [details, setDetails] = useState({
+    id: '',
+    position:[],
+    color: '',
+    shape: '',
+  });
+
+  const handleSelected = (id, position, color, shape) => {
     setSelected(id);
+    setDetails({id: id, position: position, color: color, shape: shape})
+    console.log(id, position, color, shape)
   };
 
   useEffect(() => {
@@ -39,7 +50,11 @@ const App = ( ) => {
       </button>
       <h1>Editor</h1>
       <div style={styles.viewport}>
-        <Viewport selected={selected} handleSelected={handleSelected} />
+        <Viewport
+          details={details}
+          selected={selected}
+          handleSelected={handleSelected}
+        />
       </div>
       <div style={styles.artboardPanel}>
         <ArtboardPanel />
@@ -76,6 +91,18 @@ const App = ( ) => {
         </div>
         <LayerList selected={selected} handleSelected={handleSelected} />
       </div>
+      {selected > 0 ? (
+        <div style={styles.shapeDetailsContainer}>
+          <ShapePanel
+            id={details.id}
+            position={details.position}
+            color={details.color}
+            shape={details.shape}
+          />
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   ) : (
     <div>
@@ -96,14 +123,17 @@ const App = ( ) => {
 const styles = {
   container: {
     overflow: "scroll",
+    // display: "flex",
+    // flexDirection: "row",
   },
-  viewport: { outline: "none" },
+  viewport: { outline: "none", flex: 1 },
   layerList: {
     width: "20%",
     height: "auto",
     borderRadius: "10px",
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
     overflow: "scroll",
+    // flex: 1,
   },
   addButtons: {
     overflow: "auto",
@@ -116,6 +146,13 @@ const styles = {
   addButton: {
     display: "inline-block",
     textAlign: "center",
+  },
+  shapeDetailsContainer: {
+    backgroundColor: "grey",
+    width: "20%",
+    height: "auto",
+    right: 0,
+    // flex: 1,
   },
 };
 

@@ -12,9 +12,6 @@ const Camera = ({ orbitControls, selected, handleSelected }) => {
 
   const id = -1
 
-  // can maybe use onPointerMissed to detect when a user clicks 'off' of a shape or camera,
-  // but i think it can only be used in canvas
-
   const { updateCameraPosition, cameraArtboards } = useCameraStore();
   const { currentArtboard } = useShapeStore();
 

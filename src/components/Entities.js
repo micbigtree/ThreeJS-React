@@ -12,6 +12,7 @@ const Entities = ({ orbitControls, selected, handleSelected }) => {
     (mapped) => (
       // editorMode ? (
       <group key={mapped.id}>
+        
         <Shape
           key={mapped.id}
           id={mapped.id}

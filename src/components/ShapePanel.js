@@ -3,15 +3,13 @@ import React from "react";
 import "../App.scss";
 import { useShapeStore } from "../zustand/shapes";
 
-const LayerListItem = ({
+const ShapePanel = ({
   id,
-  shape,
   position,
   color,
+  shape,
   selected,
-  handleSelected,
 }) => {
-  
   const {
     updatePosition,
     updateDestination,
@@ -21,20 +19,14 @@ const LayerListItem = ({
     destination,
   } = useShapeStore();
 
-
-  const clickedShape = (id) => {
-    handleSelected(id, position, color, shape);
-  };
-
   return (
     <div
-      style={selected === id ? styles.containerSelected : styles.container}
+      style={styles.container}
       key={id}
-      onPointerDown={() => clickedShape(id)}
     >
       <div style={styles.id}>id:{id}</div>
-      <div style={styles.shape}>{shape}</div> 
-      {/* Position:
+      <div style={styles.shape}>shape: {shape}</div>
+      Position:
       <div style={styles.position}>
         <div style={styles.positionVector}>
           <label> x: </label>
@@ -114,7 +106,7 @@ const LayerListItem = ({
             +
           </button>
         </div>
-      </div> */}
+      </div>
       <div style={styles.dropdownContainer}>
         Links to:
         <select
@@ -136,7 +128,7 @@ const LayerListItem = ({
           ))}
         </select>
       </div>
-      {/* <div style={styles.color}>color: {color}</div> */}
+      <div style={styles.color}>color: {color}</div>
       <div style={styles.remove}>
         <button
           onClick={() => {
@@ -157,21 +149,13 @@ const styles = {
     justifyContent: "space-between",
     borderRadius: "5px",
     boxShadow: "0 2px 4px 0 rgba(0,0,0,0.1)",
-    padding: "2.5%",
+    paddingLeft: "2.5%",
+    paddingRight: "2.5%",
     width: "100%",
-    height: "auto",
-  },
-  containerSelected: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    borderRadius: "5px",
-    boxShadow: "0 2px 4px 0 rgba(0,0,0,0.1)",
-    padding: "2.5%",
-    width: "100%",
-    height: "auto",
+    height: 155,
     backgroundColor: "lightGrey",
   },
+
   position: {
     display: "flex",
     flexDirection: "row",
@@ -190,5 +174,4 @@ const styles = {
   },
 };
 
-
-export default LayerListItem;
+export default ShapePanel;
