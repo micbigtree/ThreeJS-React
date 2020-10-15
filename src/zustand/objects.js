@@ -10,26 +10,23 @@ import { devtools } from "zustand/middleware";
 const store = (set) => ({
   objectArtboards: {
     1: [
-      {
-        name: "boat_large",
-        position: [0, 0, 0],
-        destination: 2,
-      },
     ],
     2: [
       {
-        name: "boat_large",
+        name: "ship_dark",
+        category: "pirates",
         position: [2, 0, 1],
         destination: 2,
       },
     ],
   },
-  addObject: ({ currentArtboard, name }) =>
+  addObject: ({ currentArtboard, category, name }) =>
     set((state) => {
       state.objectArtboards[currentArtboard].push({
         name: name,
+        category: category,
         position: [0, 0, 0],
-        destination: 2
+        destination: 2,
       });
     }),
   currentObjectArtboard: 1,

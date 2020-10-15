@@ -17,6 +17,7 @@ const ObjectsMapped = ({ orbitControls, selected, handleSelected }) => {
           position={mapped.position}
           destination={mapped.destination}
           object={mapped.name}
+          category={mapped.category}
           orbitControls={orbitControls}
           selected={selected}
           handleSelected={handleSelected}

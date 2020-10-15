@@ -1,9 +1,9 @@
 import React, { useRef, useEffect } from "react";
 import { useGLTFLoader, TransformControls } from "drei";
 
-const Model = ({orbitControls, object, position}) => {
+const Model = ({orbitControls, object, category, position}) => {
 
-  const gltf = useGLTFLoader("/pirates/" + object + ".gltf", true);
+  const gltf = useGLTFLoader("/"+ category + "/" + object + ".gltf", true);
   const transformControls = useRef();
 useEffect(() => {
   if (transformControls.current) {
@@ -22,11 +22,11 @@ useEffect(() => {
         showY={true}
         showX={true}
         showZ={true}
-        translationSnap={1}
+        translationSnap={0.1}
         ref={transformControls}
       >
         <group position={position}>
-          <mesh scale={[1, 1, 1]}>
+          <mesh attach="material" receiveShadow scale={[1, 1, 1]}>
             <primitive object={gltf.scene} dispose={null} />
           </mesh>
         </group>

@@ -9,69 +9,96 @@ const { currentArtboard } = useShapeStore();
 
   return (
     <div style={styles.container}>
-      <button
-        style={styles.addButton}
-        value="boat_large"
-        onClick={(e) => addObject({ currentArtboard, name: e.target.value })}
-      >
-        Large boat
-      </button>
-      <button
-        style={styles.addButton}
-        value="boat_small"
-        onClick={(e) => addObject({ currentArtboard, name: e.target.value })}
-      >
-        Small boat
-      </button>
-      <button
-        style={styles.addButton}
-        value="ship_wreck"
-        onClick={(e) => addObject({ currentArtboard, name: e.target.value })}
-      >
-        Ship wreck
-      </button>
-      <button
-        style={styles.addButton}
-        value="ship_wreck"
-        onClick={(e) => addObject({ currentArtboard, name: e.target.value })}
-      >
-        Ship wreck
-      </button>
-      <button
-        style={styles.addButton}
-        value="pirate_crew"
-        onClick={(e) => addObject({ currentArtboard, name: e.target.value })}
-      >
-        Pirate crew
-      </button>
-      <button
-        style={styles.addButton}
-        value="tower"
-        onClick={(e) => addObject({ currentArtboard, name: e.target.value })}
-      >
-        Tower
-      </button>
-      <button
-        style={styles.addButton}
-        value="hole"
-        onClick={(e) => addObject({ currentArtboard, name: e.target.value })}
-      >
-        Hole
-      </button>
-      <button
-        style={styles.addButton}
-        value="ship_light"
-        onClick={(e) => addObject({ currentArtboard, name: e.target.value })}
-      >
-        Light ship
-      </button>
-      <button
-        style={styles.addButton}
-        value="ship_dark"
-        onClick={(e) => addObject({ currentArtboard, name: e.target.value })}
-      >
-        Dark ship
-      </button>
+      <div>
+        Pirates
+        <button
+          style={styles.addButton}
+          id={"boat_large"}
+          value={"pirates"}
+          onClick={(e) =>
+            addObject({
+              currentArtboard,
+              category: e.target.value,
+              name: e.target.id,
+            })
+          }
+        >
+          Large boat
+        </button>
+        <button
+          style={styles.addButton}
+          id={"tower"}
+          value={"pirates"}
+          onClick={(e) =>
+            addObject({
+              currentArtboard,
+              category: e.target.value,
+              name: e.target.id,
+            })
+          }
+        >
+          Tower
+        </button>
+        <button
+          style={styles.addButton}
+          id={"ship_dark"}
+          value={"pirates"}
+          onClick={(e) =>
+            addObject({
+              currentArtboard,
+              category: e.target.value,
+              name: e.target.id,
+            })
+          }
+        >
+          Dark ship
+        </button>
+      </div>
+      <div>
+        Kitchen
+        <button
+          style={styles.addButton}
+          id={"Kitchen_1278"}
+          value={"kitchen"}
+          onClick={(e) =>
+            addObject({
+              currentArtboard,
+              category: e.target.value,
+              name: e.target.id,
+            })
+          }
+        >
+          Kitchen scene
+        </button>
+        <button
+          style={styles.addButton}
+          id={"ExpressoPot"}
+          value={"kitchen"}
+          onClick={(e) =>
+            addObject({
+              currentArtboard,
+              category: e.target.value,
+              name: e.target.id,
+            })
+          }
+        >
+          Espresso Pot
+        </button>
+        <button
+          style={styles.addButton}
+          id={"Coffee Cup_final"}
+          value={"kitchen"}
+          onClick={(e) =>
+            addObject({
+              currentArtboard,
+              category: e.target.value,
+              name: e.target.id,
+            })
+          }
+        >
+          Coffee Cup
+        </button>
+      </div>
     </div>
   );
 };
