@@ -44,8 +44,8 @@ const Viewport = ({
           shadowMap
           colorManagement
           camera={{
-            position: [-5, 4, 5],
-            fov: 80,
+            position: [0, 4, 4],
+            fov: 80
           }}
           onPointerMissed={() => {
             handleSelected(0);

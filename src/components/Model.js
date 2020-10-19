@@ -13,9 +13,6 @@ const Model = ({
   handleSelectedObject,
 }) => {
 
-  // was it because i've claled object object in the state but might be 
-  // referring to it as name in code? that was the case below...
-  // const gltf = useGLTFLoader("/" + category + "/" + object + ".gltf", true);
   const gltf = useGLTFLoader("/" + category + "/" + object + ".gltf", true);
   const transformControls = useRef();
 

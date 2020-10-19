@@ -1,9 +1,10 @@
 import React, { useRef } from "react";
 
 import { useShapeStore } from "../zustand/shapes";
+import { useObjectStore } from "../zustand/objects";
 import { useCameraStore } from "../zustand/camera";
 import { PreviewCamera } from "./PreviewCamera.js";
-import PreviewShape from "./PreviewShape";
+import PreviewObject from "./PreviewObject";
 import { VRCanvas, DefaultXRControllers } from "@react-three/xr";
 import "../App.scss";
 import { softShadows } from "drei";
@@ -13,15 +14,15 @@ softShadows();
 
 const PreviewViewport = () => {
 
- const { shapesAreLoaded, artboards, currentArtboard } = useShapeStore();
+ const { objectsAreLoaded, artboards, currentObjectArtboard } = useObjectStore();
  const {
-   cameraArtboards,
+   cameraArtboards, currentCameraArtboard
  } = useCameraStore();
  
 
 const orbitControls = useRef();
 
-  if (!shapesAreLoaded) {
+  if (!objectsAreLoaded) {
     return <div style={styles.viewport}>Loading...</div>;
   } else {
     return (
@@ -36,7 +37,9 @@ const orbitControls = useRef();
         > */}
         <VRCanvas colorManagement>
           <DefaultXRControllers />
-          <PreviewCamera position={cameraArtboards[currentArtboard].position} />
+          <PreviewCamera
+            position={cameraArtboards[currentCameraArtboard].position}
+          />
           <directionalLight
             castShadow
             position={[0, 10, 0]}
@@ -65,17 +68,15 @@ const orbitControls = useRef();
                 opacity={1}
               />
             </mesh>
-
-            {/* <Entities orbitControls={orbitControls} /> */}
-            {artboards[currentArtboard].map((mapped) => (
-              <PreviewShape
+            {artboards[currentObjectArtboard].map((mapped) => (
+              <PreviewObject
+                object={mapped.object}
+                category={mapped.category}
                 key={mapped.id}
                 id={mapped.id}
                 position={mapped.position}
-                color={mapped.color}
-                speed={mapped.speed}
-                args={[1, 1, 2]}
-                shape={mapped.shape}
+                rotation={mapped.rotation}
+                scale={mapped.scale}
                 orbitControls={orbitControls}
                 destination={mapped.destination}
               />

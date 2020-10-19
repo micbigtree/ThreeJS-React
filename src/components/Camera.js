@@ -55,7 +55,7 @@ const Camera = ({ mode, orbitControls, cameraSelected, handleSelectedCamera }) =
           onPointerUp={() => handlePositionChange()}
         >
           <a.mesh
-            scale={[0.5,0.5,0.5]}
+            scale={[0.25,0.25,0.25]}
             castShadow
             onPointerOver={() => setHovered(true)}
             onPointerOut={() => setHovered(false)}
