@@ -1,65 +1,35 @@
 import React from "react";
 
 import "../App.scss";
-import { useObjectStore } from "../zustand/objects";
+import { useCameraStore } from "../zustand/camera";
 
 const LayerListItem = ({
   id,
   object,
   position,
-  selected,
-  handleSelectedObject,
+  cameraSelected,
+  handleSelectedCamera,
 }) => {
   const {
-    updateDestination,
     removeShape,
-    artboards,
-    currentArtboard,
-    destination,
-  } = useObjectStore();
+    cameraArtboards,
+    currentCameraArtboard,
+    updateCameraPosition,
+  } = useCameraStore();
 
   const clickedShape = (id) => {
-    handleSelectedObject(id, position, object);
+    handleSelectedCamera(true);
   };
 
   return (
     <div
-      style={selected === id ? styles.containerSelected : styles.container}
+      style={
+        cameraSelected === id ? styles.containerSelected : styles.container
+      }
       key={id}
       onPointerDown={() => clickedShape(id)}
     >
       <div style={styles.shape}>{object}</div>
-      <div style={styles.dropdownContainer}>
-        Links to:
-        <select
-          selected={destination}
-          onChange={(e) => {
-            updateDestination({
-              id,
-              currentArtboard,
-              destination: e.target.value,
-            });
-          }}
-          id="myDropdown"
-        >
-          <option value={null}>none</option>
-          {Object.keys(artboards).map((mapped) => (
-            <option key={mapped} value={mapped}>
-              {mapped}
-            </option>
-          ))}
-        </select>
-      </div>
-      {/* <div style={styles.color}>color: {color}</div> */}
-      <div style={styles.remove}>
-        <button
-          onClick={() => {
-            removeShape({ currentArtboard, id });
-          }}
-        >
-          Remove
-        </button>
-      </div>
     </div>
   );
 };
@@ -103,6 +73,5 @@ const styles = {
     cursor: "pointer",
   },
 };
-
 
 export default LayerListItem;

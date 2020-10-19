@@ -17,8 +17,10 @@ softShadows();
 
 const Viewport = ({
   selected,
+  cameraSelected,
   handleSelected,
   handleSelectedObject,
+  handleSelectedCamera,
   objectDetails,
 }) => {
   const orbitControls = useRef();
@@ -39,6 +41,7 @@ const Viewport = ({
           camera={{ position: [0, 2, 5], fov: 60 }}
           onPointerMissed={() => {
             handleSelected(0);
+            handleSelectedCamera(false);
           }}
         >
           <directionalLight
@@ -79,15 +82,9 @@ const Viewport = ({
             </Suspense>
             <Camera
               orbitControls={orbitControls}
-              selected={selected}
-              handleSelected={handleSelected}
+              cameraSelected={cameraSelected}
+              handleSelectedCamera={handleSelectedCamera}
             />
-
-            {/* <Entities
-              selected={selected}
-              handleSelected={handleSelected}
-              orbitControls={orbitControls}
-            /> */}
             <OrbitControls ref={orbitControls} />
           </group>
         </Canvas>

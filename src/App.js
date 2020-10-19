@@ -8,7 +8,9 @@ import { useObjectStore } from "./zustand/objects";
 import { useCameraStore } from "./zustand/camera";
 import ArtboardPanel from "./components/ArtboardPanel";
 import ShapePanel from "./components/ShapePanel";
+import CameraPanel from "./components/CameraPanel";
 import ObjectTopbar from "./components/ObjectTopbar";
+import { current } from "immer";
 
 const App = ( ) => {
 
@@ -22,9 +24,10 @@ const {
     switchModes,
   } = useShapeStore();
 
-  const { loadPreviewCameras } = useCameraStore();
+  const { loadPreviewCameras, currentCameraArtboard, cameraArtboards } = useCameraStore();
 
   const [selected, setSelected] = useState(0);
+  const [cameraSelected, setSelectedCamera] = useState(false);
 
   const [details, setDetails] = useState({
     id: '',
@@ -38,10 +41,20 @@ const {
      name: "",
    });
 
+    const [cameraDetails, setCameraDetails] = useState({
+      id: "",
+      position: [],
+    });
+
 const handleSelectedObject = (id, position, name,) => {
   setSelected(id);
   setObjectDetails({ id: id, position: position, name: name });
   console.log(id, position, name);
+};
+
+const handleSelectedCamera = (val) => {
+  setSelectedCamera(val);
+  setCameraDetails({ id: cameraArtboards[currentCameraArtboard].id, position: cameraArtboards[currentCameraArtboard].position });
 };
 
   const handleSelected = (id, position, color, shape) => {
@@ -71,9 +84,13 @@ const handleSelectedObject = (id, position, name,) => {
         <Viewport
           details={details}
           objectDetails={objectDetails}
+          cameraDetails={cameraDetails}
+          setCameraDetails={setCameraDetails}
           selected={selected}
+          cameraSelected={cameraSelected}
           handleSelected={handleSelected}
           handleSelectedObject={handleSelectedObject}
+          handleSelectedCamera={handleSelectedCamera}
         />
       </div>
       <div style={styles.artboardPanel}>
@@ -82,7 +99,9 @@ const handleSelectedObject = (id, position, name,) => {
       <div style={styles.layerList}>
         <LayerList
           selected={selected}
+          cameraSelected={cameraSelected}
           handleSelectedObject={handleSelectedObject}
+          handleSelectedCamera={handleSelectedCamera}
         />
       </div>
       {selected !== 0 ? (
@@ -91,6 +110,16 @@ const handleSelectedObject = (id, position, name,) => {
             id={objectDetails.id}
             position={objectDetails.position}
             shape={objectDetails.name}
+          />
+        </div>
+      ) : (
+        ""
+      )}
+      {cameraSelected ? (
+        <div style={styles.shapeDetailsContainer}>
+          <CameraPanel
+            id={cameraDetails.id}
+            position={cameraDetails.position}
           />
         </div>
       ) : (

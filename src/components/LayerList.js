@@ -1,10 +1,11 @@
 import React from "react";
 import { useObjectStore } from "../zustand/objects";
 import { useShapeStore } from "../zustand/shapes";
+import { useCameraStore } from "../zustand/camera";
 import LayerListItem from "./LayerListItem";
+import LayerListItemCamera from "./LayerListItemCamera";
 
-const LayerList = ({ selected, handleSelectedObject }) => {
-
+const LayerList = ({ selected, handleSelectedObject, cameraSelected, handleSelectedCamera }) => {
   const {
     // artboards,
     objectsAreLoaded,
@@ -12,22 +13,34 @@ const LayerList = ({ selected, handleSelectedObject }) => {
     currentObjectArtboard,
   } = useObjectStore();
 
-//I think the map problem is in here, as ArtboardPanel is mapping shapeStore fine and it's not mapping fine here
   const {
-    shapesAreLoaded,
-    currentArtboard,
-  } = useShapeStore();
+    cameraArtboards,
+    currentCameraArtboard,
+    cameraIsLoaded,
+  } = useCameraStore();
 
-  if (!objectsAreLoaded) {
+  if (!cameraIsLoaded) {
     return <div>Loading...</div>;
   } else {
     return (
       <ul style={styles.list}>
+        <li
+          style={styles.listItem}
+          key={cameraArtboards[currentCameraArtboard].id}
+        >
+          <LayerListItemCamera
+            key={cameraArtboards[currentCameraArtboard].id}
+            position={cameraArtboards[currentCameraArtboard].position}
+            object={"Camera"}
+            selected={cameraSelected}
+            handleSelectedObject={handleSelectedObject}
+            handleSelectedCamera={handleSelectedCamera}
+          />
+        </li>
         {artboards[currentObjectArtboard].map((objects) => (
           <li style={styles.listItem} key={objects.id}>
             <LayerListItem
               key={objects.id}
-              id={objects.id}
               position={objects.position}
               object={objects.object}
               selected={selected}

@@ -15,7 +15,7 @@ const store = (set) => ({
   // UPDATE POSITION OF CAMERA
   updateCameraPosition: ({ currentArtboard, position }) =>
     set((state) => {
-      state.cameraArtboards[currentArtboard].position = position
+      state.cameraArtboards[state.currentCameraArtboard].position = position;
       sendPreviewCameras(state.cameraArtboards)
       .then(state.cameraIsLoaded = false)
     .then(state.loadPreviewCameras(),

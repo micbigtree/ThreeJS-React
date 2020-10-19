@@ -1,30 +1,17 @@
 import React from "react";
 
 import "../App.scss";
-import { useShapeStore } from "../zustand/shapes";
+import { useCameraStore } from "../zustand/camera";
 
-const ShapePanel = ({
-  id,
-  position,
-  color,
-  shape,
-  selected,
-}) => {
+const CameraPanel = ({ id, position, selected }) => {
   const {
-    updatePosition,
-    updateDestination,
-    removeShape,
-    artboards,
-    currentArtboard,
-    destination,
-  } = useShapeStore();
+    cameraArtboards,
+    currentCameraArtboard,
+    updateCameraPosition,
+  } = useCameraStore();
 
   return (
-    <div
-      style={styles.container}
-      key={id}
-    >
-      <div style={styles.shape}>shape: {shape}</div>
+    <div style={styles.container} key={id}>
       Position:
       <div style={styles.position}>
         <div style={styles.positionVector}>
@@ -32,9 +19,9 @@ const ShapePanel = ({
           <input style={styles.inputField} placeholder={position[0]} />
           <button
             onClick={() => {
-              updatePosition({
+              updateCameraPosition({
                 id,
-                currentArtboard,
+                currentCameraArtboard,
                 position: [position[0] - 1, position[1], position[2]],
               });
             }}
@@ -43,9 +30,9 @@ const ShapePanel = ({
           </button>
           <button
             onClick={() => {
-              updatePosition({
+              updateCameraPosition({
                 id,
-                currentArtboard,
+                currentCameraArtboard,
                 position: [position[0] + 1, position[1], position[2]],
               });
             }}
@@ -58,9 +45,9 @@ const ShapePanel = ({
           <input style={styles.inputField} placeholder={position[1]} />
           <button
             onClick={() => {
-              updatePosition({
+              updateCameraPosition({
                 id,
-                currentArtboard,
+                currentCameraArtboard,
                 position: [position[0], position[1] - 1, position[2]],
               });
             }}
@@ -69,9 +56,9 @@ const ShapePanel = ({
           </button>
           <button
             onClick={() => {
-              updatePosition({
+              updateCameraPosition({
                 id,
-                currentArtboard,
+                currentCameraArtboard,
                 position: [position[0], position[1] + 1, position[2]],
               });
             }}
@@ -84,9 +71,9 @@ const ShapePanel = ({
           <input style={styles.inputField} placeholder={position[2]} />
           <button
             onClick={() => {
-              updatePosition({
+              updateCameraPosition({
                 id,
-                currentArtboard,
+                currentCameraArtboard,
                 position: [position[0], position[1], position[2] - 1],
               });
             }}
@@ -95,9 +82,9 @@ const ShapePanel = ({
           </button>
           <button
             onClick={() => {
-              updatePosition({
+              updateCameraPosition({
                 id,
-                currentArtboard,
+                currentCameraArtboard,
                 position: [position[0], position[1], position[2] + 1],
               });
             }}
@@ -105,37 +92,6 @@ const ShapePanel = ({
             +
           </button>
         </div>
-      </div>
-      <div style={styles.dropdownContainer}>
-        Links to:
-        <select
-          selected={destination}
-          onChange={(e) => {
-            updateDestination({
-              id,
-              currentArtboard,
-              destination: e.target.value,
-            });
-          }}
-          id="myDropdown"
-        >
-          <option value={null}>none</option>
-          {Object.keys(artboards).map((mapped) => (
-            <option key={mapped} value={mapped}>
-              {mapped}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div style={styles.color}>color: {color}</div>
-      <div style={styles.remove}>
-        <button
-          onClick={() => {
-            removeShape({ currentArtboard, id });
-          }}
-        >
-          Remove
-        </button>
       </div>
     </div>
   );
@@ -151,7 +107,6 @@ const styles = {
     paddingLeft: "2.5%",
     paddingRight: "2.5%",
     width: "100%",
-    height: 155,
     backgroundColor: "lightGrey",
   },
 
@@ -173,4 +128,4 @@ const styles = {
   },
 };
 
-export default ShapePanel;
+export default CameraPanel;

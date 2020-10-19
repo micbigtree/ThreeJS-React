@@ -5,22 +5,25 @@ import "../App.scss";
 import { a } from "react-spring/three";
 import { TransformControls } from "drei";
 import { useCameraStore } from "../zustand/camera";
-import { useShapeStore } from "../zustand/shapes";
 
-const Camera = ({ orbitControls, selected, handleSelected }) => {
+const Camera = ({ orbitControls, cameraSelected, handleSelectedCamera }) => {
   const [hovered, setHovered] = useState(false);
 
-  const id = -1
+  const id = -1;
 
-  const { updateCameraPosition, currentCameraArtboard, cameraArtboards } = useCameraStore();
-  const { currentArtboard } = useShapeStore();
+  const {
+    updateCameraPosition,
+    currentCameraArtboard,
+    cameraArtboards,
+    cameraIsLoaded,
+  } = useCameraStore();
 
   const worldPosition = new THREE.Vector3();
 
   const handlePositionChange = () => {
     const controls = transformControls.current;
     updateCameraPosition({
-      currentArtboard,
+      currentCameraArtboard,
       position: Object.values(controls.object.getWorldPosition(worldPosition)),
     });
   };
@@ -37,33 +40,39 @@ const Camera = ({ orbitControls, selected, handleSelected }) => {
     }
   });
 
-  return (
-    <TransformControls
-      // position={cameraArtboards[currentCameraArtboard].position}
-      showY={selected === id ? true : false}
-      showX={selected === id ? true : false}
-      showZ={selected === id ? true : false}
-      translationSnap={1}
-      ref={transformControls}
-      onPointerUp={() => handlePositionChange()}
-    >
-      <a.mesh
-        scale={[0.25, 0.25, 0.25]}
-        castShadow
-        onPointerOver={() => setHovered(true)}
-        onPointerOut={() => setHovered(false)}
-        onPointerDown={() => handleSelected(id)}
+  if (!cameraIsLoaded) {
+    return <group></group>;
+  } else { 
+    return (
+      <TransformControls
+        position={cameraIsLoaded && cameraArtboards[1].position}
+        showY={cameraSelected}
+        showX={cameraSelected}
+        showZ={cameraSelected}
+        translationSnap={0.1}
+        ref={transformControls}
+        onPointerUp={() => handlePositionChange()}
       >
-        <sphereBufferGeometry attach="geometry" />
-        <meshStandardMaterial
-          attach="material"
-          color="black"
-          factor={0.6}
-          opacity={hovered ? 0.8 : 1}
-        />
-      </a.mesh>
-    </TransformControls>
-  );
+        <a.mesh
+          scale={[0.125, 0.125, 0.125]}
+          castShadow
+          onPointerOver={() => setHovered(true)}
+          onPointerOut={() => setHovered(false)}
+          onPointerDown={() =>
+            handleSelectedCamera(true)
+          }
+        >
+          <sphereBufferGeometry attach="geometry" />
+          <meshStandardMaterial
+            attach="material"
+            color="black"
+            factor={0.6}
+            opacity={hovered ? 0.4 : 0.5}
+          />
+        </a.mesh>
+      </TransformControls>
+    );
+  }
 };
 
 export default Camera;
