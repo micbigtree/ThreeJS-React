@@ -10,15 +10,17 @@ const ScaleUI = ({ id, scale }) => {
     updateObjectScale,
   } = useObjectStore();
 
+const objectById = artboards[currentObjectArtboard].find(({ id }) => id === id);
+
   return (
     <div style={styles.container} key={id}>
       Size:
       <div style={styles.scale}>
         <button
           disabled={
-            (scale[0] <= 1,
-            scale[1] <= 1,
-            scale[2] <= 1)
+            (objectById.scale[0] <= 1,
+            objectById.scale[1] <= 1,
+            objectById.scale[2] <= 1)
               ? true
               : false
           }
@@ -26,7 +28,11 @@ const ScaleUI = ({ id, scale }) => {
             updateObjectScale({
               id: id,
               currentArtboard: currentObjectArtboard,
-              scale: [ scale[0] - 1, scale[1] - 1, scale[2] - 1,],
+              scale: [
+                objectById.scale[0] - 1,
+                objectById.scale[1] - 1,
+                objectById.scale[2] - 1,
+              ],
             });
           }}
         >
@@ -34,17 +40,21 @@ const ScaleUI = ({ id, scale }) => {
         </button>
         <button
           disabled={
-            (scale[0] >= 10,
-            scale[1] >= 10,
-            scale[2] >= 10)
+            (objectById.scale[0] >= 10,
+            objectById.scale[1] >= 10,
+            objectById.scale[2] >= 10)
               ? true
               : false
           }
           onClick={() => {
             updateObjectScale({
               id: id,
-              currentArtboard:currentObjectArtboard,
-              scale: [scale[0] + 1, scale[1] + 1, scale[2] + 1],
+              currentArtboard: currentObjectArtboard,
+              scale: [
+                objectById.scale[0] + 1,
+                objectById.scale[1] + 1,
+                objectById.scale[2] + 1,
+              ],
             });
           }}
         >

@@ -39,22 +39,22 @@ const store = (set) => ({
   updateObjectPosition: ({ id, currentArtboard, position }) =>
     set((state) => {
       state.artboards[currentArtboard].find(
-        (x) => x.id === id
+        ({ id }) => id === id
       ).position = position;
     }),
   // UPDATE ROTATION OF OBJECT
   updateObjectRotation: ({ id, currentArtboard, rotation }) =>
     set((state) => {
       state.artboards[currentArtboard].find(
-        (x) => x.id === id
+        ({id}) => id === id
       ).rotation = rotation;
     }),
   // UPDATE SCALE OF OBJECT
   updateObjectScale: ({ id, currentArtboard, scale }) =>
     set((state) => {
       state.artboards[currentArtboard].find(
-        (x) => x.id === id
-        ).scale = scale;
+        ({ id }) => id === id
+      ).scale = scale;
     }),
 });
 const immer = (config) => (set, get, api) =>
