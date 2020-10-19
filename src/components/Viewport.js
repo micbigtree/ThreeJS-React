@@ -1,14 +1,10 @@
-import React, { useRef, useState, useEffect, Suspense } from "react";
-import { useCameraStore } from "../zustand/camera";
-import { useShapeStore } from "../zustand/shapes";
+import React, { useRef, Suspense } from "react";
+import { useObjectStore } from "../zustand/objects";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
-
-import { useGLTFLoader, Html } from "drei";
 
 import "../App.scss";
 import Entities from "./Entities";
 import Camera from "./Camera";
-import Model from "./Model";
 
 
 // react three fiber takes care of camera position in canvas
@@ -19,15 +15,16 @@ import ObjectsMapped from "./ObjectsMapped";
 
 softShadows();
 
-const Viewport = ({ selected, handleSelected, details }) => {
-
-const Model = React.lazy(() => import("./Model"));
-
+const Viewport = ({
+  selected,
+  handleSelected,
+  handleSelectedObject,
+  objectDetails,
+}) => {
   const orbitControls = useRef();
-  const { shapesAreLoaded, currentArtboard } = useShapeStore();
-  const { cameraArtboards } = useCameraStore();
+  const { objectsAreLoaded } = useObjectStore();
 
-  if (!shapesAreLoaded) {
+  if (!objectsAreLoaded) {
     return <div style={styles.viewport}>Loading...</div>;
   } else {
     return (
@@ -73,11 +70,11 @@ const Model = React.lazy(() => import("./Model"));
               />
             </mesh>
             <Suspense fallback={null}>
-              {/* <Model orbitControls={orbitControls} /> */}
               <ObjectsMapped
                 selected={selected}
-                handleSelected={handleSelected}
+                handleSelectedObject={handleSelectedObject}
                 orbitControls={orbitControls}
+                objectDetails={objectDetails}
               />
             </Suspense>
             <Camera
@@ -86,11 +83,11 @@ const Model = React.lazy(() => import("./Model"));
               handleSelected={handleSelected}
             />
 
-            <Entities
+            {/* <Entities
               selected={selected}
               handleSelected={handleSelected}
               orbitControls={orbitControls}
-            />
+            /> */}
             <OrbitControls ref={orbitControls} />
           </group>
         </Canvas>

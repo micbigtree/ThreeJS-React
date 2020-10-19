@@ -1,26 +1,37 @@
 import React from "react";
-
+import { useObjectStore } from "../zustand/objects";
 import { useShapeStore } from "../zustand/shapes";
 import LayerListItem from "./LayerListItem";
 
-const LayerList = ({ selected, handleSelected }) => {
-  const { artboards, shapesAreLoaded, currentArtboard } = useShapeStore();
+const LayerList = ({ selected, handleSelectedObject }) => {
 
-  if (!shapesAreLoaded) {
+  const {
+    // artboards,
+    objectsAreLoaded,
+    artboards,
+    currentObjectArtboard,
+  } = useObjectStore();
+
+//I think the map problem is in here, as ArtboardPanel is mapping shapeStore fine and it's not mapping fine here
+  const {
+    shapesAreLoaded,
+    currentArtboard,
+  } = useShapeStore();
+
+  if (!objectsAreLoaded) {
     return <div>Loading...</div>;
   } else {
     return (
       <ul style={styles.list}>
-        {artboards[currentArtboard].map((shape) => (
-          <li style={styles.listItem} key={shape.id}>
+        {artboards[currentObjectArtboard].map((objects) => (
+          <li style={styles.listItem} key={objects.id}>
             <LayerListItem
-              key={shape.id}
-              id={shape.id}
-              position={shape.position}
-              shape={shape.shape}
-              color={shape.color}
+              key={objects.id}
+              id={objects.id}
+              position={objects.position}
+              object={objects.object}
               selected={selected}
-              handleSelected={handleSelected}
+              handleSelectedObject={handleSelectedObject}
             />
           </li>
         ))}

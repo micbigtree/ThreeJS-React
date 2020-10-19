@@ -3,10 +3,9 @@ import React from "react";
 import { useShapeStore } from "../zustand/shapes";
 
 import Shape from "./Shape";
-import PreviewShape from "./PreviewShape";
 
 const Entities = ({ orbitControls, selected, handleSelected }) => {
-  const { artboards, currentArtboard, editorMode } = useShapeStore();
+  const { artboards, currentArtboard } = useShapeStore();
 
   return artboards[currentArtboard].map(
     (mapped) => (

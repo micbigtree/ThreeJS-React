@@ -16,7 +16,6 @@ const Shape = ({
   selected, 
   handleSelected
 }) => {
-  const [shapeSelected, setSelected] = useState(selected);
   const [hovered, setHover] = useState();
   const { updatePosition, currentArtboard } = useShapeStore();
   const worldPosition = new THREE.Vector3();
@@ -84,12 +83,6 @@ const Shape = ({
       </a.mesh>
     </TransformControls>
   );
-};
-
-const styles = {
-htmlContainer: {
-  position: "absolute",
-}
 };
 
 export default Shape;

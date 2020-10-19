@@ -1,14 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
 
 import { useShapeStore } from "../zustand/shapes";
 import { useCameraStore } from "../zustand/camera";
 import { PreviewCamera } from "./PreviewCamera.js";
 import PreviewShape from "./PreviewShape";
-import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
-import { VRCanvas, DefaultXRControllers, Select, Hover } from "@react-three/xr";
+import { VRCanvas, DefaultXRControllers } from "@react-three/xr";
 import "../App.scss";
-import Entities from "./Entities";
-import { Canvas } from "react-three-fiber";
 import { softShadows } from "drei";
 
 softShadows();
@@ -19,7 +16,6 @@ const PreviewViewport = () => {
  const { shapesAreLoaded, artboards, currentArtboard } = useShapeStore();
  const {
    cameraArtboards,
-   currentCameraArtboard,
  } = useCameraStore();
  
 

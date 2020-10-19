@@ -9,13 +9,22 @@ import { devtools } from "zustand/middleware";
 
 const store = (set) => ({
   editorMode: true,
-  artboards: {},
   switchModes: () =>
     set((state) => {
       state.editorMode = !state.editorMode;
     }),
+  artboards: {},
   currentArtboard: 1,
   shapesAreLoaded: false,
+  // LOAD SHAPES
+  loadShapes: () =>
+    getShapes()
+      .then((shapes) =>
+        set((state) => {
+          state.artboards = shapes.artboards;
+        })
+      )
+      .then(() => set(() => ({ shapesAreLoaded: true }))),
   // UPDATE POSITION OF SHAPE
   updatePosition: ({ id, currentArtboard, position }) =>
     set((state) => {
@@ -77,15 +86,7 @@ const store = (set) => ({
     set((state) => {
       delete state.artboards[key];
     }),
-  // LOAD SHAPES
-  loadShapes: () =>
-    getShapes()
-      .then((shapes) =>
-        set((state) => {
-          state.artboards = shapes.artboards;
-        })
-      )
-      .then(() => set(() => ({ shapesAreLoaded: true }))),
+
   // UPDATE SHAPE'S CLICK DESTINATION
   updateDestination: ({ id, currentArtboard, destination }) =>
     set((state) => {

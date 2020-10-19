@@ -4,42 +4,33 @@ import { useShapeStore } from "../zustand/shapes";
 import { useObjectStore } from "../zustand/objects";
 import Model from "./Model";
 
-const ObjectsMapped = ({ orbitControls, selected, handleSelected }) => {
+const ObjectsMapped = ({ orbitControls, selected, handleSelectedObject }) => {
 
-  const { objectArtboards } = useObjectStore();
+  const { artboards, objectsAreLoaded } = useObjectStore();
   const { currentArtboard } = useShapeStore();
 
-  return objectArtboards[currentArtboard].map(
+  if (!objectsAreLoaded) {  
+    return <div>Loading...</div>;
+  } else {
+  return artboards[currentArtboard].map(
     (mapped) => (
-      // editorMode ? (
 
-        <Model
-          position={mapped.position}
-          destination={mapped.destination}
-          object={mapped.name}
-          category={mapped.category}
-          orbitControls={orbitControls}
-          selected={selected}
-          handleSelected={handleSelected}
-        />
 
+      <Model
+        key={mapped.id}
+        position={mapped.position}
+        id={mapped.id}
+        destination={mapped.destination}
+        object={mapped.object}
+        category={mapped.category}
+        orbitControls={orbitControls}
+        selected={selected}
+        handleSelectedObject={handleSelectedObject}
+      />
     )
-    // ) : (
-
-    //       <PreviewShape
-    //         key={mapped.id}
-    //         id={mapped.id}
-    //         position={mapped.position}
-    //         color={mapped.color}
-    //         speed={mapped.speed}
-    //         args={[1, 1, 2]}
-    //         shape={mapped.shape}
-    //         orbitControls={orbitControls}
-    //         destination={mapped.destination}
-    //       />
-
-    // )
+  
   );
 };
+}
 
 export default ObjectsMapped;

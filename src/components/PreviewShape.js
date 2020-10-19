@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 
 import { a } from "react-spring/three";
-import { Select, Hover } from "@react-three/xr";
+import { Select } from "@react-three/xr";
 import { useShapeStore } from "../zustand/shapes";
 import { useCameraStore } from "../zustand/camera";
 import { TransformControls } from "drei";

@@ -2,7 +2,7 @@ import React from "react";
 import { useObjectStore } from "../zustand/objects";
 import { useShapeStore } from "../zustand/shapes";
 
-const ObjectTopbar = ({ }) => {
+const ObjectTopbar = () => {
 
 const { addObject } = useObjectStore();
 const { currentArtboard } = useShapeStore();
@@ -19,7 +19,7 @@ const { currentArtboard } = useShapeStore();
             addObject({
               currentArtboard,
               category: e.target.value,
-              name: e.target.id,
+              object: e.target.id,
             })
           }
         >
@@ -33,7 +33,7 @@ const { currentArtboard } = useShapeStore();
             addObject({
               currentArtboard,
               category: e.target.value,
-              name: e.target.id,
+              object: e.target.id,
             })
           }
         >
@@ -47,7 +47,7 @@ const { currentArtboard } = useShapeStore();
             addObject({
               currentArtboard,
               category: e.target.value,
-              name: e.target.id,
+              object: e.target.id,
             })
           }
         >
@@ -64,7 +64,7 @@ const { currentArtboard } = useShapeStore();
             addObject({
               currentArtboard,
               category: e.target.value,
-              name: e.target.id,
+              object: e.target.id,
             })
           }
         >
@@ -78,7 +78,7 @@ const { currentArtboard } = useShapeStore();
             addObject({
               currentArtboard,
               category: e.target.value,
-              name: e.target.id,
+              object: e.target.id,
             })
           }
         >
@@ -92,7 +92,7 @@ const { currentArtboard } = useShapeStore();
             addObject({
               currentArtboard,
               category: e.target.value,
-              name: e.target.id,
+              object: e.target.id,
             })
           }
         >

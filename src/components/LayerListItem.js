@@ -1,29 +1,25 @@
 import React from "react";
 
 import "../App.scss";
-import { useShapeStore } from "../zustand/shapes";
+import { useObjectStore } from "../zustand/objects";
 
 const LayerListItem = ({
   id,
-  shape,
+  object,
   position,
-  color,
   selected,
-  handleSelected,
+  handleSelectedObject,
 }) => {
-  
   const {
-    updatePosition,
     updateDestination,
     removeShape,
     artboards,
     currentArtboard,
     destination,
-  } = useShapeStore();
-
+  } = useObjectStore();
 
   const clickedShape = (id) => {
-    handleSelected(id, position, color, shape);
+    handleSelectedObject(id, position, object);
   };
 
   return (
@@ -33,7 +29,7 @@ const LayerListItem = ({
       onPointerDown={() => clickedShape(id)}
     >
       <div style={styles.id}>id:{id}</div>
-      <div style={styles.shape}>{shape}</div> 
+      <div style={styles.shape}>{object}</div>
       {/* Position:
       <div style={styles.position}>
         <div style={styles.positionVector}>

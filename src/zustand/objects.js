@@ -1,36 +1,40 @@
-import { getShapes } from "../api";
+import { getObjects } from "../api";
 import create from "zustand";
 import produce from "immer";
 import { devtools } from "zustand/middleware";
+import shortid from 'shortid';
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~
 // STATE
 // ~~~~~~~~~~~~~~~~~~~~~~~~
-
+//looks like the api just isn't loading. adding 1: [] below stopped it breaking. 
+// But it should be loading shit from the api. but shapes api is working
 const store = (set) => ({
-  objectArtboards: {
-    1: [
-    ],
-    2: [
-      {
-        name: "ship_dark",
-        category: "pirates",
-        position: [2, 0, 1],
-        destination: 2,
-      },
-    ],
+  artboards: {
+    1: [],
   },
-  addObject: ({ currentArtboard, category, name }) =>
+  // LOAD OBJECTS
+  loadObjects: () =>
+    getObjects()
+      .then((objects) =>
+        set((state) => {
+          state.artboards = objects.objectArtboards;
+        })
+      )
+      .then(() => set(() => ({ objectsAreLoaded: true }))),
+  //ADD OBJECT
+  addObject: ({ currentArtboard, category, object }) =>
     set((state) => {
-      state.objectArtboards[currentArtboard].push({
-        name: name,
+      state.artboards[currentArtboard].push({
+        id: shortid.generate(),
+        object: object,
         category: category,
         position: [0, 0, 0],
         destination: 2,
       });
     }),
   currentObjectArtboard: 1,
-  objectsAreLoaded: false,
+  objectsAreLoaded: true,
 });
 const immer = (config) => (set, get, api) =>
   config((fn) => set(produce(fn)), get, api);

@@ -4,19 +4,24 @@ import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
 import LayerList from "./components/LayerList";
 import { useShapeStore } from "./zustand/shapes";
+import { useObjectStore } from "./zustand/objects";
 import { useCameraStore } from "./zustand/camera";
 import ArtboardPanel from "./components/ArtboardPanel";
 import ShapePanel from "./components/ShapePanel";
 import ObjectTopbar from "./components/ObjectTopbar";
 
 const App = ( ) => {
-  const {
+
+const { loadObjects } = useObjectStore();
+
+const {
     loadShapes,
     addShape,
     currentArtboard,
     editorMode,
     switchModes,
   } = useShapeStore();
+
   const { loadPreviewCameras } = useCameraStore();
 
   const [selected, setSelected] = useState(0);
@@ -27,6 +32,17 @@ const App = ( ) => {
     color: '',
     shape: '',
   });
+   const [objectDetails, setObjectDetails] = useState({
+     id: "",
+     position: [],
+     name: "",
+   });
+
+const handleSelectedObject = (id, position, name,) => {
+  setSelected(id);
+  setObjectDetails({ id: id, position: position, name: name });
+  console.log(id, position, name);
+};
 
   const handleSelected = (id, position, color, shape) => {
     setSelected(id);
@@ -36,6 +52,7 @@ const App = ( ) => {
 
   useEffect(() => {
     loadShapes();
+    loadObjects();
     loadPreviewCameras();
   }, []); // <-- empty dependency array
 
@@ -53,52 +70,27 @@ const App = ( ) => {
       <div style={styles.viewport}>
         <Viewport
           details={details}
+          objectDetails={objectDetails}
           selected={selected}
           handleSelected={handleSelected}
+          handleSelectedObject={handleSelectedObject}
         />
       </div>
       <div style={styles.artboardPanel}>
         <ArtboardPanel />
       </div>
       <div style={styles.layerList}>
-        <div style={styles.addButtons}>
-          <button
-            style={styles.addButton}
-            value="box"
-            onClick={(e) => {
-              addShape({ currentArtboard, shape: e.target.value });
-            }}
-          >
-            Add Cube
-          </button>
-          <button
-            style={styles.addButton}
-            value="sphere"
-            onClick={(e) => {
-              addShape({ currentArtboard, shape: e.target.value });
-            }}
-          >
-            Add Sphere
-          </button>
-          <button
-            style={styles.addButton}
-            value="cylinder"
-            onClick={(e) => {
-              addShape({ currentArtboard, shape: e.target.value });
-            }}
-          >
-            Add Cylinder
-          </button>
-        </div>
-        <LayerList selected={selected} handleSelected={handleSelected} />
+        <LayerList
+          selected={selected}
+          handleSelectedObject={handleSelectedObject}
+        />
       </div>
-      {selected > 0 ? (
+      {selected !== 0 ? (
         <div style={styles.shapeDetailsContainer}>
           <ShapePanel
-            id={details.id}
-            position={details.position}
-            color={details.color}
-            shape={details.shape}
+            id={objectDetails.id}
+            position={objectDetails.position}
+            shape={objectDetails.name}
           />
         </div>
       ) : (
@@ -124,8 +116,6 @@ const App = ( ) => {
 const styles = {
   container: {
     overflow: "scroll",
-    // display: "flex",
-    // flexDirection: "row",
   },
   viewport: { outline: "none", flex: 1 },
   layerList: {
@@ -134,7 +124,6 @@ const styles = {
     borderRadius: "10px",
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
     overflow: "scroll",
-    // flex: 1,
   },
   addButtons: {
     overflow: "auto",
@@ -153,7 +142,6 @@ const styles = {
     width: "20%",
     height: "auto",
     right: 0,
-    // flex: 1,
   },
 };
 

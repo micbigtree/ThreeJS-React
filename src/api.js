@@ -1,5 +1,3 @@
-import {useCameraStore} from './zustand/camera';
-
 // Get shapes from JsonBin
 export const getShapes = (
   url = "https://api.jsonbin.io/b/5f59ebde302a837e95638e0e/latest"
@@ -12,6 +10,21 @@ export const getShapes = (
       "Content-Type": "application/json",
     }
   }).then((response) => response.json());
+};
+
+// Get objects from JsonBin
+export const getObjects = (
+  url = "https://api.jsonbin.io/b/5f899c47302a837e957a1076/latest"
+) => {
+  return fetch(url, {
+    method: "GET",
+    headers: {
+      "secret-key":
+        "$2b$10$ia1eqHlS0SqHe9ynAROzfuR814NIz0UEz.deChs/3ebwLgBCEtzhO",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
 };
 
 // Get preview camera from JsonBin

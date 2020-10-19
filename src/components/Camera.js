@@ -12,7 +12,7 @@ const Camera = ({ orbitControls, selected, handleSelected }) => {
 
   const id = -1
 
-  const { updateCameraPosition, cameraArtboards } = useCameraStore();
+  const { updateCameraPosition, currentCameraArtboard, cameraArtboards } = useCameraStore();
   const { currentArtboard } = useShapeStore();
 
   const worldPosition = new THREE.Vector3();
@@ -39,7 +39,7 @@ const Camera = ({ orbitControls, selected, handleSelected }) => {
 
   return (
     <TransformControls
-      position={cameraArtboards[currentArtboard].position}
+      // position={cameraArtboards[currentCameraArtboard].position}
       showY={selected === id ? true : false}
       showX={selected === id ? true : false}
       showZ={selected === id ? true : false}
