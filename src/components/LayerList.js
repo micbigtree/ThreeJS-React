@@ -19,29 +19,32 @@ const LayerList = ({ selected, handleSelectedObject, cameraSelected, handleSelec
     cameraIsLoaded,
   } = useCameraStore();
 
-  if (!cameraIsLoaded) {
+  if (!objectsAreLoaded) {
     return <div>Loading...</div>;
   } else {
     return (
       <ul style={styles.list}>
-        <li
+        
+        { cameraIsLoaded ? <li
           style={styles.listItem}
-          key={cameraArtboards[currentCameraArtboard].id}
+          key={[currentCameraArtboard]}
         >
+        
           <LayerListItemCamera
-            key={cameraArtboards[currentCameraArtboard].id}
+            key={[currentCameraArtboard]}
             position={cameraArtboards[currentCameraArtboard].position}
             object={"Camera"}
             selected={cameraSelected}
-            handleSelectedObject={handleSelectedObject}
             handleSelectedCamera={handleSelectedCamera}
           />
-        </li>
+        </li>: ('')}
         {artboards[currentObjectArtboard].map((objects) => (
           <li style={styles.listItem} key={objects.id}>
             <LayerListItem
               key={objects.id}
               position={objects.position}
+              rotation={objects.rotation}
+              scale={objects.scale}
               object={objects.object}
               selected={selected}
               handleSelectedObject={handleSelectedObject}

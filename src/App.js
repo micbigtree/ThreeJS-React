@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useControl } from "react-three-gui";
 
 import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
@@ -10,9 +11,16 @@ import ArtboardPanel from "./components/ArtboardPanel";
 import ShapePanel from "./components/ShapePanel";
 import CameraPanel from "./components/CameraPanel";
 import ObjectTopbar from "./components/ObjectTopbar";
-import { current } from "immer";
 
 const App = ( ) => {
+
+// CONTROL KIND OF TRANSFORM
+
+const [mode, setMode] = useState('translate');
+
+ const changeTransformMode = (mode) => {
+  setMode(mode)
+ }
 
 const { loadObjects } = useObjectStore();
 
@@ -46,10 +54,9 @@ const {
       position: [],
     });
 
-const handleSelectedObject = (id, position, name,) => {
+const handleSelectedObject = (id, position, rotation, scale, name) => {
   setSelected(id);
-  setObjectDetails({ id: id, position: position, name: name });
-  console.log(id, position, name);
+  setObjectDetails({ id: id, position: position, rotation: rotation, scale: scale, name: name });
 };
 
 const handleSelectedCamera = (val) => {
@@ -57,14 +64,18 @@ const handleSelectedCamera = (val) => {
   setCameraDetails({ id: cameraArtboards[currentCameraArtboard].id, position: cameraArtboards[currentCameraArtboard].position });
 };
 
-  const handleSelected = (id, position, color, shape) => {
+  const handleSelected = (id, position, shape, rotation, scale) => {
     setSelected(id);
-    setDetails({id: id, position: position, color: color, shape: shape})
-    console.log(id, position, color, shape)
+    setDetails({
+      id: id,
+      position: position,
+      rotation: rotation,
+      scale: scale,
+      shape: shape,
+    });
   };
 
   useEffect(() => {
-    loadShapes();
     loadObjects();
     loadPreviewCameras();
   }, []); // <-- empty dependency array
@@ -82,6 +93,7 @@ const handleSelectedCamera = (val) => {
       <ObjectTopbar />
       <div style={styles.viewport}>
         <Viewport
+          mode={mode}
           details={details}
           objectDetails={objectDetails}
           cameraDetails={cameraDetails}
@@ -109,6 +121,8 @@ const handleSelectedCamera = (val) => {
           <ShapePanel
             id={objectDetails.id}
             position={objectDetails.position}
+            rotation={objectDetails.rotation}
+            scale={objectDetails.scale}
             shape={objectDetails.name}
           />
         </div>

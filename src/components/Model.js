@@ -6,6 +6,8 @@ const Model = ({
   object,
   category,
   position,
+  rotation,
+  scale,
   id,
   selected,
   handleSelectedObject,
@@ -18,7 +20,7 @@ const Model = ({
   const transformControls = useRef();
 
   const clickedShape = (id) => {
-    handleSelectedObject(id, position, object);
+    handleSelectedObject(id, position, rotation, scale, object);
   };
 
   useEffect(() => {
@@ -45,7 +47,7 @@ const Model = ({
           onPointerDown={() => clickedShape(id)}
           attach="material"
           receiveShadow
-          scale={[1, 1, 1]}
+          scale={scale}
         >
           <primitive object={gltf.scene} dispose={null} />
         </mesh>

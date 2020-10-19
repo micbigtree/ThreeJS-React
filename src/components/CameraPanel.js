@@ -3,7 +3,11 @@ import React from "react";
 import "../App.scss";
 import { useCameraStore } from "../zustand/camera";
 
-const CameraPanel = ({ id, position, selected }) => {
+import PositionUI from "./UIValues/PositionUI";
+import RotationUI from "./UIValues/RotationUI";
+
+
+const CameraPanel = ({ id, position }) => {
   const {
     cameraArtboards,
     currentCameraArtboard,
@@ -12,87 +16,8 @@ const CameraPanel = ({ id, position, selected }) => {
 
   return (
     <div style={styles.container} key={id}>
-      Position:
-      <div style={styles.position}>
-        <div style={styles.positionVector}>
-          <label> x: </label>
-          <input style={styles.inputField} placeholder={position[0]} />
-          <button
-            onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
-                position: [position[0] - 1, position[1], position[2]],
-              });
-            }}
-          >
-            -
-          </button>
-          <button
-            onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
-                position: [position[0] + 1, position[1], position[2]],
-              });
-            }}
-          >
-            +
-          </button>
-        </div>
-        <div style={styles.positionVector}>
-          <label> y: </label>
-          <input style={styles.inputField} placeholder={position[1]} />
-          <button
-            onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
-                position: [position[0], position[1] - 1, position[2]],
-              });
-            }}
-          >
-            -
-          </button>
-          <button
-            onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
-                position: [position[0], position[1] + 1, position[2]],
-              });
-            }}
-          >
-            +
-          </button>
-        </div>
-        <div style={styles.positionVector}>
-          <label> z: </label>
-          <input style={styles.inputField} placeholder={position[2]} />
-          <button
-            onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
-                position: [position[0], position[1], position[2] - 1],
-              });
-            }}
-          >
-            -
-          </button>
-          <button
-            onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
-                position: [position[0], position[1], position[2] + 1],
-              });
-            }}
-          >
-            +
-          </button>
-        </div>
-      </div>
+      <PositionUI position={cameraArtboards[currentCameraArtboard].position} />
+      <RotationUI rotation={cameraArtboards[currentCameraArtboard].rotation} />
     </div>
   );
 };

@@ -7,6 +7,8 @@ const LayerListItem = ({
   id,
   object,
   position,
+  rotation,
+  scale,
   selected,
   handleSelectedObject,
 }) => {
@@ -16,12 +18,16 @@ const LayerListItem = ({
     artboards,
     currentArtboard,
     destination,
+    objectsAreLoaded,
   } = useObjectStore();
 
   const clickedShape = (id) => {
-    handleSelectedObject(id, position, object);
+    handleSelectedObject(id, position, rotation, scale, object);
   };
 
+  if (!objectsAreLoaded) {
+    return <div>Loading...</div>;
+  } else {
   return (
     <div
       style={selected === id ? styles.containerSelected : styles.container}
@@ -43,7 +49,7 @@ const LayerListItem = ({
           id="myDropdown"
         >
           <option value={null}>none</option>
-          {Object.keys(artboards).map((mapped) => (
+          if (!objectsAreLoaded)('Loading...') {Object.keys(artboards).map((mapped) => (
             <option key={mapped} value={mapped}>
               {mapped}
             </option>
@@ -61,7 +67,7 @@ const LayerListItem = ({
         </button>
       </div>
     </div>
-  );
+  )}
 };
 
 const styles = {

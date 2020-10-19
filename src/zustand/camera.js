@@ -16,11 +16,13 @@ const store = (set) => ({
   updateCameraPosition: ({ currentArtboard, position }) =>
     set((state) => {
       state.cameraArtboards[state.currentCameraArtboard].position = position;
-      sendPreviewCameras(state.cameraArtboards)
-      .then(state.cameraIsLoaded = false)
-    .then(state.loadPreviewCameras(),
-    console.log("state updated!"),
-    state.cameraIsLoaded = true)
+      sendPreviewCameras(state.cameraArtboards);
+    }),
+  // UPDATE ROTATION OF CAMERA
+  updateCameraRotation: ({ currentArtboard, rotation }) =>
+    set((state) => {
+      state.cameraArtboards[state.currentCameraArtboard].rotation = rotation;
+      sendPreviewCameras(state.cameraArtboards);
     }),
   // ADD A NEW CAMERA ARTBOARD
   addCameraArtboard: () =>

@@ -55,6 +55,7 @@ const Shape = ({
       showZ={selected === id ? true : false}
       translationSnap={1}
       ref={transformControls}
+      mode="rotate"
     >
       
       <a.mesh

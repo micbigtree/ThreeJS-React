@@ -1,13 +1,17 @@
 import React from "react";
 
+import PositionUI from "./UIValues/PositionUI";
+import RotationUI from "./UIValues/RotationUI";
+import ScaleUI from "./UIValues/ScaleUI";
+
 import "../App.scss";
-import { useShapeStore } from "../zustand/shapes";
+import { useObjectStore } from "../zustand/objects";
 
 const ShapePanel = ({
   id,
   position,
-  color,
-  shape,
+  rotation,
+  scale,
   selected,
 }) => {
   const {
@@ -17,126 +21,13 @@ const ShapePanel = ({
     artboards,
     currentArtboard,
     destination,
-  } = useShapeStore();
+  } = useObjectStore();
 
   return (
-    <div
-      style={styles.container}
-      key={id}
-    >
-      <div style={styles.shape}>shape: {shape}</div>
-      Position:
-      <div style={styles.position}>
-        <div style={styles.positionVector}>
-          <label> x: </label>
-          <input style={styles.inputField} placeholder={position[0]} />
-          <button
-            onClick={() => {
-              updatePosition({
-                id,
-                currentArtboard,
-                position: [position[0] - 1, position[1], position[2]],
-              });
-            }}
-          >
-            -
-          </button>
-          <button
-            onClick={() => {
-              updatePosition({
-                id,
-                currentArtboard,
-                position: [position[0] + 1, position[1], position[2]],
-              });
-            }}
-          >
-            +
-          </button>
-        </div>
-        <div style={styles.positionVector}>
-          <label> y: </label>
-          <input style={styles.inputField} placeholder={position[1]} />
-          <button
-            onClick={() => {
-              updatePosition({
-                id,
-                currentArtboard,
-                position: [position[0], position[1] - 1, position[2]],
-              });
-            }}
-          >
-            -
-          </button>
-          <button
-            onClick={() => {
-              updatePosition({
-                id,
-                currentArtboard,
-                position: [position[0], position[1] + 1, position[2]],
-              });
-            }}
-          >
-            +
-          </button>
-        </div>
-        <div style={styles.positionVector}>
-          <label> z: </label>
-          <input style={styles.inputField} placeholder={position[2]} />
-          <button
-            onClick={() => {
-              updatePosition({
-                id,
-                currentArtboard,
-                position: [position[0], position[1], position[2] - 1],
-              });
-            }}
-          >
-            -
-          </button>
-          <button
-            onClick={() => {
-              updatePosition({
-                id,
-                currentArtboard,
-                position: [position[0], position[1], position[2] + 1],
-              });
-            }}
-          >
-            +
-          </button>
-        </div>
-      </div>
-      <div style={styles.dropdownContainer}>
-        Links to:
-        <select
-          selected={destination}
-          onChange={(e) => {
-            updateDestination({
-              id,
-              currentArtboard,
-              destination: e.target.value,
-            });
-          }}
-          id="myDropdown"
-        >
-          <option value={null}>none</option>
-          {Object.keys(artboards).map((mapped) => (
-            <option key={mapped} value={mapped}>
-              {mapped}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div style={styles.color}>color: {color}</div>
-      <div style={styles.remove}>
-        <button
-          onClick={() => {
-            removeShape({ currentArtboard, id });
-          }}
-        >
-          Remove
-        </button>
-      </div>
+    <div style={styles.container} key={id}>
+      <PositionUI position={position} />
+      <RotationUI rotation={rotation} />
+      <ScaleUI scale={scale} id={id} />
     </div>
   );
 };

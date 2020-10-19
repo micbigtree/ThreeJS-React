@@ -10,9 +10,9 @@ import shortid from 'shortid';
 //looks like the api just isn't loading. adding 1: [] below stopped it breaking. 
 // But it should be loading shit from the api. but shapes api is working
 const store = (set) => ({
-  artboards: {
-    1: [],
-  },
+  artboards: {1: []},
+  currentObjectArtboard: 1,
+  objectsAreLoaded: false,
   // LOAD OBJECTS
   loadObjects: () =>
     getObjects()
@@ -30,11 +30,32 @@ const store = (set) => ({
         object: object,
         category: category,
         position: [0, 0, 0],
+        rotation: [0, 0, 0],
+        scale: [1, 1, 1],
         destination: 2,
       });
     }),
-  currentObjectArtboard: 1,
-  objectsAreLoaded: true,
+  // UPDATE POSITION OF OBJECT
+  updateObjectPosition: ({ id, currentArtboard, position }) =>
+    set((state) => {
+      state.artboards[currentArtboard].find(
+        (x) => x.id === id
+      ).position = position;
+    }),
+  // UPDATE ROTATION OF OBJECT
+  updateObjectRotation: ({ id, currentArtboard, rotation }) =>
+    set((state) => {
+      state.artboards[currentArtboard].find(
+        (x) => x.id === id
+      ).rotation = rotation;
+    }),
+  // UPDATE SCALE OF OBJECT
+  updateObjectScale: ({ id, currentArtboard, scale }) =>
+    set((state) => {
+      state.artboards[currentArtboard].find(
+        (x) => x.id === id
+        ).scale = scale;
+    }),
 });
 const immer = (config) => (set, get, api) =>
   config((fn) => set(produce(fn)), get, api);

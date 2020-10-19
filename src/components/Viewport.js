@@ -1,9 +1,11 @@
 import React, { useRef, Suspense } from "react";
+import { Controls } from "react-three-gui";
+
 import { useObjectStore } from "../zustand/objects";
+import { useCameraStore } from "../zustand/camera";
 import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 
 import "../App.scss";
-import Entities from "./Entities";
 import Camera from "./Camera";
 
 
@@ -22,9 +24,12 @@ const Viewport = ({
   handleSelectedObject,
   handleSelectedCamera,
   objectDetails,
+  mode
 }) => {
   const orbitControls = useRef();
   const { objectsAreLoaded } = useObjectStore();
+  const { cameraArtboards, currentCameraArtboard, cameraIsLoaded } = useCameraStore();
+
 
   if (!objectsAreLoaded) {
     return <div style={styles.viewport}>Loading...</div>;
@@ -38,7 +43,10 @@ const Viewport = ({
           vr={true}
           shadowMap
           colorManagement
-          camera={{ position: [0, 2, 5], fov: 60 }}
+          camera={{
+            position: [-5, 4, 5],
+            fov: 80,
+          }}
           onPointerMissed={() => {
             handleSelected(0);
             handleSelectedCamera(false);
@@ -80,11 +88,14 @@ const Viewport = ({
                 objectDetails={objectDetails}
               />
             </Suspense>
-            <Camera
-              orbitControls={orbitControls}
-              cameraSelected={cameraSelected}
-              handleSelectedCamera={handleSelectedCamera}
-            />
+            <Suspense fallback={null}>
+              <Camera
+                orbitControls={orbitControls}
+                cameraSelected={cameraSelected}
+                handleSelectedCamera={handleSelectedCamera}
+                mode={mode}
+              />
+            </Suspense>
             <OrbitControls ref={orbitControls} />
           </group>
         </Canvas>
