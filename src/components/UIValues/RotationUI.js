@@ -9,11 +9,13 @@ const RotationUI = ({ id, rotation }) => {
     updateCameraRotation,
   } = useCameraStore();
 
+
+  
   return (
     <div style={styles.container} key={id}>
       Rotation:
       <div style={styles.rotation}>
-        <div style={styles.rotationVector}>
+        {/* <div style={styles.rotationVector}>
           <label> x: </label>
           <input style={styles.inputField} placeholder={rotation[0]} />
           <button
@@ -46,7 +48,7 @@ const RotationUI = ({ id, rotation }) => {
           >
             +
           </button>
-        </div>
+        </div> */}
         <div style={styles.rotationVector}>
           <label> y: </label>
           <input style={styles.inputField} placeholder={rotation[1]} />
@@ -81,7 +83,7 @@ const RotationUI = ({ id, rotation }) => {
             +
           </button>
         </div>
-        <div style={styles.rotationVector}>
+        {/* <div style={styles.rotationVector}>
           <label> z: </label>
           <input style={styles.inputField} placeholder={rotation[2]} />
           <button
@@ -114,7 +116,7 @@ const RotationUI = ({ id, rotation }) => {
           >
             +
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

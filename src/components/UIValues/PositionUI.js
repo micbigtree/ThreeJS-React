@@ -26,7 +26,7 @@ const {
                 id,
                 currentCameraArtboard,
                 position: [
-                  cameraArtboards[currentCameraArtboard].position[0] - 1,
+                  cameraArtboards[currentCameraArtboard].position[0] - 0.5,
                   cameraArtboards[currentCameraArtboard].position[1],
                   cameraArtboards[currentCameraArtboard].position[2],
                 ],
@@ -41,7 +41,7 @@ const {
                 id,
                 currentCameraArtboard,
                 position: [
-                  cameraArtboards[currentCameraArtboard].position[0] + 1,
+                  cameraArtboards[currentCameraArtboard].position[0] + 0.5,
                   cameraArtboards[currentCameraArtboard].position[1],
                   cameraArtboards[currentCameraArtboard].position[2],
                 ],
@@ -61,7 +61,7 @@ const {
                 currentCameraArtboard,
                 position: [
                   cameraArtboards[currentCameraArtboard].position[0],
-                  cameraArtboards[currentCameraArtboard].position[1] - 1,
+                  cameraArtboards[currentCameraArtboard].position[1] - 0.5,
                   cameraArtboards[currentCameraArtboard].position[2],
                 ],
               });
@@ -76,7 +76,7 @@ const {
                 currentCameraArtboard,
                 position: [
                   cameraArtboards[currentCameraArtboard].position[0],
-                  cameraArtboards[currentCameraArtboard].position[1] + 1,
+                  cameraArtboards[currentCameraArtboard].position[1] + 0.5,
                   cameraArtboards[currentCameraArtboard].position[2],
                 ],
               });
@@ -96,7 +96,7 @@ const {
                 position: [
                   cameraArtboards[currentCameraArtboard].position[0],
                   cameraArtboards[currentCameraArtboard].position[1],
-                  cameraArtboards[currentCameraArtboard].position[2] - 1,
+                  cameraArtboards[currentCameraArtboard].position[2] - 0.5,
                 ],
               });
             }}
@@ -111,7 +111,7 @@ const {
                 position: [
                   cameraArtboards[currentCameraArtboard].position[0],
                   cameraArtboards[currentCameraArtboard].position[1],
-                  cameraArtboards[currentCameraArtboard].position[2] + 1,
+                  cameraArtboards[currentCameraArtboard].position[2] + 0.5,
                 ],
               });
             }}

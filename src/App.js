@@ -14,8 +14,7 @@ import ObjectTopbar from "./components/ObjectTopbar";
 
 const App = ( ) => {
 
-// CONTROL KIND OF TRANSFORM
-
+// CHOOSE SCALE/ROTATE/MOVE
 const [mode, setMode] = useState('translate');
 
  const changeTransformMode = (mode) => {

@@ -10,7 +10,7 @@ const ScaleUI = ({ id, scale }) => {
     updateObjectScale,
   } = useObjectStore();
 
-const objectById = artboards[currentObjectArtboard].find(({ id }) => id === id);
+const objectById = artboards[currentObjectArtboard].find(({ id }) => id === id); 
 
   return (
     <div style={styles.container} key={id}>
