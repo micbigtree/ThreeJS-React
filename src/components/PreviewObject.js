@@ -1,0 +1,65 @@
+import React, { useState, useRef } from "react";
+
+import { a } from "react-spring/three";
+import { Select } from "@react-three/xr";
+import { useObjectStore } from "../zustand/objects";
+import { useShapeStore } from "../zustand/shapes";
+import { useCameraStore } from "../zustand/camera";
+import { useGLTFLoader, TransformControls } from "drei";
+
+import "../App.scss";
+
+const PreviewObject = ({
+  orbitControls,
+  object,
+  category,
+  position,
+  rotation,
+  scale,
+  id,
+  selected,
+  destination,
+  handleSelectedObject,
+}) => {
+  const [hovered, setHover] = useState(false);
+
+  const { updateArtboard } = useShapeStore();
+  const {} = useObjectStore();
+  const { updateCameraArtboard } = useCameraStore();
+
+  const gltf = useGLTFLoader("/" + category + "/" + object + ".gltf", true);
+  const transformControls = useRef();
+  console.log(destination);
+  return (
+    <TransformControls
+      position={position}
+      showY={false}
+      showX={false}
+      showZ={false}
+      translationSnap={1}
+      ref={transformControls}
+    >
+      {/* <Select
+        onSelect={() => {
+          if (destination !== "none") {
+            updateArtboard(destination);
+            updateCameraArtboard(destination);
+          }
+        }}
+      > */}
+        <group position={position}>
+          <mesh
+            // onPointerDown={() => clickedShape(id)}
+            attach="material"
+            receiveShadow
+            scale={scale}
+          >
+            <primitive object={gltf.scene} dispose={null} />
+          </mesh>
+        </group>
+      {/* </Select> */}
+    </TransformControls>
+  );
+};
+
+export default PreviewObject;
