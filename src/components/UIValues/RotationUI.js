@@ -1,32 +1,31 @@
 import React from "react";
-import { useCameraStore } from "../../zustand/camera";
+import { useObjectStore } from "../../zustand/objects";
 import "../../App.scss";
 
 const RotationUI = ({ id, rotation }) => {
+ 
   const {
-    cameraArtboards,
-    currentCameraArtboard,
-    updateCameraRotation,
-  } = useCameraStore();
+    artboards,
+    currentObjectArtboard,
+    updateObjectRotation,
+  } = useObjectStore();
 
-
+  const objectById = artboards[currentObjectArtboard].find(({ id }) => id === id); 
   
   return (
     <div style={styles.container} key={id}>
       Rotation:
       <div style={styles.rotation}>
         <div style={styles.rotationVector}>
-          <label> y: </label>
-          <input style={styles.inputField} placeholder={rotation[currentCameraArtboard]} />
           <button
             onClick={() => {
-              updateCameraRotation({
-                id,
-                currentCameraArtboard,
+              updateObjectRotation({
+                id: id,
+              currentArtboard: currentObjectArtboard,
                 rotation: [
-                  cameraArtboards[currentCameraArtboard].rotation[0],
-                  cameraArtboards[currentCameraArtboard].rotation[1] - 1,
-                  cameraArtboards[currentCameraArtboard].rotation[2],
+                  objectById.rotation[0],
+                  objectById.rotation[1] - 0.1,
+                  objectById.rotation[2],
                 ],
               });
             }}
@@ -35,13 +34,13 @@ const RotationUI = ({ id, rotation }) => {
           </button>
           <button
             onClick={() => {
-              updateCameraRotation({
-                id,
-                currentCameraArtboard,
+              updateObjectRotation({
+                id: id,
+              currentArtboard: currentObjectArtboard,
                 rotation: [
-                  cameraArtboards[currentCameraArtboard].rotation[0],
-                  cameraArtboards[currentCameraArtboard].rotation[1] + 1,
-                  cameraArtboards[currentCameraArtboard].rotation[2],
+                  objectById.rotation[0],
+                  objectById.rotation[1] + 0.1,
+                  objectById.rotation[2],
                 ],
               });
             }}
@@ -55,7 +54,8 @@ const RotationUI = ({ id, rotation }) => {
 };
 
 const styles = {
-  container: {},
+  container: {display: "flex",
+  flexDirection: "row",},
 
   rotation: {
     display: "flex",

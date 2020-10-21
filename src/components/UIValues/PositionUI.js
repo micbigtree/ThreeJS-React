@@ -1,14 +1,16 @@
 import React from "react";
-import { useCameraStore } from "../../zustand/camera";
+import { useObjectStore } from "../../zustand/objects";
 import "../../App.scss";
 
 const PositionUI = ({ id, position }) => {
 
-const {
-  cameraArtboards,
-  currentCameraArtboard,
-  updateCameraPosition,
-} = useCameraStore();
+  const {
+    artboards,
+    currentObjectArtboard,
+    updateObjectPosition,
+  } = useObjectStore();
+
+  const objectById = artboards[currentObjectArtboard].find(({ id }) => id === id); 
 
   return (
     <div style={styles.container} key={id}>
@@ -22,13 +24,13 @@ const {
           />
           <button
             onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
+              updateObjectPosition({
+                id: id,
+              currentArtboard: currentObjectArtboard,
                 position: [
-                  cameraArtboards[currentCameraArtboard].position[0] - 0.5,
-                  cameraArtboards[currentCameraArtboard].position[1],
-                  cameraArtboards[currentCameraArtboard].position[2],
+                  objectById.position[0] - 0.5,
+                  objectById.position[1],
+                  objectById.position[2],
                 ],
               });
             }}
@@ -37,13 +39,13 @@ const {
           </button>
           <button
             onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
+              updateObjectPosition({
+                id: id,
+                currentArtboard: currentObjectArtboard,
                 position: [
-                  cameraArtboards[currentCameraArtboard].position[0] + 0.5,
-                  cameraArtboards[currentCameraArtboard].position[1],
-                  cameraArtboards[currentCameraArtboard].position[2],
+                  objectById.position[0] + 0.5,
+                  objectById.position[1],
+                  objectById.position[2],
                 ],
               });
             }}
@@ -56,13 +58,13 @@ const {
           <input style={styles.inputField} placeholder={position[1]} />
           <button
             onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
+              updateObjectPosition({
+                id: id,
+              currentArtboard: currentObjectArtboard,
                 position: [
-                  cameraArtboards[currentCameraArtboard].position[0],
-                  cameraArtboards[currentCameraArtboard].position[1] - 0.5,
-                  cameraArtboards[currentCameraArtboard].position[2],
+                  objectById.position[0],
+                  objectById.position[1] - 0.5,
+                  objectById.position[2],
                 ],
               });
             }}
@@ -71,13 +73,13 @@ const {
           </button>
           <button
             onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
+              updateObjectPosition({
+                id: id,
+              currentArtboard: currentObjectArtboard,
                 position: [
-                  cameraArtboards[currentCameraArtboard].position[0],
-                  cameraArtboards[currentCameraArtboard].position[1] + 0.5,
-                  cameraArtboards[currentCameraArtboard].position[2],
+                  objectById.position[0],
+                  objectById.position[1] + 0.5,
+                  objectById.position[2],
                 ],
               });
             }}
@@ -90,13 +92,13 @@ const {
           <input style={styles.inputField} placeholder={position[2]} />
           <button
             onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
+              updateObjectPosition({
+                id: id,
+              currentArtboard: currentObjectArtboard,
                 position: [
-                  cameraArtboards[currentCameraArtboard].position[0],
-                  cameraArtboards[currentCameraArtboard].position[1],
-                  cameraArtboards[currentCameraArtboard].position[2] - 0.5,
+                  objectById.position[0],
+                  objectById.position[1],
+                  objectById.position[2] - 0.5,
                 ],
               });
             }}
@@ -105,13 +107,13 @@ const {
           </button>
           <button
             onClick={() => {
-              updateCameraPosition({
-                id,
-                currentCameraArtboard,
+              updateObjectPosition({
+                id: id,
+              currentArtboard: currentObjectArtboard,
                 position: [
-                  cameraArtboards[currentCameraArtboard].position[0],
-                  cameraArtboards[currentCameraArtboard].position[1],
-                  cameraArtboards[currentCameraArtboard].position[2] + 0.5,
+                  objectById.position[0],
+                  objectById.position[1],
+                  objectById.position[2] + 0.5,
                 ],
               });
             }}

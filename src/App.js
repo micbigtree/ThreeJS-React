@@ -115,7 +115,7 @@ const handleSelectedCamera = (val) => {
       ) : (
         ""
       )}
-      {cameraSelected ? (
+      {/* {cameraSelected ? (
         <div style={styles.shapeDetailsContainer}>
           <CameraPanel
             id={cameraDetails.id}
@@ -124,7 +124,7 @@ const handleSelectedCamera = (val) => {
         </div>
       ) : (
         ""
-      )}
+      )} */}
     </div>
   ) : (
     <div>

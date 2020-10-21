@@ -42,6 +42,7 @@ const LayerList = ({ selected, handleSelectedObject, cameraSelected, handleSelec
           <li style={styles.listItem} key={objects.id}>
             <LayerListItem
               key={objects.id}
+              id={objects.id}
               position={objects.position}
               rotation={objects.rotation}
               scale={objects.scale}

@@ -2,6 +2,8 @@ import React from "react";
 
 import "../App.scss";
 import { useCameraStore } from "../zustand/camera";
+import PositionUI from "./UIValues/PositionUI";
+import RotationUI from "./UIValues/RotationUI";
 
 const LayerListItem = ({
   id,
@@ -10,7 +12,7 @@ const LayerListItem = ({
   cameraSelected,
   handleSelectedCamera,
 }) => {
-  const {
+  const { 
     removeShape,
     cameraArtboards,
     currentCameraArtboard,
@@ -27,8 +29,10 @@ const LayerListItem = ({
         cameraSelected === id ? styles.containerSelected : styles.container
       }
       key={id}
-      onPointerDown={() => clickedShape(id)}
+      // onPointerDown={() => clickedShape(id)}
     >
+      <PositionUI position={cameraArtboards[currentCameraArtboard].position} />
+      <RotationUI rotation={cameraArtboards[currentCameraArtboard].rotation} />
       <div style={styles.shape}>{object}</div>
     </div>
   );

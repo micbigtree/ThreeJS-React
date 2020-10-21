@@ -39,7 +39,7 @@ const Model = ({
       translationSnap={0.1}
       ref={transformControls}
     >
-      <group position={position}>
+      <group position={position} rotation={rotation}>
         <mesh
           onPointerDown={() => clickedShape(id)}
           attach="material"
