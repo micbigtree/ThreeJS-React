@@ -18,7 +18,7 @@ const ShapePanel = ({
   return (
     <div style={styles.container} key={id}>
       <PositionUI camera={camera} position={position} />
-     {/* <RotationUI camera={camera} rotation={rotation} /> */}
+     <RotationUI camera={camera} rotation={rotation} />
     <ScaleUI scale={scale} id={id} />
     </div>
   );

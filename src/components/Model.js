@@ -51,6 +51,7 @@ const Model = ({
   return (
     <TransformControls
       position={objectsAreLoaded && position}
+      rotation={rotation}
       showY={selected === id ? true : false}
       showX={selected === id ? true : false}
       showZ={selected === id ? true : false}

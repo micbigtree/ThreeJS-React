@@ -25,7 +25,7 @@ return (
     <div style={styles.position}>
       <div style={styles.positionVector}>
         <label> x: </label>
-        <input style={styles.inputField} placeholder={objectById.position[0]} />
+        <input style={styles.inputField} placeholder={position[0]} />
         <button
           onClick={() => {
             camera

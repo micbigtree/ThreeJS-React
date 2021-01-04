@@ -1,122 +1,85 @@
 import React from "react";
 import { useCameraStore } from "../../zustand/camera";
+import { useObjectStore } from "../../zustand/objects";
 import "../../App.scss";
 
-const RotationUI = ({ id, rotation }) => {
-  const {
+const RotationUI = ({ id, rotation, camera }) => {
+
+const {
     cameraArtboards,
     currentCameraArtboard,
     updateCameraRotation,
   } = useCameraStore();
 
 
+  const {
+    artboards,
+    currentObjectArtboard,
+    updateObjectRotation,
+  } = useObjectStore();
+
+  const objectById = artboards[currentObjectArtboard].find(
+    ({ id }) => id === id
+  ); 
   
   return (
     <div style={styles.container} key={id}>
       Rotation:
       <div style={styles.rotation}>
-        {/* <div style={styles.rotationVector}>
-          <label> x: </label>
-          <input style={styles.inputField} placeholder={rotation[0]} />
-          <button
-            onClick={() => {
-              updateCameraRotation({
-                id,
-                currentCameraArtboard,
-                rotation: [
-                  cameraArtboards[currentCameraArtboard].rotation[0] - 1,
-                  cameraArtboards[currentCameraArtboard].rotation[1],
-                  cameraArtboards[currentCameraArtboard].rotation[2],
-                ],
-              });
-            }}
-          >
-            -
-          </button>
-          <button
-            onClick={() => {
-              updateCameraRotation({
-                id,
-                currentCameraArtboard,
-                rotation: [
-                  cameraArtboards[currentCameraArtboard].rotation[0] + 1,
-                  cameraArtboards[currentCameraArtboard].rotation[1],
-                  cameraArtboards[currentCameraArtboard].rotation[2],
-                ],
-              });
-            }}
-          >
-            +
-          </button>
-        </div> */}
         <div style={styles.rotationVector}>
           <label> y: </label>
           <input style={styles.inputField} placeholder={rotation[1]} />
           <button
             onClick={() => {
-              updateCameraRotation({
-                id,
-                currentCameraArtboard,
-                rotation: [
-                  cameraArtboards[currentCameraArtboard].rotation[0],
-                  cameraArtboards[currentCameraArtboard].rotation[1] - 1,
-                  cameraArtboards[currentCameraArtboard].rotation[2],
-                ],
-              });
+              camera
+                ? updateCameraRotation({
+                    id,
+                    currentCameraArtboard,
+                    rotation: [
+                      cameraArtboards[currentCameraArtboard].rotation[0],
+                      cameraArtboards[currentCameraArtboard].rotation[1] - 0.5,
+                      cameraArtboards[currentCameraArtboard].rotation[2],
+                    ],
+                  })
+                : updateObjectRotation({
+                    id: id,
+                    currentArtboard: currentObjectArtboard,
+                    rotation: [
+                      objectById.rotation[0],
+                      objectById.rotation[1] - 0.5,
+                      objectById.rotation[2],
+                    ],
+                  });
             }}
           >
             -
           </button>
           <button
             onClick={() => {
-              updateCameraRotation({
-                id,
-                currentCameraArtboard,
-                rotation: [
-                  cameraArtboards[currentCameraArtboard].rotation[0],
-                  cameraArtboards[currentCameraArtboard].rotation[1] + 1,
-                  cameraArtboards[currentCameraArtboard].rotation[2],
-                ],
-              });
+              camera
+                ? updateCameraRotation({
+                    id,
+                    currentCameraArtboard,
+                    rotation: [
+                      cameraArtboards[currentCameraArtboard].rotation[0],
+                      cameraArtboards[currentCameraArtboard].rotation[1] + 0.5,
+                      cameraArtboards[currentCameraArtboard].rotation[2],
+                    ],
+                  })
+                : updateObjectRotation({
+                    id: id,
+                    currentArtboard: currentObjectArtboard,
+                    rotation: [
+                      objectById.rotation[0],
+                      objectById.rotation[1] + 0.5,
+                      objectById.rotation[2],
+                    ],
+                  });
             }}
           >
             +
           </button>
         </div>
-        {/* <div style={styles.rotationVector}>
-          <label> z: </label>
-          <input style={styles.inputField} placeholder={rotation[2]} />
-          <button
-            onClick={() => {
-              updateCameraRotation({
-                id,
-                currentCameraArtboard,
-                rotation: [
-                  cameraArtboards[currentCameraArtboard].rotation[0],
-                  cameraArtboards[currentCameraArtboard].rotation[1],
-                  cameraArtboards[currentCameraArtboard].rotation[2] - 1,
-                ],
-              });
-            }}
-          >
-            -
-          </button>
-          <button
-            onClick={() => {
-              updateCameraRotation({
-                id,
-                currentCameraArtboard,
-                rotation: [
-                  cameraArtboards[currentCameraArtboard].rotation[0],
-                  cameraArtboards[currentCameraArtboard].rotation[1],
-                  cameraArtboards[currentCameraArtboard].rotation[2] + 1,
-                ],
-              });
-            }}
-          >
-            +
-          </button>
-        </div> */}
       </div>
     </div>
   );
