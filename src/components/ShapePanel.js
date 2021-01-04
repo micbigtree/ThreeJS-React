@@ -5,29 +5,21 @@ import RotationUI from "./UIValues/RotationUI";
 import ScaleUI from "./UIValues/ScaleUI";
 
 import "../App.scss";
-import { useObjectStore } from "../zustand/objects";
+
 
 const ShapePanel = ({
   id,
   position,
   rotation,
   scale,
-  selected,
+  camera
 }) => {
-  const {
-    updatePosition,
-    updateDestination,
-    removeShape,
-    artboards,
-    currentArtboard,
-    destination,
-  } = useObjectStore();
 
   return (
     <div style={styles.container} key={id}>
-      <PositionUI position={position} />
-      <RotationUI rotation={rotation} />
-      <ScaleUI scale={scale} id={id} />
+      <PositionUI camera={camera} position={position} />
+     {/* <RotationUI camera={camera} rotation={rotation} /> */}
+    <ScaleUI scale={scale} id={id} />
     </div>
   );
 };

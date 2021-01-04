@@ -92,14 +92,12 @@ const handleSelectedCamera = (val) => {
       <ObjectTopbar />
       <div style={styles.viewport}>
         <Viewport
-          mode={mode}
-          details={details}
+          mode={mode} 
           objectDetails={objectDetails}
           cameraDetails={cameraDetails}
           setCameraDetails={setCameraDetails}
           selected={selected}
           cameraSelected={cameraSelected}
-          handleSelected={handleSelected}
           handleSelectedObject={handleSelectedObject}
           handleSelectedCamera={handleSelectedCamera}
         />
@@ -123,6 +121,7 @@ const handleSelectedCamera = (val) => {
             rotation={objectDetails.rotation}
             scale={objectDetails.scale}
             shape={objectDetails.name}
+            camera={false}
           />
         </div>
       ) : (
@@ -133,6 +132,7 @@ const handleSelectedCamera = (val) => {
           <CameraPanel
             id={cameraDetails.id}
             position={cameraDetails.position}
+            camera={true}
           />
         </div>
       ) : (

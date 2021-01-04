@@ -7,17 +7,22 @@ import PositionUI from "./UIValues/PositionUI";
 import RotationUI from "./UIValues/RotationUI";
 
 
-const CameraPanel = ({ id, position }) => {
+const CameraPanel = ({ id, position, camera }) => {
   const {
     cameraArtboards,
     currentCameraArtboard,
-    updateCameraPosition,
   } = useCameraStore();
 
   return (
     <div style={styles.container} key={id}>
-      <PositionUI position={cameraArtboards[currentCameraArtboard].position} />
-      <RotationUI rotation={cameraArtboards[currentCameraArtboard].rotation} />
+      <PositionUI
+        camera={camera}
+        position={cameraArtboards[currentCameraArtboard].position}
+      />
+      <RotationUI
+        camera={camera}
+        rotation={cameraArtboards[currentCameraArtboard].rotation}
+      />
     </div>
   );
 };

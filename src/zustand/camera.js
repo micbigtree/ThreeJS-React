@@ -9,7 +9,7 @@ import { devtools } from "zustand/middleware";
 
 const store = (set) => ({
   // CAMERAS
-  cameraArtboards: {},
+  cameraArtboards: {}, 
   currentCameraArtboard: 1,
   cameraIsLoaded: false,
   // UPDATE POSITION OF CAMERA

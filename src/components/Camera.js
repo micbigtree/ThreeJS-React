@@ -26,7 +26,7 @@ const Camera = ({ mode, orbitControls, cameraSelected, handleSelectedCamera }) =
       position: Object.values(controls.object.getWorldPosition(worldPosition)),
     });
   };
-
+ 
   const transformControls = useRef();
   useEffect(() => {
     if (transformControls.current) {

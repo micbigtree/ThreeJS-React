@@ -1,5 +1,10 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useGLTFLoader, TransformControls } from "drei";
+import { useObjectStore } from "../zustand/objects";
+
+
+
+
 const Model = ({
   orbitControls,
   object,
@@ -7,18 +12,24 @@ const Model = ({
   position,
   rotation,
   scale,
-  id,
+  id, 
   selected,
   handleSelectedObject,
 }) => {
-
   const gltf = useGLTFLoader("/" + category + "/" + object + ".gltf", true);
   const [modelGeometry, setModelGeometry] = useState();
 
   if (!modelGeometry) {
     const modelScene = gltf.scene.clone(true);
-    setModelGeometry(modelScene)
+    setModelGeometry(modelScene);
   }
+
+
+  const {
+    artboards,
+    objectsAreLoaded,
+    currentObjectArtboard,
+  } = useObjectStore();
 
   const transformControls = useRef();
 
@@ -39,13 +50,14 @@ const Model = ({
 
   return (
     <TransformControls
+      position={objectsAreLoaded && position}
       showY={selected === id ? true : false}
       showX={selected === id ? true : false}
       showZ={selected === id ? true : false}
       translationSnap={0.1}
       ref={transformControls}
     >
-      <group position={position}>
+      <group>
         <mesh
           onPointerDown={() => clickedShape(id)}
           attach="material"

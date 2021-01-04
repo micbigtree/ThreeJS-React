@@ -20,7 +20,6 @@ softShadows();
 const Viewport = ({
   selected,
   cameraSelected,
-  handleSelected,
   handleSelectedObject,
   handleSelectedCamera,
   objectDetails,
@@ -49,7 +48,7 @@ const Viewport = ({
             fov: 80,
           }}
           onPointerMissed={() => {
-            handleSelected(0);
+            handleSelectedObject(0);
             handleSelectedCamera(false);
           }}
         >
@@ -80,7 +79,7 @@ const Viewport = ({
                 attach="material"
                 opacity={1}
               />
-            </mesh>
+            </mesh> 
             <Suspense fallback={null}>
               <ObjectsMapped
                 selected={selected}
