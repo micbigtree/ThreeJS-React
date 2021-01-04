@@ -1,6 +1,5 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { useGLTFLoader, TransformControls } from "drei";
-
 const Model = ({
   orbitControls,
   object,
@@ -14,6 +13,13 @@ const Model = ({
 }) => {
 
   const gltf = useGLTFLoader("/" + category + "/" + object + ".gltf", true);
+  const [modelGeometry, setModelGeometry] = useState();
+
+  if (!modelGeometry) {
+    const modelScene = gltf.scene.clone(true);
+    setModelGeometry(modelScene)
+  }
+
   const transformControls = useRef();
 
   const clickedShape = (id) => {
@@ -46,7 +52,7 @@ const Model = ({
           receiveShadow
           scale={scale}
         >
-          <primitive object={gltf.scene} dispose={null} />
+          <primitive object={modelGeometry} dispose={null} />
         </mesh>
       </group>
     </TransformControls>
