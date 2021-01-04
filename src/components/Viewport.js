@@ -37,6 +37,7 @@ const Viewport = ({
     return (
       <div style={styles.viewport}>
         <Canvas
+          invalidateFrameloop
           onCreated={({ gl }) => {
             document.body.appendChild(VRButton.createButton(gl));
           }}
@@ -45,7 +46,7 @@ const Viewport = ({
           colorManagement
           camera={{
             position: [0, 4, 4],
-            fov: 80
+            fov: 80,
           }}
           onPointerMissed={() => {
             handleSelected(0);
