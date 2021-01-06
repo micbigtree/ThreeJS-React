@@ -36,6 +36,7 @@ const Viewport = ({
     return (
       <div style={styles.viewport}>
         <Canvas
+        alpha={false}
           invalidateFrameloop
           onCreated={({ gl }) => {
             document.body.appendChild(VRButton.createButton(gl));
@@ -45,7 +46,7 @@ const Viewport = ({
           colorManagement
           camera={{
             position: [0, 4, 4],
-            fov: 80,
+            fov: 25,
           }}
           onPointerMissed={() => {
             handleSelectedObject(0);
@@ -64,18 +65,16 @@ const Viewport = ({
             shadow-camera-top={10}
             shadow-camera-bottom={-10}
           />
-          <ambientLight intensity={0.3} />
-          <pointLight position={[-10, 0, -20]} intensity={0.5} />
-          <pointLight position={[0, -10, 0]} intensity={1.5} />
+          <ambientLight intensity={0.7} color="0x404040"/>
           <group>
             <mesh
               receiveShadow
               rotation={[-Math.PI / 2, 0, 0]}
               position={[0, 0, 0]}
             >
-              <planeBufferGeometry attach="geometry" args={[100, 100]} />
-              <meshStandardMaterial
-                color="gray"
+              <planeBufferGeometry attach="geometry" args={[25, 25]} />
+              <meshBasicMaterial
+                color="lightGrey"
                 attach="material"
                 opacity={1}
               />
@@ -96,7 +95,7 @@ const Viewport = ({
                 mode={mode}
               />
             </Suspense>
-            <OrbitControls maxPolarAngle={1.5} dampingFactor={1} keyPanSpeed={15} zoomSpeed={0.5} maxDistance={50} minDistance={5} enableZoom={true} enableDamping={true} ref={orbitControls} />
+            <OrbitControls maxPolarAngle={1.5} dampingFactor={1} keyPanSpeed={15} zoomSpeed={0.5} maxDistance={25} minDistance={7} enableZoom={true} enableDamping={true} ref={orbitControls} />
           </group>
         </Canvas>
       </div>
