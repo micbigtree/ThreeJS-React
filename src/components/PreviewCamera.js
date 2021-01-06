@@ -69,9 +69,9 @@ const PlayerCamera = ({ position }) => {
 
   const [camera] = React.useState(() => {
     const cam = new THREE.PerspectiveCamera(
-      60,
+      45,
       size.width / size.height,
-      0.005,
+      0.01,
       10000
     );
     cam.position.set(...position);
