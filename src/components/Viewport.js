@@ -96,7 +96,7 @@ const Viewport = ({
                 mode={mode}
               />
             </Suspense>
-            <OrbitControls ref={orbitControls} />
+            <OrbitControls maxPolarAngle={1.5} dampingFactor={1} keyPanSpeed={15} zoomSpeed={0.5} maxDistance={50} minDistance={5} enableZoom={true} enableDamping={true} ref={orbitControls} />
           </group>
         </Canvas>
       </div>
