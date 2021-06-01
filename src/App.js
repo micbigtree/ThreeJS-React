@@ -112,6 +112,7 @@ const App = () => {
           cameraSelected={cameraSelected}
           handleSelectedObject={handleSelectedObject}
           handleSelectedCamera={handleSelectedCamera}
+          handleSelected={handleSelected}
         />
       </div>
       <div style={styles.artboardPanel}>
@@ -123,6 +124,7 @@ const App = () => {
           cameraSelected={cameraSelected}
           handleSelectedObject={handleSelectedObject}
           handleSelectedCamera={handleSelectedCamera}
+          handleSelected={handleSelected}
         />
       </div>
       {selected !== 0 ? (

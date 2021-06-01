@@ -11,63 +11,66 @@ const LayerListItem = ({
   scale,
   selected,
   handleSelectedObject,
+  handleSelected
 }) => {
   const {
     updateDestination,
-    removeShape,
+    removeObject,
     artboards,
-    currentArtboard,
+    currentObjectArtboard,
     destination,
-    objectsAreLoaded,
+    objectsAreLoaded
   } = useObjectStore();
 
   const clickedShape = (id) => {
     handleSelectedObject(id, position, rotation, scale, object);
+    handleSelected(id, position, rotation, scale, object);
   };
 
   if (!objectsAreLoaded) {
     return <div>Loading...</div>;
   } else {
-  return (
-    <div
-      style={selected === id ? styles.containerSelected : styles.container}
-      key={id}
-      onPointerDown={() => clickedShape(id)}
-    >
-      <div style={styles.shape}>{object}</div>
-      <div style={styles.dropdownContainer}>
-        Links to:
-        <select
-          selected={destination}
-          onChange={(e) => {
-            updateDestination({
-              id,
-              currentArtboard,
-              destination: e.target.value,
-            });
-          }}
-          id="myDropdown"
-        >
-          <option value={null}>none</option>
-          if (!objectsAreLoaded)('Loading...') {Object.keys(artboards).map((mapped) => (
-            <option key={mapped} value={mapped}>
-              {mapped}
-            </option>
-          ))}
-        </select>
+    return (
+      <div
+        style={selected === id ? styles.containerSelected : styles.container}
+        key={id}
+        onPointerDown={() => clickedShape(id)}
+      >
+        <div style={styles.shape}>{object}</div>
+        <div style={styles.dropdownContainer}>
+          Links to:
+          <select
+            selected={destination}
+            onChange={(e) => {
+              updateDestination({
+                id,
+                currentObjectArtboard,
+                destination: e.target.value
+              });
+            }}
+            id="myDropdown"
+          >
+            <option value={null}>none</option>
+            if (!objectsAreLoaded)('Loading...'){" "}
+            {Object.keys(artboards).map((mapped) => (
+              <option key={mapped} value={mapped}>
+                {mapped}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div style={styles.remove}>
+          <button
+            onClick={() => {
+              removeObject({ currentObjectArtboard, id });
+            }}
+          >
+            Remove
+          </button>
+        </div>
       </div>
-      {/* <div style={styles.color}>color: {color}</div> */}
-      <div style={styles.remove}>
-        <button
-          onClick={() => {
-            removeShape({ currentArtboard, id });
-          }}
-        >
-          Remove
-        </button>
-      </div>
-    </div>
-  )}
+    );
+  }
 };
 
 const styles = {
@@ -79,7 +82,7 @@ const styles = {
     boxShadow: "0 2px 4px 0 rgba(0,0,0,0.1)",
     padding: "2.5%",
     width: "100%",
-    height: "auto",
+    height: "auto"
   },
   containerSelected: {
     display: "flex",
@@ -90,25 +93,24 @@ const styles = {
     padding: "2.5%",
     width: "100%",
     height: "auto",
-    backgroundColor: "lightGrey",
+    backgroundColor: "lightGrey"
   },
   position: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   positionVector: {
     flex: 1,
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   inputField: {
-    width: "100%",
+    width: "100%"
   },
   dropdownContainer: {
     border: "none",
-    cursor: "pointer",
-  },
+    cursor: "pointer"
+  }
 };
-
 
 export default LayerListItem;

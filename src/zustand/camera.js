@@ -4,12 +4,12 @@ import produce from "immer";
 import { devtools } from "zustand/middleware";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~
-// STATE 
+// STATE
 // ~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = (set) => ({
   // CAMERAS
-  cameraArtboards: {}, 
+  cameraArtboards: {},
   currentCameraArtboard: 1,
   cameraIsLoaded: false,
   // UPDATE POSITION OF CAMERA
@@ -29,7 +29,7 @@ const store = (set) => ({
     set((state) => {
       let newNumber = Object.keys(state.cameraArtboards).length + 1;
       state.cameraArtboards[newNumber] = {
-        position: [0, 0, 0],
+        position: [0, 0, 0]
       };
     }),
   // REMOVE AN EXISTING ARTBOARD
@@ -53,8 +53,8 @@ const store = (set) => ({
           state.cameraArtboards = cameras;
         })
       )
-      .then(() => set(() => ({ cameraIsLoaded: true }))),
+      .then(() => set(() => ({ cameraIsLoaded: true })))
 });
 const immer = (config) => (set, get, api) =>
   config((fn) => set(produce(fn)), get, api);
-export const [useCameraStore] = create(devtools(immer(store))); 
+export const [useCameraStore] = create(devtools(immer(store)));

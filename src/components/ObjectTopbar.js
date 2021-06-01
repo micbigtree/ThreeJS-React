@@ -1,11 +1,8 @@
 import React from "react";
 import { useObjectStore } from "../zustand/objects";
-import { useShapeStore } from "../zustand/shapes";
 
 const ObjectTopbar = () => {
-
-const { addObject } = useObjectStore();
-const { currentArtboard } = useShapeStore();
+  const { addObject, currentObjectArtboard } = useObjectStore();
 
   return (
     <div style={styles.container}>
@@ -17,9 +14,9 @@ const { currentArtboard } = useShapeStore();
           value={"pirates"}
           onClick={(e) =>
             addObject({
-              currentArtboard,
+              currentObjectArtboard,
               category: e.target.value,
-              object: e.target.id,
+              object: e.target.id
             })
           }
         >
@@ -31,9 +28,9 @@ const { currentArtboard } = useShapeStore();
           value={"pirates"}
           onClick={(e) =>
             addObject({
-              currentArtboard,
+              currentObjectArtboard,
               category: e.target.value,
-              object: e.target.id,
+              object: e.target.id
             })
           }
         >
@@ -45,9 +42,9 @@ const { currentArtboard } = useShapeStore();
           value={"pirates"}
           onClick={(e) =>
             addObject({
-              currentArtboard,
+              currentObjectArtboard,
               category: e.target.value,
-              object: e.target.id,
+              object: e.target.id
             })
           }
         >
@@ -62,9 +59,9 @@ const { currentArtboard } = useShapeStore();
           value={"kitchen"}
           onClick={(e) =>
             addObject({
-              currentArtboard,
+              currentObjectArtboard,
               category: e.target.value,
-              object: e.target.id,
+              object: e.target.id
             })
           }
         >
@@ -76,9 +73,9 @@ const { currentArtboard } = useShapeStore();
           value={"kitchen"}
           onClick={(e) =>
             addObject({
-              currentArtboard,
+              currentObjectArtboard,
               category: e.target.value,
-              object: e.target.id,
+              object: e.target.id
             })
           }
         >
@@ -90,9 +87,9 @@ const { currentArtboard } = useShapeStore();
           value={"kitchen"}
           onClick={(e) =>
             addObject({
-              currentArtboard,
+              currentObjectArtboard,
               category: e.target.value,
-              object: e.target.id,
+              object: e.target.id
             })
           }
         >
@@ -105,12 +102,12 @@ const { currentArtboard } = useShapeStore();
 
 const styles = {
   container: {
-      width: "20%"
+    width: "20%"
   },
   addButton: {
     display: "inline-block",
-    textAlign: "center",
-  },
+    textAlign: "center"
+  }
 };
 
 export default ObjectTopbar;

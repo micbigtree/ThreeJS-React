@@ -5,18 +5,24 @@ import { useCameraStore } from "../zustand/camera";
 import LayerListItem from "./LayerListItem";
 import LayerListItemCamera from "./LayerListItemCamera";
 
-const LayerList = ({ selected, handleSelectedObject, cameraSelected, handleSelectedCamera }) => {
+const LayerList = ({
+  selected,
+  handleSelectedObject,
+  cameraSelected,
+  handleSelectedCamera,
+  handleSelected
+}) => {
   const {
     // artboards,
     objectsAreLoaded,
     artboards,
-    currentObjectArtboard,
+    currentObjectArtboard
   } = useObjectStore();
 
   const {
     cameraArtboards,
     currentCameraArtboard,
-    cameraIsLoaded,
+    cameraIsLoaded
   } = useCameraStore();
 
   if (!objectsAreLoaded) {
@@ -24,20 +30,19 @@ const LayerList = ({ selected, handleSelectedObject, cameraSelected, handleSelec
   } else {
     return (
       <ul style={styles.list}>
-        
-        { cameraIsLoaded ? <li
-          style={styles.listItem}
-          key={[currentCameraArtboard]}
-        >
-        
-          <LayerListItemCamera
-            key={[currentCameraArtboard]}
-            position={cameraArtboards[currentCameraArtboard].position}
-            object={"Camera"}
-            selected={cameraSelected}
-            handleSelectedCamera={handleSelectedCamera}
-          />
-        </li>: ('')}
+        {cameraIsLoaded ? (
+          <li style={styles.listItem} key={[currentCameraArtboard]}>
+            <LayerListItemCamera
+              key={[currentCameraArtboard]}
+              position={cameraArtboards[currentCameraArtboard].position}
+              object={"Camera"}
+              selected={cameraSelected}
+              handleSelectedCamera={handleSelectedCamera}
+            />
+          </li>
+        ) : (
+          ""
+        )}
         {artboards[currentObjectArtboard].map((objects) => (
           <li style={styles.listItem} key={objects.id}>
             <LayerListItem
@@ -48,6 +53,7 @@ const LayerList = ({ selected, handleSelectedObject, cameraSelected, handleSelec
               object={objects.object}
               selected={selected}
               handleSelectedObject={handleSelectedObject}
+              handleSelected={handleSelected}
             />
           </li>
         ))}
@@ -60,7 +66,7 @@ const styles = {
   listItem: {
     marginTop: "1%",
 
-    listStyleType: "none",
+    listStyleType: "none"
   },
   list: {
     padding: 10
