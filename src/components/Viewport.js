@@ -8,7 +8,6 @@ import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
 import "../App.scss";
 import Camera from "./Camera";
 
-
 // react three fiber takes care of camera position in canvas
 import { Canvas } from "react-three-fiber";
 // drei have lots of shapes without writing code
@@ -27,8 +26,11 @@ const Viewport = ({
 }) => {
   const orbitControls = useRef();
   const { objectsAreLoaded } = useObjectStore();
-  const { cameraArtboards, currentCameraArtboard, cameraIsLoaded } = useCameraStore();
-
+  const {
+    cameraArtboards,
+    currentCameraArtboard,
+    cameraIsLoaded
+  } = useCameraStore();
 
   if (!objectsAreLoaded) {
     return <div style={styles.viewport}>Loading...</div>;
@@ -36,7 +38,7 @@ const Viewport = ({
     return (
       <div style={styles.viewport}>
         <Canvas
-        alpha={false}
+          alpha="false"
           invalidateFrameloop
           onCreated={({ gl }) => {
             document.body.appendChild(VRButton.createButton(gl));
@@ -46,7 +48,7 @@ const Viewport = ({
           colorManagement
           camera={{
             position: [0, 4, 4],
-            fov: 25,
+            fov: 25
           }}
           onPointerMissed={() => {
             handleSelectedObject(0);
@@ -65,7 +67,7 @@ const Viewport = ({
             shadow-camera-top={10}
             shadow-camera-bottom={-10}
           />
-          <ambientLight intensity={0.7} color="0x404040"/>
+          <ambientLight intensity={0.7} color="0x404040" />
           <group>
             <mesh
               receiveShadow
@@ -78,7 +80,7 @@ const Viewport = ({
                 attach="material"
                 opacity={1}
               />
-            </mesh> 
+            </mesh>
             <Suspense fallback={null}>
               <ObjectsMapped
                 selected={selected}
@@ -95,7 +97,17 @@ const Viewport = ({
                 mode={mode}
               />
             </Suspense>
-            <OrbitControls maxPolarAngle={1.5} dampingFactor={1} keyPanSpeed={15} zoomSpeed={0.5} maxDistance={25} minDistance={7} enableZoom={true} enableDamping={true} ref={orbitControls} />
+            <OrbitControls
+              maxPolarAngle={1.5}
+              dampingFactor={1}
+              keyPanSpeed={15}
+              zoomSpeed={0.5}
+              maxDistance={25}
+              minDistance={7}
+              enableZoom={true}
+              enableDamping={true}
+              ref={orbitControls}
+            />
           </group>
         </Canvas>
       </div>
@@ -112,12 +124,9 @@ const styles = {
     left: "20%",
     borderRadius: "10px",
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
-    outline: "none",
+    outline: "none"
   },
-  shapePanelContainer : {
-
-  },
+  shapePanelContainer: {}
 };
-
 
 export default Viewport;

@@ -12,56 +12,68 @@ import ShapePanel from "./components/ShapePanel";
 import CameraPanel from "./components/CameraPanel";
 import ObjectTopbar from "./components/ObjectTopbar";
 
-const App = ( ) => {
+const App = () => {
+  // CHOOSE SCALE/ROTATE/MOVE
+  const [mode, setMode] = useState("translate");
 
-// CHOOSE SCALE/ROTATE/MOVE
-const [mode, setMode] = useState('translate');
+  const changeTransformMode = (mode) => {
+    setMode(mode);
+  };
 
- const changeTransformMode = (mode) => {
-  setMode(mode)
- }
+  const { loadObjects } = useObjectStore();
 
-const { loadObjects } = useObjectStore();
-
-const {
+  const {
     loadShapes,
     addShape,
     currentArtboard,
     editorMode,
-    switchModes,
+    switchModes
   } = useShapeStore();
 
-  const { loadPreviewCameras, currentCameraArtboard, cameraArtboards } = useCameraStore();
+  const {
+    loadPreviewCameras,
+    currentCameraArtboard,
+    cameraArtboards
+  } = useCameraStore();
 
   const [selected, setSelected] = useState(0);
   const [cameraSelected, setSelectedCamera] = useState(false);
 
   const [details, setDetails] = useState({
-    id: '',
-    position:[],
-    color: '',
-    shape: '',
+    id: "",
+    position: [],
+    color: "",
+    shape: ""
   });
-   const [objectDetails, setObjectDetails] = useState({
-     id: "",
-     position: [],
-     name: "",
-   });
+  const [objectDetails, setObjectDetails] = useState({
+    id: "",
+    position: [],
+    name: ""
+  });
 
-    const [cameraDetails, setCameraDetails] = useState({
-      id: "",
-      position: [],
+  const [cameraDetails, setCameraDetails] = useState({
+    id: "",
+    position: []
+  });
+
+  const handleSelectedObject = (id, position, rotation, scale, name) => {
+    setSelected(id);
+    setObjectDetails({
+      id: id,
+      position: position,
+      rotation: rotation,
+      scale: scale,
+      name: name
     });
+  };
 
-const handleSelectedObject = (id, position, rotation, scale, name) => {
-  setSelected(id);
-  setObjectDetails({ id: id, position: position, rotation: rotation, scale: scale, name: name });
-};
-
-const handleSelectedCamera = (val) => {
-  setSelectedCamera(val);
-  setCameraDetails({ id: cameraArtboards[currentCameraArtboard].id, position: cameraArtboards[currentCameraArtboard].position });
-};
+  const handleSelectedCamera = (val) => {
+    setSelectedCamera(val);
+    setCameraDetails({
+      id: cameraArtboards[currentCameraArtboard].id,
+      position: cameraArtboards[currentCameraArtboard].position
+    });
+  };
 
   const handleSelected = (id, position, shape, rotation, scale) => {
     setSelected(id);
@@ -70,7 +82,7 @@ const handleSelectedCamera = (val) => {
       position: position,
       rotation: rotation,
       scale: scale,
-      shape: shape,
+      shape: shape
     });
   };
 
@@ -92,7 +104,7 @@ const handleSelectedCamera = (val) => {
       <ObjectTopbar />
       <div style={styles.viewport}>
         <Viewport
-          mode={mode} 
+          mode={mode}
           objectDetails={objectDetails}
           cameraDetails={cameraDetails}
           setCameraDetails={setCameraDetails}
@@ -152,12 +164,11 @@ const handleSelectedCamera = (val) => {
       <PreviewViewport />
     </div>
   );
-  };
-
+};
 
 const styles = {
   container: {
-    overflow: "scroll",
+    overflow: "scroll"
   },
   viewport: { outline: "none", flex: 1 },
   layerList: {
@@ -165,7 +176,7 @@ const styles = {
     height: "auto",
     borderRadius: "10px",
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
-    overflow: "scroll",
+    overflow: "scroll"
   },
   addButtons: {
     overflow: "auto",
@@ -173,18 +184,18 @@ const styles = {
     padding: "2.5%",
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-around"
   },
   addButton: {
     display: "inline-block",
-    textAlign: "center",
+    textAlign: "center"
   },
   shapeDetailsContainer: {
     backgroundColor: "grey",
     width: "20%",
     height: "auto",
-    right: 0,
-  },
+    right: 0
+  }
 };
 
 export default App;
