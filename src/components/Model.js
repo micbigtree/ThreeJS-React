@@ -63,7 +63,7 @@ const Model = ({
         scale={scale}
       >
         <primitive object={modelGeometry} dispose={null} />
-        {selected !== 0 ? (
+        {/* {selected !== 0 ? (
           <Html transform>
             <ShapePanel
               id={objectDetails.id}
@@ -76,7 +76,7 @@ const Model = ({
           </Html>
         ) : (
           ""
-        )}
+        )} */}
       </mesh>
     </TransformControls>
   );

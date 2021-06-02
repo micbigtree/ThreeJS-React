@@ -127,7 +127,7 @@ const App = () => {
           handleSelected={handleSelected}
         />
       </div>
-      {selected !== 0 ? (
+      {/* {selected !== 0 ? (
         <div style={styles.shapeDetailsContainer}>
           <ShapePanel
             id={objectDetails.id}
@@ -151,7 +151,7 @@ const App = () => {
         </div>
       ) : (
         ""
-      )}
+      )} */}
     </div>
   ) : (
     <div>
