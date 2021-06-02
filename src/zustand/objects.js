@@ -46,7 +46,7 @@ const store = (set) => ({
   // UPDATE POSITION OF OBJECT
   updateObjectPosition: ({ id, currentArtboard, position }) =>
     set((state) => {
-      state.artboards[currentArtboard].find(({ id }) => id).position = position;
+      state.artboards[currentArtboard].find((x) => x.id).position = position;
     }),
   // UPDATE ROTATION OF OBJECT
   updateObjectRotation: ({ id, currentObjectArtboard, rotation }) =>
@@ -59,6 +59,25 @@ const store = (set) => ({
   updateObjectScale: ({ id, currentObjectArtboard, scale }) =>
     set((state) => {
       state.artboards[currentObjectArtboard].find(({ id }) => id).scale = scale;
+    }),
+  // SELECT DIFFERENT ARTBOARD
+  updateArtboard: (artboard) => {
+    set((state) => {
+      state.currentObjectArtboard = artboard;
+    });
+  },
+  // ADD A NEW ARTBOARD
+  addArtboard: () =>
+    set((state) => {
+      let newNumber = Object.keys(state.artboards).length + 1;
+      state.artboards[newNumber] = [];
+    }),
+  // REMOVE AN EXISTING ARTBOARD
+  // AND SET CURRENT ARTBOARD TO A LEFTOVER ARTBOARD
+  // OR CREATE A NEW BLANK IF THERE ARE NONE
+  removeArtboard: (key) =>
+    set((state) => {
+      delete state.artboards[key];
     })
 });
 const immer = (config) => (set, get, api) =>
