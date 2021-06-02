@@ -51,6 +51,7 @@ const Viewport = ({
             fov: 25
           }}
           onPointerMissed={() => {
+            console.log("missed");
             handleSelectedObject(0);
             handleSelectedCamera(false);
           }}

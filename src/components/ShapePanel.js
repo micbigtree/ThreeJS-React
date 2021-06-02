@@ -6,20 +6,15 @@ import ScaleUI from "./UIValues/ScaleUI";
 
 import "../App.scss";
 
-
-const ShapePanel = ({
-  id,
-  position,
-  rotation,
-  scale,
-  camera
-}) => {
-
+const ShapePanel = ({ id, position, rotation, scale, shape, camera }) => {
   return (
     <div style={styles.container} key={id}>
-      <PositionUI camera={camera} position={position} />
-     <RotationUI camera={camera} rotation={rotation} />
-    <ScaleUI scale={scale} id={id} />
+      {shape}
+      <div>
+        <PositionUI camera={camera} position={position} />
+        <RotationUI camera={camera} rotation={rotation} />
+        <ScaleUI scale={scale} id={id} />
+      </div>
     </div>
   );
 };
@@ -35,25 +30,25 @@ const styles = {
     paddingRight: "2.5%",
     width: "100%",
     height: 155,
-    backgroundColor: "lightGrey",
+    backgroundColor: "lightGrey"
   },
 
   position: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   positionVector: {
     flex: 1,
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   inputField: {
-    width: "100%",
+    width: "100%"
   },
   dropdownContainer: {
     border: "none",
-    cursor: "pointer",
-  },
+    cursor: "pointer"
+  }
 };
 
 export default ShapePanel;

@@ -1,14 +1,19 @@
 import React from "react";
-
+import { Html } from "drei";
 import { useShapeStore } from "../zustand/shapes";
 import { useObjectStore } from "../zustand/objects";
 import Model from "./Model";
 
-const ObjectsMapped = ({ orbitControls, selected, handleSelectedObject }) => {
+const ObjectsMapped = ({
+  orbitControls,
+  selected,
+  handleSelectedObject,
+  objectDetails
+}) => {
   const {
     artboards,
     objectsAreLoaded,
-    currentObjectArtboard,
+    currentObjectArtboard
   } = useObjectStore();
 
   if (!objectsAreLoaded) {
@@ -27,6 +32,7 @@ const ObjectsMapped = ({ orbitControls, selected, handleSelectedObject }) => {
         orbitControls={orbitControls}
         selected={selected}
         handleSelectedObject={handleSelectedObject}
+        objectDetails={objectDetails}
       />
     ));
   }

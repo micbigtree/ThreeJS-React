@@ -46,23 +46,19 @@ const store = (set) => ({
   // UPDATE POSITION OF OBJECT
   updateObjectPosition: ({ id, currentArtboard, position }) =>
     set((state) => {
-      state.artboards[currentArtboard].find(
-        ({ id }) => id === id
-      ).position = position;
+      state.artboards[currentArtboard].find(({ id }) => id).position = position;
     }),
   // UPDATE ROTATION OF OBJECT
-  updateObjectRotation: ({ id, currentArtboard, rotation }) =>
+  updateObjectRotation: ({ id, currentObjectArtboard, rotation }) =>
     set((state) => {
-      state.artboards[currentArtboard].find(
-        ({ id }) => id === id
+      state.artboards[currentObjectArtboard].find(
+        ({ id }) => id
       ).rotation = rotation;
     }),
   // UPDATE SCALE OF OBJECT
-  updateObjectScale: ({ id, currentArtboard, scale }) =>
+  updateObjectScale: ({ id, currentObjectArtboard, scale }) =>
     set((state) => {
-      state.artboards[currentArtboard].find(
-        ({ id }) => id === id
-      ).scale = scale;
+      state.artboards[currentObjectArtboard].find(({ id }) => id).scale = scale;
     })
 });
 const immer = (config) => (set, get, api) =>
