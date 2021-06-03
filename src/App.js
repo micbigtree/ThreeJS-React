@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useControl } from "react-three-gui";
-
 import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
 import LayerList from "./components/LayerList";
-import { useShapeStore } from "./zustand/shapes";
 import { useObjectStore } from "./zustand/objects";
 import { useCameraStore } from "./zustand/camera";
 import ArtboardPanel from "./components/ArtboardPanel";
-import ShapePanel from "./components/ShapePanel";
-import CameraPanel from "./components/CameraPanel";
 import ObjectTopbar from "./components/ObjectTopbar";
 
 const App = () => {

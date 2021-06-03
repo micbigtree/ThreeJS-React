@@ -73,6 +73,18 @@ const store = (set) => ({
       state.currentObjectArtboard = artboard;
     });
   },
+  // UPDATE SHAPE'S CLICK DESTINATION
+  updateDestination: ({ id, currentObjectArtboard, destination }) =>
+    set((state) => {
+      console.log(destination);
+      state.artboards[currentObjectArtboard].find(
+        (x) => x.id === id
+      ).destination = destination;
+      console.log(
+        state.artboards[currentObjectArtboard].find((x) => x.id === id)
+          .destination
+      );
+    }),
   // ADD A NEW ARTBOARD
   addArtboard: () =>
     set((state) => {

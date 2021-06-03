@@ -1,10 +1,10 @@
 import { getShapes } from "../api";
 import create from "zustand";
-import produce from 'immer';
+import produce from "immer";
 import { devtools } from "zustand/middleware";
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~
-// STATE 
+// STATE
 // ~~~~~~~~~~~~~~~~~~~~~~~~
 
 const store = (set) => ({
@@ -54,9 +54,9 @@ const store = (set) => ({
                 ].position[1],
                 state.artboards[currentArtboard][
                   state.artboards[currentArtboard].length - 1
-                ].position[2],
+                ].position[2]
               ]
-            : [1, 0, 1],
+            : [1, 0, 1]
       });
     }),
   // REMOVE A SHAPE
@@ -97,7 +97,7 @@ const store = (set) => ({
       console.log(
         state.artboards[currentArtboard].find((x) => x.id === id).destination
       );
-    }),
+    })
 });
 const immer = (config) => (set, get, api) =>
   config((fn) => set(produce(fn)), get, api);
