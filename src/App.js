@@ -20,15 +20,7 @@ const App = () => {
     setMode(mode);
   };
 
-  const { loadObjects } = useObjectStore();
-
-  const {
-    loadShapes,
-    addShape,
-    currentArtboard,
-    editorMode,
-    switchModes
-  } = useShapeStore();
+  const { loadObjects, editorMode, switchModes } = useObjectStore();
 
   const {
     loadPreviewCameras,

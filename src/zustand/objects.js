@@ -10,6 +10,11 @@ import shortid from "shortid";
 //looks like the api just isn't loading. adding 1: [] below stopped it breaking.
 // But it should be loading shit from the api. but shapes api is working
 const store = (set) => ({
+  editorMode: true,
+  switchModes: () =>
+    set((state) => {
+      state.editorMode = !state.editorMode;
+    }),
   artboards: { 1: [] },
   currentObjectArtboard: 1,
   objectsAreLoaded: false,
