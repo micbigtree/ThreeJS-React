@@ -1,17 +1,16 @@
 import React from "react";
 
-import { useShapeStore } from "../zustand/shapes";
+import { useObjectStore } from "../zustand/objects";
 
 import Shape from "./Shape";
 
 const Entities = ({ orbitControls, selected, handleSelected }) => {
-  const { artboards, currentArtboard } = useShapeStore();
+  const { artboards, currentObjectArtboard } = useObjectStore();
 
-  return artboards[currentArtboard].map(
+  return artboards[currentObjectArtboard].map(
     (mapped) => (
       // editorMode ? (
       <group key={mapped.id}>
-        
         <Shape
           key={mapped.id}
           id={mapped.id}
@@ -45,4 +44,3 @@ const Entities = ({ orbitControls, selected, handleSelected }) => {
 };
 
 export default Entities;
-

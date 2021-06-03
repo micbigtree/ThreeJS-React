@@ -1,6 +1,4 @@
 import React, { useRef } from "react";
-
-import { useShapeStore } from "../zustand/shapes";
 import { useObjectStore } from "../zustand/objects";
 import { useCameraStore } from "../zustand/camera";
 import { PreviewCamera } from "./PreviewCamera.js";
@@ -11,16 +9,15 @@ import { softShadows } from "drei";
 
 softShadows();
 
-
 const PreviewViewport = () => {
+  const {
+    objectsAreLoaded,
+    artboards,
+    currentObjectArtboard
+  } = useObjectStore();
+  const { cameraArtboards, currentCameraArtboard } = useCameraStore();
 
- const { objectsAreLoaded, artboards, currentObjectArtboard } = useObjectStore();
- const {
-   cameraArtboards, currentCameraArtboard
- } = useCameraStore();
- 
-
-const orbitControls = useRef();
+  const orbitControls = useRef();
 
   if (!objectsAreLoaded) {
     return <div style={styles.viewport}>Loading...</div>;
@@ -87,7 +84,7 @@ const orbitControls = useRef();
       </div>
     );
   }
-}
+};
 
 const styles = {
   viewport: {
@@ -98,8 +95,8 @@ const styles = {
     bottom: "5%",
     borderRadius: "10px",
     boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)",
-    outline: "none",
-  },
+    outline: "none"
+  }
 };
 
 export default PreviewViewport;

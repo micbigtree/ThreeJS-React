@@ -3,7 +3,6 @@ import React, { useState, useRef } from "react";
 import { a } from "react-spring/three";
 import { Select } from "@react-three/xr";
 import { useObjectStore } from "../zustand/objects";
-import { useShapeStore } from "../zustand/shapes";
 import { useCameraStore } from "../zustand/camera";
 import { useGLTFLoader, TransformControls } from "drei";
 
@@ -19,11 +18,10 @@ const PreviewObject = ({
   id,
   selected,
   destination,
-  handleSelectedObject,
+  handleSelectedObject
 }) => {
   const [hovered, setHover] = useState(false);
 
-  const { updateArtboard } = useShapeStore();
   const {} = useObjectStore();
   const { updateCameraArtboard } = useCameraStore();
 
@@ -47,16 +45,16 @@ const PreviewObject = ({
           }
         }}
       > */}
-        <group position={position}>
-          <mesh
-            // onPointerDown={() => clickedShape(id)}
-            attach="material"
-            receiveShadow
-            scale={scale}
-          >
-            <primitive object={gltf.scene} dispose={null} />
-          </mesh>
-        </group>
+      <group position={position}>
+        <mesh
+          // onPointerDown={() => clickedShape(id)}
+          attach="material"
+          receiveShadow
+          scale={scale}
+        >
+          <primitive object={gltf.scene} dispose={null} />
+        </mesh>
+      </group>
       {/* </Select> */}
     </TransformControls>
   );
