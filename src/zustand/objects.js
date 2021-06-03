@@ -47,14 +47,14 @@ const store = (set) => ({
   updateObjectPosition: ({ id, currentObjectArtboard, position }) =>
     set((state) => {
       state.artboards[currentObjectArtboard].find(
-        (x) => x.id
+        (x) => x.id === id
       ).position = position;
     }),
   // UPDATE ROTATION OF OBJECT
   updateObjectRotation: ({ id, currentObjectArtboard, rotation }) =>
     set((state) => {
       state.artboards[currentObjectArtboard].find(
-        ({ id }) => id
+        (x) => x.id === id
       ).rotation = rotation;
     }),
   // UPDATE SCALE OF OBJECT
@@ -72,7 +72,9 @@ const store = (set) => ({
   addArtboard: () =>
     set((state) => {
       let newNumber = Object.keys(state.artboards).length + 1;
-      state.artboards[newNumber] = [];
+      state.artboards[newNumber] = [
+        ...state.artboards[Object.keys(state.artboards).length]
+      ];
     }),
   // REMOVE AN EXISTING ARTBOARD
   // AND SET CURRENT ARTBOARD TO A LEFTOVER ARTBOARD
