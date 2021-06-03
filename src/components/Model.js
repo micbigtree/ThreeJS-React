@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useGLTFLoader, TransformControls, Html } from "drei";
+import { useGLTFLoader, TransformControls } from "drei";
 import { useObjectStore } from "../zustand/objects";
-import ShapePanel from "../components/ShapePanel";
+// import ShapePanel from "../components/ShapePanel";
+import * as THREE from "three";
 
 const Model = ({
   orbitControls,
@@ -24,10 +25,12 @@ const Model = ({
   }
 
   const {
-    artboards,
     objectsAreLoaded,
-    currentObjectArtboard
+    currentObjectArtboard,
+    updateObjectPosition
   } = useObjectStore();
+
+  const worldPosition = new THREE.Vector3();
 
   const transformControls = useRef();
 
@@ -35,11 +38,22 @@ const Model = ({
     handleSelectedObject(id, position, rotation, scale, object);
   };
 
+  const handleObjectPositionChange = () => {
+    const controls = transformControls.current;
+
+    updateObjectPosition({
+      id,
+      currentObjectArtboard,
+      position: Object.values(controls.object.getWorldPosition(worldPosition))
+    });
+  };
+
   useEffect(() => {
     if (transformControls.current) {
       const controls = transformControls.current;
       const callback = (event) => {
         orbitControls.current.enabled = !event.value;
+        handleObjectPositionChange();
       };
       controls.addEventListener("dragging-changed", callback);
       return () => controls.removeEventListener("dragging-changed", callback);
@@ -80,15 +94,6 @@ const Model = ({
       </mesh>
     </TransformControls>
   );
-};
-
-const styles = {
-  shapeDetailsContainer: {
-    backgroundColor: "grey",
-    width: "20%",
-    height: "auto",
-    right: 0
-  }
 };
 
 export default Model;

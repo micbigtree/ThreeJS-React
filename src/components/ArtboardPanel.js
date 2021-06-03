@@ -17,23 +17,23 @@ const ArtboardPanel = () => {
     artboards,
     addArtboard,
     removeArtboard,
-    currentArtboard,
+    currentObjectArtboard,
     updateArtboard
   } = useObjectStore();
 
   return (
     <div style={styles.artboardContainer}>
-      Editing scene: {currentArtboard}
+      Editing scene: {currentObjectArtboard}
       {Object.keys(artboards).map((mapped) => (
         <div key={mapped} style={styles.artboardButtons}>
           <button
             style={{
               backgroundColor:
-                parseFloat(mapped) === parseFloat(currentArtboard)
+                parseFloat(mapped) === parseFloat(currentObjectArtboard)
                   ? "grey"
                   : "white",
               color:
-                parseFloat(mapped) === parseFloat(currentArtboard)
+                parseFloat(mapped) === parseFloat(currentObjectArtboard)
                   ? "white"
                   : "black"
             }}
@@ -50,7 +50,7 @@ const ArtboardPanel = () => {
               if (mapped !== "1") {
                 let length = Object.keys(artboards).length > 1 ? true : false;
                 if (length) {
-                  currentArtboard === mapped
+                  currentObjectArtboard === mapped
                     ? selectedDeleteRequest(mapped)
                     : removeArtboard(mapped);
                 }

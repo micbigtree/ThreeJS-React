@@ -44,9 +44,11 @@ const store = (set) => ({
       );
     }),
   // UPDATE POSITION OF OBJECT
-  updateObjectPosition: ({ id, currentArtboard, position }) =>
+  updateObjectPosition: ({ id, currentObjectArtboard, position }) =>
     set((state) => {
-      state.artboards[currentArtboard].find((x) => x.id).position = position;
+      state.artboards[currentObjectArtboard].find(
+        (x) => x.id
+      ).position = position;
     }),
   // UPDATE ROTATION OF OBJECT
   updateObjectRotation: ({ id, currentObjectArtboard, rotation }) =>
