@@ -1,6 +1,5 @@
 import React from "react";
 import { useObjectStore } from "../zustand/objects";
-import { useShapeStore } from "../zustand/shapes";
 import { useCameraStore } from "../zustand/camera";
 import LayerListItem from "./LayerListItem";
 import LayerListItemCamera from "./LayerListItemCamera";

@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useControl } from "react-three-gui";
-
 import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
 import LayerList from "./components/LayerList";
-import { useShapeStore } from "./zustand/shapes";
 import { useObjectStore } from "./zustand/objects";
 import { useCameraStore } from "./zustand/camera";
 import ArtboardPanel from "./components/ArtboardPanel";
-import ShapePanel from "./components/ShapePanel";
-import CameraPanel from "./components/CameraPanel";
 import ObjectTopbar from "./components/ObjectTopbar";
 
 const App = () => {
@@ -20,15 +15,7 @@ const App = () => {
     setMode(mode);
   };
 
-  const { loadObjects } = useObjectStore();
-
-  const {
-    loadShapes,
-    addShape,
-    currentArtboard,
-    editorMode,
-    switchModes
-  } = useShapeStore();
+  const { loadObjects, editorMode, switchModes } = useObjectStore();
 
   const {
     loadPreviewCameras,
@@ -127,7 +114,7 @@ const App = () => {
           handleSelected={handleSelected}
         />
       </div>
-      {selected !== 0 ? (
+      {/* {selected !== 0 ? (
         <div style={styles.shapeDetailsContainer}>
           <ShapePanel
             id={objectDetails.id}
@@ -151,7 +138,7 @@ const App = () => {
         </div>
       ) : (
         ""
-      )}
+      )} */}
     </div>
   ) : (
     <div>

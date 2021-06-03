@@ -1,6 +1,4 @@
 import React from "react";
-import { Html } from "drei";
-import { useShapeStore } from "../zustand/shapes";
 import { useObjectStore } from "../zustand/objects";
 import Model from "./Model";
 

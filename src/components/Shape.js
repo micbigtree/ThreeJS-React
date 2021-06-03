@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { a } from "react-spring/three";
 import { useShapeStore } from "../zustand/shapes";
 import { TransformControls } from "drei";
-import * as THREE from 'three';
+import * as THREE from "three";
 import "../App.scss";
 
 const Shape = ({
@@ -13,7 +13,7 @@ const Shape = ({
   shape,
   speed,
   id,
-  selected, 
+  selected,
   handleSelected
 }) => {
   const [hovered, setHover] = useState();
@@ -21,19 +21,20 @@ const Shape = ({
   const worldPosition = new THREE.Vector3();
   const transformControls = useRef();
   const mesh = useRef();
-  const handlePositionChange = () => {
-  const controls = transformControls.current;
 
-    updatePosition({ 
+  const handlePositionChange = () => {
+    const controls = transformControls.current;
+
+    updatePosition({
       id,
       currentArtboard,
-      position: Object.values(controls.object.getWorldPosition(worldPosition)),
+      position: Object.values(controls.object.getWorldPosition(worldPosition))
     });
   };
 
   const clickedShape = (id) => {
     handleSelected(id, position, color, shape);
-  }
+  };
 
   useEffect(() => {
     if (transformControls.current) {
@@ -57,7 +58,6 @@ const Shape = ({
       ref={transformControls}
       mode="rotate"
     >
-      
       <a.mesh
         onPointerOver={() => setHover(true)}
         onPointerOut={() => setHover(false)}

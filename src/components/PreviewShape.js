@@ -2,27 +2,20 @@ import React, { useState, useRef } from "react";
 
 import { a } from "react-spring/three";
 import { Select } from "@react-three/xr";
-import { useShapeStore } from "../zustand/shapes";
+import { useObjectStore } from "../zustand/objects";
 import { useCameraStore } from "../zustand/camera";
 import { TransformControls } from "drei";
 
-
 import "../App.scss";
 
-const PreviewShape = ({
-  position,
-  color,
-  shape,
-  speed,
-  destination,
-}) => {
+const PreviewShape = ({ position, color, shape, speed, destination }) => {
   const [hovered, setHover] = useState(false);
 
-  const { updateArtboard } = useShapeStore();
+  const { updateObjectArtboard } = useObjectStore();
   const { updateCameraArtboard } = useCameraStore();
 
   const transformControls = useRef();
-console.log(destination);
+  console.log(destination);
   return (
     <TransformControls
       position={position}
@@ -35,7 +28,7 @@ console.log(destination);
       <Select
         onSelect={() => {
           if (destination !== "none") {
-            updateArtboard(destination);
+            updateObjectArtboard(destination);
             updateCameraArtboard(destination);
           }
         }}
@@ -43,7 +36,7 @@ console.log(destination);
         <a.mesh
           onPointerDown={() => {
             if (destination !== "none") {
-              updateArtboard(destination);
+              updateObjectArtboard(destination);
               updateCameraArtboard(destination);
             }
           }}
