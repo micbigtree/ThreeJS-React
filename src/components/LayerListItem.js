@@ -10,6 +10,7 @@ const LayerListItem = ({
   rotation,
   scale,
   selected,
+  destination,
   handleSelectedObject,
   handleSelected
 }) => {
@@ -18,7 +19,6 @@ const LayerListItem = ({
     removeObject,
     artboards,
     currentObjectArtboard,
-    destination,
     objectsAreLoaded
   } = useObjectStore();
 
@@ -40,7 +40,7 @@ const LayerListItem = ({
         <div style={styles.dropdownContainer}>
           Links to:
           <select
-            selected={destination}
+            value={destination}
             onChange={(e) => {
               updateDestination({
                 id,
@@ -50,7 +50,7 @@ const LayerListItem = ({
             }}
             id="myDropdown"
           >
-            <option value={null}>none</option>
+            <option value="">none</option>
             if (!objectsAreLoaded)('Loading...'){" "}
             {Object.keys(artboards).map((mapped) => (
               <option key={mapped} value={mapped}>

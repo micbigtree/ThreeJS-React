@@ -12,7 +12,6 @@ const LayerList = ({
   handleSelected
 }) => {
   const {
-    // artboards,
     objectsAreLoaded,
     artboards,
     currentObjectArtboard
@@ -49,6 +48,7 @@ const LayerList = ({
               id={objects.id}
               position={objects.position}
               rotation={objects.rotation}
+              destination={objects.destination}
               scale={objects.scale}
               object={objects.object}
               selected={selected}

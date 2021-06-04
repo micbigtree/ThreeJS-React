@@ -19,6 +19,7 @@ const Entities = ({ orbitControls, selected, handleSelected }) => {
           speed={mapped.speed}
           args={[1, 1, 2]}
           shape={mapped.shape}
+          destination={mapped.destination}
           orbitControls={orbitControls}
           selected={selected}
           handleSelected={handleSelected}
