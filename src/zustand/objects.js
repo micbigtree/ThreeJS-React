@@ -37,7 +37,7 @@ const store = (set) => ({
         position: [0, 0, 0],
         rotation: [0, 0, 0],
         scale: [1, 1, 1],
-        destination: 2
+        destination: ""
       });
     }),
   // REMOVE OBJECT
