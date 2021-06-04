@@ -6,7 +6,12 @@ import { a } from "react-spring/three";
 import { useGLTFLoader, TransformControls } from "drei";
 import { useCameraStore } from "../zustand/camera";
 
-const Camera = ({ mode, orbitControls, cameraSelected, handleSelectedCamera }) => {
+const Camera = ({
+  mode,
+  orbitControls,
+  cameraSelected,
+  handleSelectedCamera
+}) => {
   const [hovered, setHovered] = useState(false);
   const gltf = useGLTFLoader("/user/High-end_headset_01.gltf", true);
 
@@ -14,7 +19,7 @@ const Camera = ({ mode, orbitControls, cameraSelected, handleSelectedCamera }) =
     updateCameraPosition,
     currentCameraArtboard,
     cameraArtboards,
-    cameraIsLoaded,
+    cameraIsLoaded
   } = useCameraStore();
 
   const worldPosition = new THREE.Vector3();
@@ -23,17 +28,18 @@ const Camera = ({ mode, orbitControls, cameraSelected, handleSelectedCamera }) =
     const controls = transformControls.current;
     updateCameraPosition({
       currentCameraArtboard,
-      position: Object.values(controls.object.getWorldPosition(worldPosition)),
+      position: Object.values(controls.object.getWorldPosition(worldPosition))
     });
   };
- 
+
   const transformControls = useRef();
   useEffect(() => {
     if (transformControls.current) {
       const controls = transformControls.current;
-       controls.setMode(mode);
+      controls.setMode(mode);
       const callback = (event) => {
         orbitControls.current.enabled = !event.value;
+        handlePositionChange();
       };
       controls.addEventListener("dragging-changed", callback);
       return () => controls.removeEventListener("dragging-changed", callback);
@@ -42,7 +48,7 @@ const Camera = ({ mode, orbitControls, cameraSelected, handleSelectedCamera }) =
 
   if (!cameraIsLoaded) {
     return <group></group>;
-  } else { 
+  } else {
     return (
       <>
         <TransformControls
@@ -57,11 +63,11 @@ const Camera = ({ mode, orbitControls, cameraSelected, handleSelectedCamera }) =
           showZ={cameraSelected}
           translationSnap={0.1}
           ref={transformControls}
-          onPointerUp={() => handlePositionChange()}
+          // onPointerUp={() => handlePositionChange()}
           onPointerDown={() => handleSelectedCamera(true)}
         >
-          <group >
-            <mesh  scale={[0.025, 0.025, 0.025]} attach="material" receiveShadow>
+          <group>
+            <mesh scale={[0.025, 0.025, 0.025]} attach="material" receiveShadow>
               <primitive object={gltf.scene} dispose={null} />
             </mesh>
           </group>
