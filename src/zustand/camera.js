@@ -9,17 +9,18 @@ import { devtools } from "zustand/middleware";
 
 const store = (set) => ({
   // CAMERAS
-  cameraArtboards: {},
+  cameraArtboards: { 1: [] },
   currentCameraArtboard: 1,
   cameraIsLoaded: false,
   // UPDATE POSITION OF CAMERA
-  updateCameraPosition: ({ currentArtboard, position }) =>
+  updateCameraPosition: ({ position }) =>
     set((state) => {
+      console.log(position);
       state.cameraArtboards[state.currentCameraArtboard].position = position;
       sendPreviewCameras(state.cameraArtboards);
     }),
   // UPDATE ROTATION OF CAMERA
-  updateCameraRotation: ({ currentArtboard, rotation }) =>
+  updateCameraRotation: ({ currentCameraArtboard, rotation }) =>
     set((state) => {
       state.cameraArtboards[state.currentCameraArtboard].rotation = rotation;
       sendPreviewCameras(state.cameraArtboards);
