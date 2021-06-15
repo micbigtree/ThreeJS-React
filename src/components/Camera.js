@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import * as THREE from "three";
 import "../App.scss";
 
-import { a } from "react-spring/three";
 import { useGLTF, TransformControls } from "@react-three/drei";
 import { useCameraStore } from "../zustand/camera";
 
