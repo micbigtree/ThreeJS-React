@@ -4,7 +4,7 @@ import { a } from "react-spring/three";
 import { Interactive } from "@react-three/xr";
 import { useObjectStore } from "../zustand/objects";
 import { useCameraStore } from "../zustand/camera";
-import { TransformControls } from "drei";
+import { TransformControls } from "@react-three/drei";
 
 import "../App.scss";
 

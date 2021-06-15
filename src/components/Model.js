@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { useGLTFLoader, TransformControls } from "drei";
+import { useGLTF, TransformControls } from "@react-three/drei";
 import { useObjectStore } from "../zustand/objects";
 // import ShapePanel from "../components/ShapePanel";
 import * as THREE from "three";
@@ -16,7 +16,7 @@ const Model = ({
   handleSelectedObject,
   objectDetails
 }) => {
-  const gltf = useGLTFLoader("/" + category + "/" + object + ".gltf", true);
+  const gltf = useGLTF("/" + category + "/" + object + ".gltf");
   const [modelGeometry, setModelGeometry] = useState();
 
   if (!modelGeometry) {

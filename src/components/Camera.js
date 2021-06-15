@@ -3,7 +3,7 @@ import * as THREE from "three";
 import "../App.scss";
 
 import { a } from "react-spring/three";
-import { useGLTFLoader, TransformControls } from "drei";
+import { useGLTF, TransformControls } from "@react-three/drei";
 import { useCameraStore } from "../zustand/camera";
 
 const Camera = ({
@@ -13,7 +13,7 @@ const Camera = ({
   handleSelectedCamera
 }) => {
   const [hovered, setHovered] = useState(false);
-  const gltf = useGLTFLoader("/user/High-end_headset_01.gltf", true);
+  const gltf = useGLTF("/user/High-end_headset_01.gltf");
 
   const {
     updateCameraPosition,

@@ -5,7 +5,7 @@ import { PreviewCamera } from "./PreviewCamera.js";
 import PreviewObject from "./PreviewObject";
 import { VRCanvas, DefaultXRControllers } from "@react-three/xr";
 import "../App.scss";
-import { softShadows } from "drei";
+import { softShadows } from "@react-three/drei";
 
 softShadows();
 

@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.9.0",
+    "@react-three/drei": "6.1.2",
+    "@react-three/fiber": "7.0.1",
     "@react-three/xr": "^1.1.0",
     "@rooks/use-outside-click": "^3.6.0",
     "@svgr/webpack": "4.3.3",
@@ -86,7 +88,11 @@
     "extends": "react-app"
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
@@ -96,10 +102,19 @@
   "keywords": [],
   "description": "",
   "jest": {
-    "roots": ["<rootDir>/src"],
-    "collectCoverageFrom": ["src/**/*.{js,jsx,ts,tsx}", "!src/**/*.d.ts"],
-    "setupFiles": ["react-app-polyfill/jsdom"],
-    "setupFilesAfterEnv": ["<rootDir>/src/setupTests.js"],
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "setupFiles": [
+      "react-app-polyfill/jsdom"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
       "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
@@ -137,7 +152,9 @@
     ]
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "devDependencies": {
     "body-parser": "^1.19.0",

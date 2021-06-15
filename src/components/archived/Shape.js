@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 
 import { a } from "react-spring/three";
 import { useShapeStore } from "../zustand/shapes";
-import { TransformControls } from "drei";
+import { TransformControls } from "@react-three/drei";
 import * as THREE from "three";
 import "../App.scss";
 

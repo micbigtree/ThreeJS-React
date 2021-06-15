@@ -4,7 +4,7 @@ import { a } from "react-spring/three";
 import { Select } from "@react-three/xr";
 import { useObjectStore } from "../zustand/objects";
 import { useCameraStore } from "../zustand/camera";
-import { useGLTFLoader, TransformControls } from "drei";
+import { useGLTFLoader, TransformControls } from "@react-three/drei";
 
 import "../App.scss";
 

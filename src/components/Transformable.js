@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { TransformControls } from "drei";
+import { TransformControls } from "@react-three/drei";
 
 function Transformable({ showX, showY, showZ, children, orbitControls }) {
   const transformControls = useRef();

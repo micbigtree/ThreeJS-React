@@ -9,9 +9,9 @@ import "../App.scss";
 import Camera from "./Camera";
 
 // react three fiber takes care of camera position in canvas
-import { Canvas } from "react-three-fiber";
+import { Canvas } from "@react-three/fiber";
 // drei have lots of shapes without writing code
-import { softShadows, OrbitControls } from "drei";
+import { softShadows, OrbitControls } from "@react-three/drei";
 import ObjectsMapped from "./ObjectsMapped";
 
 softShadows();
