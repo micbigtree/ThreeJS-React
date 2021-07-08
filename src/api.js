@@ -2,12 +2,12 @@
 export const getShapes = (
   url = "https://api.jsonbin.io/b/5f59ebde302a837e95638e0e/latest"
 ) => {
- return fetch(url, {
+  return fetch(url, {
     method: "GET",
     headers: {
       "secret-key":
         "$2b$10$ia1eqHlS0SqHe9ynAROzfuR814NIz0UEz.deChs/3ebwLgBCEtzhO",
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     }
   }).then((response) => response.json());
 };
@@ -21,10 +21,9 @@ export const getObjects = (
     headers: {
       "secret-key":
         "$2b$10$ia1eqHlS0SqHe9ynAROzfuR814NIz0UEz.deChs/3ebwLgBCEtzhO",
-      "Content-Type": "application/json",
-    },
-  })
-    .then((response) => response.json())
+      "Content-Type": "application/json"
+    }
+  }).then((response) => response.json());
 };
 
 // Get preview camera from JsonBin
@@ -36,13 +35,14 @@ export const getPreviewCameras = (
     headers: {
       "secret-key":
         "$2b$10$ia1eqHlS0SqHe9ynAROzfuR814NIz0UEz.deChs/3ebwLgBCEtzhO",
-      "Content-Type": "application/json",
-    },
+      "Content-Type": "application/json"
+    }
   }).then((response) => response.json());
 };
 
 // Update preview camera in JsonBin
-export const sendPreviewCameras = (data,
+export const sendPreviewCameras = (
+  data,
   url = "https://api.jsonbin.io/b/5f7ec9be65b18913fc5c91b4"
 ) => {
   return fetch(url, {
@@ -51,9 +51,9 @@ export const sendPreviewCameras = (data,
       "secret-key":
         "$2b$10$ia1eqHlS0SqHe9ynAROzfuR814NIz0UEz.deChs/3ebwLgBCEtzhO",
       "Content-Type": "application/json",
-      versioning: "false",
+      versioning: "false"
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   })
     .then((response) => response.json())
     .then((data) => {

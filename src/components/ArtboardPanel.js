@@ -7,6 +7,7 @@ const ArtboardPanel = () => {
   // then sets current artboard to an alternative. Then, after 1ms setTimeout,
   // runs the removeArtboard function with the selected artboard.
   const selectedDeleteRequest = (mapped) => {
+    console.log("delete artboard request sent");
     updateArtboard(Object.keys(artboards).filter((key) => key !== mapped)[0]);
     setTimeout(() => {
       removeArtboard(mapped);
@@ -20,6 +21,8 @@ const ArtboardPanel = () => {
     currentObjectArtboard,
     updateArtboard
   } = useObjectStore();
+
+  console.log(Object.keys(artboards));
 
   return (
     <div style={styles.artboardContainer}>

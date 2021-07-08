@@ -83,6 +83,7 @@ const store = (set) => ({
   // AND SET CURRENT ARTBOARD TO A LEFTOVER ARTBOARD
   // OR CREATE A NEW BLANK IF THERE ARE NONE
   removeArtboard: (key) =>
+    console.log("delete artboard request sent") &&
     set((state) => {
       delete state.artboards[key];
     }),

@@ -73,9 +73,10 @@ const App = () => {
     });
   };
 
+  // loadObjects is causing the 'cannot convert undefined or null to object' error. we actually can load artboards but then something wipes them
   useEffect(() => {
     loadObjects();
-    loadPreviewCameras();
+    // loadPreviewCameras();
   }, []); // <-- empty dependency array
 
   return editorMode ? (

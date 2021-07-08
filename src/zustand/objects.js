@@ -20,13 +20,17 @@ const store = (set) => ({
   objectsAreLoaded: false,
   // LOAD OBJECTS
   loadObjects: () =>
-    getObjects()
-      .then((objects) =>
-        set((state) => {
-          state.artboards = objects.objectArtboards;
-        })
-      )
-      .then(() => set(() => ({ objectsAreLoaded: true }))),
+    // getObjects()
+    //   .then((objects) =>
+
+    //   // what here is breaking artboards?
+    //     set((state) => {
+    //       state.artboards = objects.objectArtboards;
+    //     })
+    //   )
+    //   .then(() =>
+    set(() => ({ objectsAreLoaded: true })),
+  // )
   //ADD OBJECT
   addObject: ({ currentObjectArtboard, category, object }) =>
     set((state) => {
@@ -97,6 +101,7 @@ const store = (set) => ({
   // AND SET CURRENT ARTBOARD TO A LEFTOVER ARTBOARD
   // OR CREATE A NEW BLANK IF THERE ARE NONE
   removeArtboard: (key) =>
+    console.log("delete artboard request sent") &&
     set((state) => {
       delete state.artboards[key];
     })
