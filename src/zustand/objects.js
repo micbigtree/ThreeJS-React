@@ -34,6 +34,9 @@ const store = (set) => ({
   //ADD OBJECT
   addObject: ({ currentObjectArtboard, category, object }) =>
     set((state) => {
+      console.log(object);
+      console.log(category);
+      console.log(currentObjectArtboard);
       state.artboards[currentObjectArtboard].push({
         id: shortid.generate(),
         object: object,
