@@ -1,5 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, Suspense } from "react";
 import { useGLTF, TransformControls } from "@react-three/drei";
+import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useObjectStore } from "../zustand/objects";
 // import ShapePanel from "../components/ShapePanel";
 import * as THREE from "three";
@@ -16,12 +18,17 @@ const Model = ({
   handleSelectedObject,
   objectDetails
 }) => {
-  const gltf = useGLTF("/" + category + "/" + object + ".gltf");
+  // const gltf = useGLTF("./" + category + "/" + object + ".gltf");
+  const gltf = useLoader(GLTFLoader, "./" + category + "/" + object + ".gltf");
+  // const gltf = useGLTF("/table.glb", "/draco-gltf");
   const [modelGeometry, setModelGeometry] = useState();
 
   if (!modelGeometry) {
+    console.log("getting model geometry");
     const modelScene = gltf.scene.clone(true);
-    setModelGeometry(modelScene);
+    console.log(gltf);
+    setModelGeometry(gltf.scene.clone(true));
+    console.log(gltf.scene);
   }
 
   const {
@@ -70,14 +77,16 @@ const Model = ({
       translationSnap={0.1}
       ref={transformControls}
     >
-      <mesh
+      {/* <mesh
         onPointerDown={() => clickedShape(id)}
         attach="material"
         receiveShadow
         scale={scale}
-      >
-        <primitive object={modelGeometry} dispose={null} />
-        {/* {selected !== 0 ? (
+      > */}
+      <Suspense fallback={null}>
+        <primitive object={gltf.scene} dispose={null} />
+      </Suspense>
+      {/* {selected !== 0 ? (
           <Html transform>
             <ShapePanel
               id={objectDetails.id}
@@ -91,7 +100,7 @@ const Model = ({
         ) : (
           ""
         )} */}
-      </mesh>
+      {/* </mesh> */}
     </TransformControls>
   );
 };

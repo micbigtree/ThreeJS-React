@@ -17,6 +17,7 @@ const ObjectsMapped = ({
   if (!objectsAreLoaded) {
     return <div>Loading...</div>;
   } else {
+    console.log("object called");
     return artboards[currentObjectArtboard].map((mapped) => (
       <Model
         key={mapped.id}
