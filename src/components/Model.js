@@ -88,7 +88,8 @@ const Model = ({
       > */}
       <Suspense fallback={null}>
         <primitive
-          onPointerDown={() => clickedShape(id)}
+          // onPointerDown={() => clickedShape(id)}
+          onClick={() => clickedShape(id)}
           object={gltf.scene.clone(true)}
           dispose={null}
         />

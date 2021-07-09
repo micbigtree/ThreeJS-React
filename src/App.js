@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useFrame } from "@react-three/fiber";
 import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
 import LayerList from "./components/LayerList";

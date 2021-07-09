@@ -34,9 +34,9 @@ const PreviewViewport = () => {
         > */}
         <VRCanvas invalidateFrameloop colorManagement>
           <DefaultXRControllers />
-          <PreviewCamera
+          {/* <PreviewCamera
             position={cameraArtboards[currentCameraArtboard].position}
-          />
+          /> */}
           <directionalLight
             castShadow
             position={[0, 10, 0]}
