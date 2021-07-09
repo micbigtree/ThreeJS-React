@@ -20,6 +20,7 @@ const Model = ({
 }) => {
   // const gltf = useGLTF("./" + category + "/" + object + ".gltf");
   const gltf = useLoader(GLTFLoader, "./" + category + "/" + object + ".gltf");
+  console.log("loader created");
   // const gltf = useGLTF("/table.glb", "/draco-gltf");
   const [modelGeometry, setModelGeometry] = useState();
 
@@ -86,7 +87,7 @@ const Model = ({
       <Suspense fallback={null}>
         <primitive
           onPointerDown={() => clickedShape(id)}
-          object={gltf.scene}
+          object={gltf.scene.clone(true)}
           dispose={null}
         />
       </Suspense>
