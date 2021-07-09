@@ -24,7 +24,7 @@ const LayerListItem = ({
 
   const clickedShape = (id) => {
     handleSelectedObject(id, position, rotation, scale, object);
-    handleSelected(id, position, rotation, scale, object);
+    // handleSelected(id, position, rotation, scale, object);
   };
 
   if (!objectsAreLoaded) {

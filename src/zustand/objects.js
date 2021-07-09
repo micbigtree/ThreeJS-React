@@ -7,8 +7,6 @@ import shortid from "shortid";
 // ~~~~~~~~~~~~~~~~~~~~~~~~
 // STATE
 // ~~~~~~~~~~~~~~~~~~~~~~~~
-//looks like the api just isn't loading. adding 1: [] below stopped it breaking.
-// But it should be loading shit from the api. but shapes api is working
 const store = (set) => ({
   editorMode: true,
   switchModes: () =>
@@ -18,19 +16,9 @@ const store = (set) => ({
   artboards: { 1: [] },
   currentObjectArtboard: 1,
   objectsAreLoaded: false,
+  selectedObjectID: "0",
   // LOAD OBJECTS
-  loadObjects: () =>
-    // getObjects()
-    //   .then((objects) =>
-
-    //   // what here is breaking artboards?
-    //     set((state) => {
-    //       state.artboards = objects.objectArtboards;
-    //     })
-    //   )
-    //   .then(() =>
-    set(() => ({ objectsAreLoaded: true })),
-  // )
+  loadObjects: () => set(() => ({ objectsAreLoaded: true })),
   //ADD OBJECT
   addObject: ({ currentObjectArtboard, category, object }) =>
     set((state) => {
@@ -46,6 +34,12 @@ const store = (set) => ({
         scale: [1, 1, 1],
         destination: ""
       });
+    }),
+
+  // UPDATE SELECTED VALUE
+  updateObjectSelected: (selectedValue) =>
+    set((state) => {
+      state.selectedObjectID = selectedValue;
     }),
   // REMOVE OBJECT
   removeObject: ({ currentObjectArtboard, id }) =>

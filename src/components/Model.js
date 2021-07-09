@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState, Suspense } from "react";
-import { useGLTF, TransformControls } from "@react-three/drei";
+import { TransformControls } from "@react-three/drei";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { useObjectStore } from "../zustand/objects";
@@ -28,7 +28,6 @@ const Model = ({
 
   if (!modelGeometry) {
     console.log("getting model geometry");
-    const modelScene = gltf.scene.clone(true);
     console.log(gltf);
     setModelGeometry(gltf.scene.clone(true));
     console.log(gltf.scene);
@@ -37,15 +36,19 @@ const Model = ({
   const {
     objectsAreLoaded,
     currentObjectArtboard,
-    updateObjectPosition
+    updateObjectPosition,
+    updateObjectSelected,
+    selectedObjectID
   } = useObjectStore();
 
   const worldPosition = new THREE.Vector3();
 
   const transformControls = useRef();
 
-  const clickedShape = (id) => {
-    handleSelectedObject(id, position, rotation, scale, object);
+  const clickedShape = () => {
+    // handleSelectedObject(id, position, rotation, scale, object);
+    updateObjectSelected(id);
+    console.log("clicked!");
   };
 
   const handleObjectPositionChange = () => {
@@ -74,9 +77,9 @@ const Model = ({
     <TransformControls
       position={objectsAreLoaded && position}
       rotation={rotation}
-      showY={selected === id ? true : false}
-      showX={selected === id ? true : false}
-      showZ={selected === id ? true : false}
+      showY={selectedObjectID === id ? true : false}
+      showX={selectedObjectID === id ? true : false}
+      showZ={selectedObjectID === id ? true : false}
       translationSnap={0.1}
       ref={transformControls}
     >
@@ -87,12 +90,15 @@ const Model = ({
         scale={scale}
       > */}
       <Suspense fallback={null}>
-        <primitive
-          // onPointerDown={() => clickedShape(id)}
-          onClick={() => clickedShape(id)}
-          object={gltf.scene.clone(true)}
-          dispose={null}
-        />
+        <mesh onClick={() => clickedShape()}>
+          <primitive
+            // onPointerDown={() => clickedShape(id)}
+
+            // onClick={() => console.log("click!")}
+            object={gltf.scene.clone(true)}
+            dispose={null}
+          />
+        </mesh>
       </Suspense>
       {/* {selected !== 0 ? (
           <Html transform>

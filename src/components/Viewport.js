@@ -25,12 +25,17 @@ const Viewport = ({
   mode
 }) => {
   const orbitControls = useRef();
-  const { objectsAreLoaded } = useObjectStore();
+  const { objectsAreLoaded, updateObjectSelected } = useObjectStore();
   const {
     cameraArtboards,
     currentCameraArtboard,
     cameraIsLoaded
   } = useCameraStore();
+
+  const missedShape = () => {
+    updateObjectSelected("0");
+    console.log("missed");
+  };
 
   if (!objectsAreLoaded) {
     return <div style={styles.viewport}>Loading...</div>;
@@ -52,8 +57,9 @@ const Viewport = ({
           }}
           onPointerMissed={() => {
             console.log("missed");
-            handleSelectedObject(0);
-            handleSelectedCamera(false);
+            missedShape();
+            // handleSelectedObject();
+            // handleSelectedCamera(false);
           }}
         >
           <directionalLight

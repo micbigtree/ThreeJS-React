@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useFrame } from "@react-three/fiber";
 import Viewport from "./components/Viewport";
 import PreviewViewport from "./components/PreviewViewport";
 import LayerList from "./components/LayerList";
@@ -24,7 +23,8 @@ const App = () => {
     cameraArtboards
   } = useCameraStore();
 
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState("0");
+
   const [cameraSelected, setSelectedCamera] = useState(false);
 
   const [details, setDetails] = useState({
@@ -33,11 +33,12 @@ const App = () => {
     color: "",
     shape: ""
   });
-  const [objectDetails, setObjectDetails] = useState({
-    id: "",
-    position: [],
-    name: ""
-  });
+
+  // const [objectDetails, setObjectDetails] = useState({
+  //   id: "",
+  //   position: [],
+  //   name: ""
+  // });
 
   const [cameraDetails, setCameraDetails] = useState({
     id: "",
@@ -46,13 +47,14 @@ const App = () => {
 
   const handleSelectedObject = (id, position, rotation, scale, name) => {
     setSelected(id);
-    setObjectDetails({
-      id: id,
-      position: position,
-      rotation: rotation,
-      scale: scale,
-      name: name
-    });
+    console.log("setSelected to " + id);
+    // setObjectDetails({
+    //   id: id,
+    //   position: position,
+    //   rotation: rotation,
+    //   scale: scale,
+    //   name: name
+    // });
   };
 
   const handleSelectedCamera = (val) => {
@@ -94,7 +96,7 @@ const App = () => {
       <div style={styles.viewport}>
         <Viewport
           mode={mode}
-          objectDetails={objectDetails}
+          // objectDetails={objectDetails}
           cameraDetails={cameraDetails}
           setCameraDetails={setCameraDetails}
           selected={selected}

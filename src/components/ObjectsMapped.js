@@ -4,7 +4,6 @@ import Model from "./Model";
 
 const ObjectsMapped = ({
   orbitControls,
-  selected,
   handleSelectedObject,
   objectDetails
 }) => {
@@ -30,7 +29,6 @@ const ObjectsMapped = ({
         category={mapped.category}
         url={"./" + mapped.category + "/" + mapped.object + ".gltf"}
         orbitControls={orbitControls}
-        selected={selected}
         handleSelectedObject={handleSelectedObject}
         objectDetails={objectDetails}
       />
