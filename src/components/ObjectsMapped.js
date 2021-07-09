@@ -28,6 +28,7 @@ const ObjectsMapped = ({
         destination={mapped.destination}
         object={mapped.object}
         category={mapped.category}
+        url={"./" + mapped.category + "/" + mapped.object + ".gltf"}
         orbitControls={orbitControls}
         selected={selected}
         handleSelectedObject={handleSelectedObject}

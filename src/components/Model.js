@@ -16,10 +16,12 @@ const Model = ({
   id,
   selected,
   handleSelectedObject,
-  objectDetails
+  objectDetails,
+  url
 }) => {
   // const gltf = useGLTF("./" + category + "/" + object + ".gltf");
-  const gltf = useLoader(GLTFLoader, "./" + category + "/" + object + ".gltf");
+  // const gltf = useLoader(GLTFLoader, "./" + category + "/" + object + ".gltf");
+  const gltf = useLoader(GLTFLoader, url);
   console.log("loader created");
   // const gltf = useGLTF("/table.glb", "/draco-gltf");
   const [modelGeometry, setModelGeometry] = useState();
