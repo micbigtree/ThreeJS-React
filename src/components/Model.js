@@ -84,7 +84,11 @@ const Model = ({
         scale={scale}
       > */}
       <Suspense fallback={null}>
-        <primitive object={gltf.scene} dispose={null} />
+        <primitive
+          onPointerDown={() => clickedShape(id)}
+          object={gltf.scene}
+          dispose={null}
+        />
       </Suspense>
       {/* {selected !== 0 ? (
           <Html transform>
