@@ -16,9 +16,7 @@ const PreviewObject = ({
   rotation,
   scale,
   id,
-  selected,
-  destination,
-  handleSelectedObject
+  destination
 }) => {
   const [hovered, setHover] = useState(false);
 

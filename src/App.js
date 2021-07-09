@@ -41,13 +41,6 @@ const App = () => {
   const handleSelectedObject = (id, position, rotation, scale, name) => {
     setSelected(id);
     console.log("setSelected to " + id);
-    // setObjectDetails({
-    //   id: id,
-    //   position: position,
-    //   rotation: rotation,
-    //   scale: scale,
-    //   name: name
-    // });
   };
 
   const handleSelectedCamera = (val) => {
