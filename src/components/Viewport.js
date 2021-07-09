@@ -21,8 +21,7 @@ const Viewport = ({
   cameraSelected,
   handleSelectedObject,
   handleSelectedCamera,
-  objectDetails,
-  mode
+  objectDetails
 }) => {
   const orbitControls = useRef();
   const { objectsAreLoaded, updateObjectSelected } = useObjectStore();
@@ -101,7 +100,6 @@ const Viewport = ({
                 orbitControls={orbitControls}
                 cameraSelected={cameraSelected}
                 handleSelectedCamera={handleSelectedCamera}
-                mode={mode}
               />
             </Suspense>
             <OrbitControls

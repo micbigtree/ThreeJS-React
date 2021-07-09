@@ -8,13 +8,6 @@ import ArtboardPanel from "./components/ArtboardPanel";
 import ObjectTopbar from "./components/ObjectTopbar";
 
 const App = () => {
-  // CHOOSE SCALE/ROTATE/MOVE
-  const [mode, setMode] = useState("translate");
-
-  const changeTransformMode = (mode) => {
-    setMode(mode);
-  };
-
   const { loadObjects, editorMode, switchModes } = useObjectStore();
 
   const {
@@ -95,7 +88,6 @@ const App = () => {
       <ObjectTopbar />
       <div style={styles.viewport}>
         <Viewport
-          mode={mode}
           // objectDetails={objectDetails}
           cameraDetails={cameraDetails}
           setCameraDetails={setCameraDetails}
