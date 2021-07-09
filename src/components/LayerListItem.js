@@ -9,22 +9,20 @@ const LayerListItem = ({
   position,
   rotation,
   scale,
-  selected,
-  destination,
-  handleSelectedObject,
-  handleSelected
+  destination
 }) => {
   const {
     updateDestination,
     removeObject,
     artboards,
     currentObjectArtboard,
-    objectsAreLoaded
+    objectsAreLoaded,
+    updateObjectSelected,
+    selectedObjectID
   } = useObjectStore();
 
-  const clickedShape = (id) => {
-    handleSelectedObject(id, position, rotation, scale, object);
-    // handleSelected(id, position, rotation, scale, object);
+  const clickedShape = (idVal) => {
+    updateObjectSelected(idVal);
   };
 
   if (!objectsAreLoaded) {
@@ -32,9 +30,13 @@ const LayerListItem = ({
   } else {
     return (
       <div
-        style={selected === id ? styles.containerSelected : styles.container}
+        style={
+          selectedObjectID === id ? styles.containerSelected : styles.container
+        }
         key={id}
+        tabIndex={id}
         onPointerDown={() => clickedShape(id)}
+        onBlur={() => clickedShape(0)}
       >
         <div style={styles.shape}>{object}</div>
         <div style={styles.dropdownContainer}>
