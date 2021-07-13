@@ -6,24 +6,9 @@ import { useObjectStore } from "../zustand/objects";
 // import ShapePanel from "../components/ShapePanel";
 import * as THREE from "three";
 
-const Model = ({
-  orbitControls,
-  object,
-  category,
-  position,
-  rotation,
-  scale,
-  id,
-  selected,
-  handleSelectedObject,
-  objectDetails,
-  url
-}) => {
-  // const gltf = useGLTF("./" + category + "/" + object + ".gltf");
-  // const gltf = useLoader(GLTFLoader, "./" + category + "/" + object + ".gltf");
+const Model = ({ orbitControls, position, rotation, id, url }) => {
   const gltf = useLoader(GLTFLoader, url);
   console.log("loader created");
-  // const gltf = useGLTF("/table.glb", "/draco-gltf");
   const [modelGeometry, setModelGeometry] = useState();
 
   if (!modelGeometry) {
@@ -83,12 +68,6 @@ const Model = ({
       translationSnap={0.1}
       ref={transformControls}
     >
-      {/* <mesh
-        onPointerDown={() => clickedShape(id)}
-        attach="material"
-        receiveShadow
-        scale={scale}
-      > */}
       <Suspense fallback={null}>
         <mesh onClick={() => clickedShape()}>
           <primitive
@@ -100,21 +79,6 @@ const Model = ({
           />
         </mesh>
       </Suspense>
-      {/* {selected !== 0 ? (
-          <Html transform>
-            <ShapePanel
-              id={objectDetails.id}
-              position={objectDetails.position}
-              rotation={objectDetails.rotation}
-              scale={objectDetails.scale}
-              shape={objectDetails.name}
-              camera={false}
-            />
-          </Html>
-        ) : (
-          ""
-        )} */}
-      {/* </mesh> */}
     </TransformControls>
   );
 };

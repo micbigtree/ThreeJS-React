@@ -76,6 +76,7 @@ const PreviewViewport = () => {
                 scale={mapped.scale}
                 orbitControls={orbitControls}
                 destination={mapped.destination}
+                url={"./" + mapped.category + "/" + mapped.object + ".gltf"}
               />
             ))}
           </group>
